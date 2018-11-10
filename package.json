@@ -1,0 +1,11 @@
+{
+  "name": "focus-start",
+  "version": "1.0.0",
+  "description": "frontend project (focus-start)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aleksandr Korovin",
+  "license": "ISC"
+}
