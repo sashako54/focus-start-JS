@@ -3,9 +3,8 @@ var light = (function() {
 	var querySelectors = document.querySelectorAll('*');
 
 	function getRandomInteger(min, max) {
-		var rand = min - 0.5 + Math.random() * (max - min + 1);
-		rand = Math.round(rand);
-		return rand;
+		// в выражении не добавляем 1, так как консоль ругается, когда рандомно выпадает последний элемент
+		return Math.floor( min + Math.random() * (max - min));
 	}
 
 	function getRandomNumQuery() {
