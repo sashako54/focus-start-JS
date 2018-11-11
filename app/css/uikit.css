@@ -169,20 +169,23 @@ table {
 	color: #fff;
 }
 
-.o-modal {
+.o-modal-banner {
+	max-width: 770px;
+	margin: 0 auto;
+	padding: 40px 0 45px;
 	width: 100%;
 	background-color: var(--light-color);
 }
 
-.o-modal_shadow {
+.o-modal-banner_shadow {
 	box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.11);
 }
 
-.o-modal_border_prymary {
+.o-modal-banner_border_prymary {
 	border: solid 1px var(--primary-border-color);
 }
 
-.o-modal_border_bottom_blue {
+.o-modal-banner_border_bottom_blue {
 	border-bottom: solid 2px var(--primary-color);
 }
 
@@ -252,6 +255,9 @@ table {
 .o-button_disabled {
 	opacity: .5;
 }
+
+::-ms-clear {width: 0; height: 0;}
+::-ms-reveal {width: 0; height: 0;}
 
 input[type="radio"] {display: none;}
 input[type="checkbox"] {display: none;}

@@ -899,3 +899,58 @@
 .o-modal__contacts-toggle-icon-check {left: 5px;}
 
 .o-modal__contacts-toggle-icon-cross {left: 39px;}
+
+.o-modal__info-link {
+	display: block;
+	width: 205px;
+	margin: 0 auto;
+}
+
+
+.o-modal__info-wrapper {
+	margin: 0 auto;
+}
+
+.o-modal__info-wrapper_margin_top_120 {
+	margin-top: 120px;
+}
+
+.o-modal__info-icon-wrapper {
+	margin: 0 auto;
+	padding: 19px;
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	border: solid 3px #358ED7;
+}
+
+.o-modal__info-icon {
+	width: 36px;
+	height: 36px;
+	color: var(--success-color);
+}
+
+.o-modal__info-icon-wrapper_margin_bottom_25 {
+	margin-bottom: 25px;
+}
+
+.o-modal__info-notice {
+	font-size: 14px;
+	letter-spacing: 0.3px;
+	text-align: center;
+	color: #34495e;
+}
+
+.o-modal__info-text {
+	margin: 0 auto;
+	max-width: 390px;
+	width: 100%;
+	font-size: 14px;
+	line-height: 2;
+	text-align: center;
+	color: #9FA3A7;
+}
+
+.o-modal__info-text_margin_top_30 {
+	margin-top: 30px;
+}
