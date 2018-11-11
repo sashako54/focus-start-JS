@@ -160,6 +160,8 @@ transitionPopupForword.addContinueEvent('js-modal__button', 'js-modal-container'
 
 transitionPopupForword.addContinueEvent('js-modal__button-pay', 'js-modal-container', 'js-modal-container', 'js-step-3', 1);
 
+transitionPopupForword.addContinueEvent('js-modal__button-submit', 'js-modal-container', 'js-modal-container', 'js-step-4', 2);
+
 var transitionPopupBack = (function(){
 
 	function delActiveClass(stepClass) {
@@ -191,3 +193,5 @@ var transitionPopupBack = (function(){
 }());
 
 transitionPopupBack.addContinueEvent('js-modal__button-back', 'js-modal-container', 'js-modal-container', 'js-step-2', 0);
+
+transitionPopupBack.addContinueEvent('js-modal__button-contacts-back', 'js-modal-container', 'js-modal-container', 'js-step-3', 1);

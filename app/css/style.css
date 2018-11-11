@@ -840,3 +840,62 @@
 	line-height: 1.7;
 	color: #C8C8C8;
 }
+
+.o-modal__contacts-wrapper {
+	position: relative;
+}
+
+.o-modal__contacts-wrapper_margin_top_120 {
+	margin-top: 120px;
+}
+
+.o-modal__contacts-wrapper_margin_left_right_50 {
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
+.o-modal__contacts-title {
+	padding: 0 10px;
+	font-size: 18px;
+	font-weight: normal;
+	text-transform: uppercase;
+	color: #030303;
+}
+
+.o-modal__contacts-inputs {
+	float: left;
+	max-width: 660px;
+	width: 100%;
+}
+
+.o-modal__contacts-radio-buttons {
+	float: right;
+	max-width: 225px;
+	width: 100%;
+}
+
+.o-modal__contacts-input-wrapper {
+	padding: 10px;
+}
+
+.o-modal__contacts-radio_margin_bottom_20 {
+	margin-bottom: 20px;
+}
+
+.o-modal__contacts-toggle_margin_top_50 {
+	margin-top: 50px;
+}
+
+.o-modal__contacts-toggle-icon-check,
+.o-modal__contacts-toggle-icon-cross {
+	position: absolute;
+	top: 5px;
+	width: 16px;
+	height: 16px;
+	color: #fff;
+	z-index: 1;
+}
+
+.o-modal__contacts-toggle-icon-check {left: 5px;}
+
+.o-modal__contacts-toggle-icon-cross {left: 39px;}

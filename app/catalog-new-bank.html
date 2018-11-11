@@ -151,7 +151,65 @@
 						<button class="o-modal__button o-button o-button_primary o-modal__button_float_right js-modal__button-pay">Оплатить</button>
 					</footer>
 				</div>
-				<div class="o-modal-container js-modal-container hidden"></div>
+				<div class="o-modal-container js-modal-container hidden">
+					<div class="o-modal__contacts-wrapper o-modal__contacts-wrapper_margin_left_right_50 o-modal__contacts-wrapper_margin_top_120">
+						<form class="o-modal__contacts-form clearfix">
+							<h4 class="o-modal__contacts-title">Контактная информация</h4>
+							<div class="o-modal__contacts-inputs">
+								<div class="l-grid">
+									<div class="o-modal__contacts-input-wrapper l-grid-6">
+										<input class="o-modal-input o-input-text" type="text" placeholder="Фамилия">
+									</div>
+									<div class="o-modal__contacts-input-wrapper l-grid-6">
+										<input class="o-modal-input o-input-text" type="text" placeholder="Имя Отчество">
+									</div>
+									<div class="o-modal__contacts-input-wrapper l-grid-6">
+										<input class="o-modal-input o-input-text" type="tel" placeholder="Номер телефона">
+									</div>
+									<div class="o-modal__contacts-input-wrapper l-grid-6">
+										<input class="o-modal-input o-input-text" type="email" placeholder="E-mail">
+									</div>
+									<div class="o-modal__contacts-input-wrapper l-grid-4">
+										<input class="o-modal-input o-input-text" type="text" placeholder="Организация">
+									</div>
+									<div class="o-modal__contacts-input-wrapper l-grid-4">
+										<input class="o-modal-input o-input-text" type="text" placeholder="ИНН">
+									</div>
+									<div class="o-modal__contacts-input-wrapper l-grid-4">
+										<input class="o-modal-input o-input-text" type="text" placeholder="Город">
+									</div>
+								</div>
+							</div>
+							<div class="o-modal__contacts-radio-buttons">
+								<div class="o-modal__contacts-radio o-modal__contacts-radio_margin_bottom_20">
+									<input type="radio" id="radio-fast-install" value="fast-install" name="install" checked>
+									<label class="o-label-radio" for="radio-fast-install">Быстрая установка</label>
+								</div>
+								<div class="o-modal__contacts-radio">
+									<input type="radio" id="radio-deferred-install" value="deferred-install" name="install">
+									<label class="o-label-radio" for="radio-deferred-install">Отложенная установка</label>
+								</div>
+								<div class="o-modal__contacts-toggle o-modal__contacts-toggle_margin_top_50">
+									<input type="checkbox" id="toggle-consultation">
+									<label class="o-label-toggle" for="toggle-consultation">
+										Требуется консультация
+										<svg class="o-modal__contacts-toggle-icon-check">
+											<use xlink:href="#icon-thick-check"></use>
+										</svg>
+										<svg class="o-modal__contacts-toggle-icon-cross">
+											<use xlink:href="#close"></use>
+										</svg>
+									</label>
+								</div>
+							</div>
+						</form>
+					</div>
+
+					<footer class="o-modal__footer clearfix">
+							<button class="o-modal__button o-button o-button_secondary o-modal__button_float_left js-modal__button-contacts-back">Назад</button>
+							<button class="o-modal__button o-button o-button_primary o-modal__button_float_right js-modal__button-submit">Подтвердить</button>
+					</footer>
+				</div>
 				<div class="o-modal-container js-modal-container hidden"></div>
 			</div>
 		</div>

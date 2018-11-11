@@ -341,9 +341,14 @@ input[type="checkbox"]:checked + .o-label-checkbox .o-label-icon {
 }
 
 .o-label-toggle {
+	display: inline-block;
 	position: relative;
-	padding-left: 60px;
+	padding-left: 75px;
 	cursor: pointer;
+	font-size: 12px;
+	font-weight: bold;
+	color: #34495e;
+	line-height: 26px;
 }
 
 .o-label-toggle::before {
@@ -368,6 +373,7 @@ input[type="checkbox"]:checked + .o-label-checkbox .o-label-icon {
 	border-radius: 50%;
 	background-color: var(--light-color);
 	transition: left 200ms ease-in-out;
+	z-index: 2;
 }
 
 input[type="checkbox"]:checked + .o-label-toggle::before {
