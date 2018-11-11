@@ -157,3 +157,37 @@ var transitionPopupForword = (function(){
 }());
 
 transitionPopupForword.addContinueEvent('js-modal__button', 'js-modal-container', 'js-modal-container', 'js-step-2', 0);
+
+transitionPopupForword.addContinueEvent('js-modal__button-pay', 'js-modal-container', 'js-modal-container', 'js-step-3', 1);
+
+var transitionPopupBack = (function(){
+
+	function delActiveClass(stepClass) {
+		main.toggleExistClass(stepClass, 'o-steps_blue');
+	}
+
+	function hideBlock(blockHiddenClass, i) {
+		main.toggleNotExistClass(blockHiddenClass, 'hidden', i);
+		console.log('hide' + i)
+	}
+	
+	function showBlock(blockShowClass, i) {
+		main.toggleExistClass(blockShowClass, 'hidden', i);
+		console.log('show' + i);
+	}
+	
+	function addContinueEvent(buttonClass, blockHiddenClass, blockShowClass, stepClass, i) {
+		var button = document.getElementsByClassName(buttonClass)[0];
+		button.addEventListener('click', function() {
+			delActiveClass(stepClass);
+			hideBlock(blockHiddenClass, i + 1);
+			showBlock(blockShowClass, i);
+		});
+	}
+
+	return {
+		addContinueEvent: addContinueEvent,
+	}
+}());
+
+transitionPopupBack.addContinueEvent('js-modal__button-back', 'js-modal-container', 'js-modal-container', 'js-step-2', 0);
