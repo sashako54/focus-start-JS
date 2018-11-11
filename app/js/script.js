@@ -1,8 +1,5 @@
 
-var popup = (function() {
-
-	var yOffset;
-
+var main = (function() {
 	function toggleNotExistClass(class1, class2, j = 0) {
 		var elem = document.getElementsByClassName(class1)[j];
 		if (!elem.classList.contains(class2)) {
@@ -16,6 +13,15 @@ var popup = (function() {
 			elem.classList.toggle(class2);
 		}
 	}
+	return {
+		toggleNotExistClass: toggleNotExistClass,
+		toggleExistClass: toggleExistClass
+	}
+})()
+
+var popup = (function() {
+
+	var yOffset;
 
 	// задаём для body свойства
 
@@ -41,7 +47,7 @@ var popup = (function() {
 
 	function hidePopup() {
 		// Скрываем модальное окно
-		toggleNotExistClass('js-modal', 'hidden');
+		main.toggleNotExistClass('js-modal', 'hidden');
 		// Возвращаем возможность скроллить body
 		removeBodyProperties()
 	}
@@ -66,7 +72,7 @@ var popup = (function() {
 		var button = document.getElementsByClassName('js-app__button')[0];
 		button.addEventListener('click', function() {
 			// Показываем модальное окно
-			toggleExistClass('js-modal', 'hidden');
+			main.toggleExistClass('js-modal', 'hidden');
 			// Убираем возможность скроллить body
 			// Делаем страничку статичной
 			addBodyProperties();
@@ -120,12 +126,34 @@ var inputs = (function(){
 inputs.plusEvent();
 inputs.minusEvent();
 
-var transitionPopup = (function(){
+var transitionPopupForword = (function(){
 
+	function setActiveClass(stepClass) {
+		main.toggleNotExistClass(stepClass, 'o-steps_blue');
+	}
+
+	function hideBlock(blockHiddenClass, i) {
+		main.toggleNotExistClass(blockHiddenClass, 'hidden', i);
+		console.log('hide' + i)
+	}
 	
+	function showBlock(blockShowClass, i) {
+		main.toggleExistClass(blockShowClass, 'hidden', i);
+		console.log('show' + i);
+	}
+	
+	function addContinueEvent(buttonClass, blockHiddenClass, blockShowClass, stepClass, i) {
+		var button = document.getElementsByClassName(buttonClass)[0];
+		button.addEventListener('click', function() {
+			setActiveClass(stepClass);
+			hideBlock(blockHiddenClass, i);
+			showBlock(blockShowClass, i + 1);
+		});
+	}
 
 	return {
-
+		addContinueEvent: addContinueEvent,
 	}
 }());
 
+transitionPopupForword.addContinueEvent('js-modal__button', 'js-modal-container', 'js-modal-container', 'js-step-2', 0);

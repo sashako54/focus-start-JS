@@ -415,3 +415,14 @@ input[type="checkbox"]:checked + .o-label-toggle::after {
 	max-width: 1180px;
 	margin: 0 auto;
 }
+
+.o-modal-input {
+	height: 46px;
+	border: solid 1px #e6e6e6;
+	background-color: #fafafa;
+	color: var(--secondary-color);
+}
+
+.o-modal-input::placeholder {
+	color: #9FA3A7;
+}

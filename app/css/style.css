@@ -685,7 +685,7 @@
 }
 
 .o-modal__footer {
-	height: 40px;
+	position: relative;
 	padding: 70px 160px;
 }
 
@@ -722,6 +722,123 @@
 	margin-left: 70px;
 }
 
+.o-modal__button_float_left {
+	float: left;
+}
 
+.o-modal__button_float_right {
+	float: right;
+}
 
+.o-modal__payment-wrapper {
+	position: relative;
+}
 
+.o-modal__payment-wrapper_margin_top_150 {
+	margin-top: 150px;
+}
+
+.o-modal__payment-wrapper_margin_left_250 {
+	margin-left: 250px;
+}
+
+.o-modal__payment {
+	position: relative;
+	padding: 30px;
+	width: 430px;
+	height: 260px;
+	border-radius: 7px;
+	border: solid 2px #d8d8d8;
+	background-color: #fff;
+	z-index: 2;
+}
+
+.o-modal__payment-turnover {
+	position: absolute;
+	top: 30px;
+	left: 115px;
+	width: 430px;
+	height: 260px;
+	border-radius: 7px;
+	border: solid 1px #e8e9ed;
+	background-color: #fafafa;
+	z-index: 1;
+}
+
+.o-modal__payment-inputs {
+	float: left;
+	width: 250px;
+	font-size: 0;
+}
+
+.o-modal__payment-icons {
+	float: right;
+}
+
+.o-modal__payment-icon-master-card {
+	display: block;
+	width: 61px;
+	height: 36px;
+}
+
+.o-modal__payment-icon-master-card_margin_bottom_20px {
+	margin-bottom: 20px;
+}
+
+.o-modal__payment-icon-visa {
+	display: block;
+	width: 58px;
+	height: 19px;
+}
+
+.o-modal__payment-inputs-num {
+	
+}
+
+.o-modal__payment-inputs-num-margin_bottom_20 {
+	margin-bottom: 20px;
+}
+
+.o-modal__payment-inputs-month,
+.o-modal__payment-inputs-year {
+	width: 115px;
+}
+
+.o-modal__payment-inputs-month_margin_right_20 {
+	margin-right: 20px;
+}
+
+.o-modal__payment-footer_margin_top_40 {
+	margin-top: 40px;
+}
+
+.o-modal__payment-turnover-strip {
+	height: 40px;
+	background-color: #e8e9ed;
+}
+
+.o-modal__payment-turnover-strip_margin_top_35 {
+	margin-top: 35px;
+}
+
+.o-modal__payment-turnover-strip_margin_bottom_20 {
+	margin-bottom: 20px;
+}
+
+.o-modal__payment-turnover-input {
+	position: absolute;
+	top: 95px;
+	right: 20px;
+	width: 76px;
+	background-color: #fff;
+}
+
+.o-modal__payment-turnover-description {
+	position: absolute;
+	top: 150px;
+	right: 20px;
+	width: 77px;
+	font-size: 12px;
+	line-height: 1.7;
+	color: #C8C8C8;
+}
