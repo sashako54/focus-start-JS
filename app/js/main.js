@@ -1,4 +1,4 @@
-
+// скрипт, посвечивающий рандомные элементы сайта (1 практическое задание по JS)
 var light = (function() {
 	var querySelectors = document.querySelectorAll('*');
 
@@ -40,5 +40,5 @@ var light = (function() {
 	}
 })();
 
-light.setLightInterval();
-light.delLightInterval();
+// light.setLightInterval();
+// light.delLightInterval();

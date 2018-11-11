@@ -299,6 +299,10 @@
 	border-bottom: solid 1px #d8d8d8;
 }
 
+.o-modal-container {
+	width: 100%;
+}
+
 .o-modal__table,
 .o-content__table {
 	display: inline-block;

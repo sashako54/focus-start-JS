@@ -119,3 +119,13 @@ var inputs = (function(){
 
 inputs.plusEvent();
 inputs.minusEvent();
+
+var transitionPopup = (function(){
+
+	
+
+	return {
+
+	}
+}());
+
