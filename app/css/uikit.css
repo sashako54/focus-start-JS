@@ -169,6 +169,10 @@ table {
 	color: #fff;
 }
 
+.o-steps_green_color {
+	color: var(--success-color);
+}
+
 .o-modal-banner {
 	max-width: 770px;
 	margin: 0 auto;
@@ -256,8 +260,7 @@ table {
 	opacity: .5;
 }
 
-::-ms-clear {width: 0; height: 0;}
-::-ms-reveal {width: 0; height: 0;}
+input[type="search"]::-webkit-search-cancel-button {display: none;}
 
 input[type="radio"] {display: none;}
 input[type="checkbox"] {display: none;}

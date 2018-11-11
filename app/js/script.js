@@ -145,6 +145,8 @@ var transitionPopupForword = (function(){
 	function setActiveClass(stepClass) {
 		if (stepClass === 'js-step-4') {
 			main.toggleNotExistClass(stepClass, 'o-steps_green');
+			main.toggleNotExistClass('js-step-4-span', 'o-steps_green_color');
+			main.toggleExistClass('js-modal__steps-stage-icon', 'hidden');
 		} else {
 			main.toggleNotExistClass(stepClass, 'o-steps_blue');
 		}

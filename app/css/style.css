@@ -528,12 +528,23 @@
 }
 
 .o-modal__steps-stage {
+	position: relative;
 	display: inline-block;
 	margin-right: 15px;
 	font-size: 14px;
 	font-weight: 900;
 	line-height: 30px;
 	text-align: center;
+}
+
+.o-modal__steps-stage-icon {
+	display: inline-block;
+	position: absolute;
+	top: 7px;
+	left: 7px;
+	width: 16px;
+	height: 16px;
+	color: #fff;
 }
 
 .o-modal__steps-name {
