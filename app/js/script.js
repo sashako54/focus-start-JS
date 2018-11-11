@@ -25,17 +25,31 @@ var popup = (function() {
 
 	// задаём для body свойства
 
+	function getWidthScroll() {
+		var div = document.createElement('div');
+
+		div.style.overflowY = 'scroll';
+		div.style.width = '50px';
+		div.style.height = '50px';
+		div.style.visibility = 'hidden';
+
+		document.body.appendChild(div);
+		var scrollWidth = div.offsetWidth - div.clientWidth;
+		document.body.removeChild(div);
+		return scrollWidth;
+	}
+
 	function addBodyProperties() {
 		var body = document.body;
 		yOffset = window.pageYOffset;
-		body.style.width = '100%';
+		body.style.width = `calc(100% - ${getWidthScroll()}px)`;
 		body.style.top = '-' + yOffset + 'px';
 		body.style.position = 'fixed';
-		body.style.overflowY = 'scroll';
+		body.style.overflowY = 'hidden';
 	}
-
+	
 	// удаляем свойства у body
-
+	
 	function removeBodyProperties() {
 		var body = document.body;
 		body.style.width = null;
@@ -129,7 +143,11 @@ inputs.minusEvent();
 var transitionPopupForword = (function(){
 
 	function setActiveClass(stepClass) {
-		main.toggleNotExistClass(stepClass, 'o-steps_blue');
+		if (stepClass === 'js-step-4') {
+			main.toggleNotExistClass(stepClass, 'o-steps_green');
+		} else {
+			main.toggleNotExistClass(stepClass, 'o-steps_blue');
+		}
 	}
 
 	function hideBlock(blockHiddenClass, i) {
