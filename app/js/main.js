@@ -69,7 +69,7 @@ var randomPackages = (function() {
 	]
 
 	function getRandomPackage() {
-		var elem = package[getRandomInteger(0, 2)];
+		var elem = package.splice(getRandomInteger(0, package.length - 1), 1)[0];
 		return elem;
 	}
 	
@@ -77,6 +77,11 @@ var randomPackages = (function() {
 		var package = getRandomPackage();
 		var wrapper = document.getElementsByClassName('o-main__pockets')[0];
 		// создаём элементы HTML
+
+		// СДЕЛАТЬ через темплейт
+
+
+
 		var elemWrapper = document.createElement('div');
 		var elemImg = document.createElement('a');
 		var elemTitle = document.createElement('h4');
@@ -96,6 +101,8 @@ var randomPackages = (function() {
 		elemWrapper.appendChild(elemTime);
 		// выводим на страницу
 		wrapper.appendChild(elemWrapper);
+		wrapper.appendChild(elemWrapper2);
+
 	}
 	return {
 		addRandomPackage: addRandomPackage,
