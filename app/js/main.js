@@ -65,8 +65,8 @@ var randomPackages = (function() {
 			'url':'assets/images/shot-3.jpg',
 			'h': 'Каталог разработок',
 			'time':'03 марта 2015',
-		}
-	]
+		},
+	];
 
 	function getRandomPackage() {
 		var elem = package.splice(getRandomInteger(0, package.length - 1), 1)[0];
@@ -76,39 +76,56 @@ var randomPackages = (function() {
 	function addRandomPackage() {
 		var package = getRandomPackage();
 		var wrapper = document.getElementsByClassName('o-main__pockets')[0];
-		// создаём элементы HTML
+		
+		// Проверка на поддержку браузером template
+		if ('content' in document.createElement('template')) {
+			var template = document.querySelector('#packageTemplate');
 
-		// СДЕЛАТЬ через темплейт
+			var elemImg = template.content.querySelectorAll('a.o-main__pocket-img')[0];
+			var elemTitle = template.content.querySelectorAll('h4.o-main__pocket-title')[0];
+			var elemTime = template.content.querySelectorAll('time.o-main__pocket-date')[0];
+			
+			elemImg.style.backgroundImage = `url(${package.url}`;
+			elemTitle.innerHTML = package.h;
+			elemTime.innerHTML = package.time;
 
+			var clone = document.importNode(template.content, true);
 
-
-		var elemWrapper = document.createElement('div');
-		var elemImg = document.createElement('a');
-		var elemTitle = document.createElement('h4');
-		var elemTime = document.createElement('time');
-		// Добавляем стили
-		elemWrapper.classList.add('o-main__pocket', 'l-grid-4');
-		elemImg.classList.add('o-main__pocket-img');
-		elemTitle.classList.add('o-main__pocket-title');
-		elemTime.classList.add('o-main__pocket-date');
-		// Добавляем содержимое
-		elemImg.style.backgroundImage = `url(${package.url}`;
-		elemTitle.innerHTML = package.h;
-		elemTime.innerHTML = package.time;
-		// содержимое добавляем внутрь обёртки
-		elemWrapper.appendChild(elemImg);
-		elemWrapper.appendChild(elemTitle);
-		elemWrapper.appendChild(elemTime);
-		// выводим на страницу
-		wrapper.appendChild(elemWrapper);
-		wrapper.appendChild(elemWrapper2);
-
+			wrapper.appendChild(clone);
+		} else {
+			// создаём HTML элементы
+			var elemWrapper = document.createElement('div');
+			var elemImg = document.createElement('a');
+			var elemTitle = document.createElement('h4');
+			var elemTime = document.createElement('time');
+			// Добавляем стили
+			elemWrapper.classList.add('o-main__pocket', 'l-grid-4');
+			elemImg.classList.add('o-main__pocket-img');
+			elemTitle.classList.add('o-main__pocket-title');
+			elemTime.classList.add('o-main__pocket-date');
+			// Добавляем содержимое
+			elemImg.style.backgroundImage = `url(${package.url}`;
+			elemTitle.innerHTML = package.h;
+			elemTime.innerHTML = package.time;
+			// содержимое добавляем внутрь обёртки
+			elemWrapper.appendChild(elemImg);
+			elemWrapper.appendChild(elemTitle);
+			elemWrapper.appendChild(elemTime);
+			// выводим на страницу
+			wrapper.appendChild(elemWrapper);
+		}
 	}
+
+	function fillWrapper() {
+		while (package.length) {
+			addRandomPackage();
+		}
+	}
+
+
 	return {
-		addRandomPackage: addRandomPackage,
+		fillWrapper: fillWrapper,
 	}
 })();
 
-randomPackages.addRandomPackage();
-randomPackages.addRandomPackage();
-randomPackages.addRandomPackage();
+randomPackages.fillWrapper();
