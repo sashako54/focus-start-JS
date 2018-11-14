@@ -41,15 +41,22 @@
 					</header>
 				</div>
 				<div class="o-main__pockets-wrapper">
-					<div class="o-main__pockets l-grid">
-						<template id="packageTemplate" style="display: none">
-							<div class="o-main__pocket l-grid-4">
-								<a class="o-main__pocket-img" href=""></a>
-								<h4 class="o-main__pocket-title"></h4>
-								<time class="o-main__pocket-date"></time>
-							</div>
-						</template>
+					<template id="packageTemplate" style="display: none">
+						<div class="o-main__pocket l-grid-4">
+							<a class="o-main__pocket-img" href=""></a>
+							<h4 class="o-main__pocket-title"></h4>
+							<time class="o-main__pocket-date"></time>
+						</div>
+					</template>
+					<div class="o-main__pockets l-grid js-packages-carousel">
 					</div>
+					<svg class="o-main__pockets-button-left js-slider-button-left">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+				
+					<svg class="o-main__pockets-button-right js-slider-button-right">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
 				</div>
 				<div class="o-main__apps-wrapper">
 					<div class="o-main__apps l-grid">
