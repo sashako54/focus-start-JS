@@ -117,7 +117,7 @@ var randomPackages = (function() {
 
 		var radio = template.content.querySelectorAll('input.js-carousel-radio')[0];
 		var label = template.content.querySelectorAll('label.js-carousel-label-radio')[0];
-		for ( var i = 0; i < packageLength; i++) {
+		for ( let i = 0; i < packageLength; i++) {
 			radio.id = `carousel-radio-${i}`;
 			label.setAttribute('for', `carousel-radio-${i}`);
 
@@ -125,6 +125,8 @@ var randomPackages = (function() {
 
 			form.appendChild(clone);
 		}
+		// зададим активную радиокнопку
+		document.getElementsByClassName('js-carousel-radio')[1].checked = true;
 	}
 
 	return {
@@ -138,23 +140,42 @@ randomPackages.addPackageRadioButtons();
 
 
 var carousel = (function() {
-	var buttonLeft = document.getElementsByClassName('js-carousel-button-left')[0];
-	var buttonRight = document.getElementsByClassName('js-carousel-button-right')[0];
-	var wrapperPackage = document.getElementsByClassName('js-packages-carousel')[0];
+	var buttonLeft = document.getElementsByClassName('js-carousel-button-left')[0],
+		buttonRight = document.getElementsByClassName('js-carousel-button-right')[0],
+		wrapperPackage = document.getElementsByClassName('js-packages-carousel')[0],
+		radioButtons = document.getElementsByClassName('js-carousel-radio'),
+
+		radioButtonChecked = 1,
+		radioButtonMin = 0,
+		radioButtonMax = radioButtons.length - 1;
 	
-	// добавим 2 первых элемента в конец
+	// добавим 2 последних элемента в начало обёртки
+	wrapperPackage.insertBefore(wrapperPackage.children[wrapperPackage.children.length - 1].cloneNode(true), wrapperPackage.children[0]);
+	wrapperPackage.insertBefore(wrapperPackage.children[wrapperPackage.children.length - 2].cloneNode(true), wrapperPackage.children[0]);
 
-	wrapperPackage.appendChild(wrapperPackage.children[0].cloneNode(true));
-	wrapperPackage.appendChild(wrapperPackage.children[1].cloneNode(true));
+	// добавим 2 первых элемента в конец обёртки
 	wrapperPackage.appendChild(wrapperPackage.children[2].cloneNode(true));
+	wrapperPackage.appendChild(wrapperPackage.children[3].cloneNode(true));
 
-	var wrapperPosition = 0;
 	var maxWrapperPosition = wrapperPackage.children.length - 3;
+	
+	// начальное положение карусели
+	var wrapperPosition = 2;
+	wrapperPackage.classList.add('no-transition');
+	wrapperPackage.style.transform = `translateX(${ -wrapperPosition * 100/3 }%)`
 
-
+	function checkRadioButtons() {
+		if (radioButtonChecked < radioButtonMin) {
+			radioButtonChecked = radioButtonMax;
+		} else if (radioButtonChecked > radioButtonMax) {
+			radioButtonChecked = radioButtonMin;
+		}
+		radioButtons[radioButtonChecked].checked = true;
+	}
 
 	function moveCarouselLeft() {
-		if (wrapperPosition === 0) {
+		wrapperPackage.classList.remove('no-transition');
+		if (wrapperPosition === 1) {
 			wrapperPackage.classList.add('no-transition');
 			wrapperPosition = maxWrapperPosition;
 			wrapperPackage.style.transform = `translateX(${ -wrapperPosition * 100/3 }%)`;
@@ -164,19 +185,24 @@ var carousel = (function() {
 			wrapperPackage.classList.remove('no-transition');
 			wrapperPackage.style.transform = `translateX(${ -wrapperPosition * 100/3 }%)`;
 		}, 10)
+		--radioButtonChecked;
+		checkRadioButtons();
 	}
 
 	function moveCarouselRight() {
-		if (wrapperPosition === maxWrapperPosition) {
+		wrapperPackage.classList.remove('no-transition');
+		if (wrapperPosition === maxWrapperPosition - 1) {
 			wrapperPackage.classList.add('no-transition');
 			wrapperPosition = 0;
 			wrapperPackage.style.transform = `translateX(0)`;
 		}
 		++wrapperPosition;
-		setTimeout(function (){
+		setTimeout(function() {
 			wrapperPackage.style.transform = `translateX(${ -wrapperPosition * 100/3 }%)`;
 			wrapperPackage.classList.remove('no-transition');
 		}, 10)
+		++radioButtonChecked;
+		checkRadioButtons();
 	}
 
 	function moveCarouselEvents() {
@@ -185,17 +211,13 @@ var carousel = (function() {
 	}
 
 	function moveCarouselRadioButtonsEvent() {
-		var radioButtons = document.getElementsByClassName('js-carousel-radio');
-
 		for ( let i = 0; i < radioButtons.length; i++) {
 			radioButtons[i].addEventListener('click', function() {
-				if ( i === 0 ) {
-					wrapperPosition = maxWrapperPosition - 1;
-					wrapperPackage.style.transform = `translateX(${ -wrapperPosition * 100/3 }%)`;
-				} else {
-					wrapperPosition = i - 1;
-					wrapperPackage.style.transform = `translateX(${ -wrapperPosition * 100/3 }%)`;
-				}
+				wrapperPackage.classList.remove('no-transition');
+				
+				wrapperPosition = i + 1;
+				wrapperPackage.style.transform = `translateX(${ -wrapperPosition * 100/3 }%)`;
+				radioButtonChecked = i;
 			})
 		}
 	}
