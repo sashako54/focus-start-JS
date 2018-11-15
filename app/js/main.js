@@ -52,37 +52,31 @@ var randomPackages = (function() {
 
 	var packageObj = [
 		{
-			'name': 'package-1',
 			'url':'assets/images/shot-1.jpg',
 			'h': 'Стандартный пакет',
 			'time':'08 апреля 2012',
 		},
 		{
-			'name': 'package-2',
 			'url':'assets/images/shot-2.jpg',
 			'h': 'Новый ЦФТ банк',
 			'time':'09 сентября 2016',
 		},
 		{
-			'name': 'package-3',
 			'url':'assets/images/shot-3.jpg',
 			'h': 'Каталог разработок',
 			'time':'03 марта 2015',
 		},
 		{
-			'name': 'package-4',
 			'url':'assets/images/shot-1.jpg',
 			'h': 'Стандартный пакет',
 			'time':'08 апреля 2012',
 		},
 		{
-			'name': 'package-5',
 			'url':'assets/images/shot-2.jpg',
 			'h': 'Новый ЦФТ банк',
 			'time':'09 сентября 2016',
 		},
 		{
-			'name': 'package-6',
 			'url':'assets/images/shot-3.jpg',
 			'h': 'Каталог разработок',
 			'time':'03 марта 2015',
@@ -100,12 +94,10 @@ var randomPackages = (function() {
 			var package = getRandomPackage();
 			var template = document.querySelector('#packageTemplate');
 	
-			var wrapperPackage = template.content.getElementsByClassName('o-main__pocket')[0];
 			var elemImg = template.content.querySelectorAll('a.o-main__pocket-img')[0];
 			var elemTitle = template.content.querySelectorAll('h4.o-main__pocket-title')[0];
 			var elemTime = template.content.querySelectorAll('time.o-main__pocket-date')[0];
 	
-			wrapperPackage.setAttribute(data-name, 'hello');
 			elemImg.style.backgroundImage = `url(${package.url}`;
 			elemTitle.innerHTML = package.h;
 			elemTime.innerHTML = package.time;
@@ -127,20 +119,53 @@ randomPackages.addRandomPackages();
 var slider = (function() {
 	var buttonLeft = document.getElementsByClassName('js-slider-button-left')[0];
 	var buttonRight = document.getElementsByClassName('js-slider-button-right')[0];
+	var wrapperPackage = document.getElementsByClassName('js-packages-carousel')[0];
 	
+	// добавим 2 первых элемента в конец
+
+	wrapperPackage.appendChild(wrapperPackage.children[0].cloneNode(true));
+	wrapperPackage.appendChild(wrapperPackage.children[1].cloneNode(true));
+	wrapperPackage.appendChild(wrapperPackage.children[2].cloneNode(true));
+
+	var wrapperPosition = 0;
+	var maxWrapperPosition = wrapperPackage.children.length - 3;
+
+
+
 	function moveCarouselLeft() {
-		var elem = document.getElementsByClassName('js-packages-carousel')[0];
-		// добавляем в конец первый элемент
-		console.log(elem.children[0].dataset)
-		elem.appendChild(elem.children[0]);
+		if (wrapperPosition === 0) {
+			wrapperPackage.classList.add('no-transition');
+			wrapperPosition = maxWrapperPosition;
+			wrapperPackage.style.transform = `translateX(${ -wrapperPosition * 100/3 }%)`;
+		}
+		--wrapperPosition;
+		setTimeout(function() {
+			wrapperPackage.classList.remove('no-transition');
+			wrapperPackage.style.transform = `translateX(${ -wrapperPosition * 100/3 }%)`;
+		}, 10)
 	}
 
 	function moveCarouselRight() {
-		var elem = document.getElementsByClassName('js-packages-carousel')[0];
-		// добавляем в начало последний элемент
-		elem.insertBefore(elem.children[elem.children.length - 1], elem.children[0]);
+		if (wrapperPosition === maxWrapperPosition) {
+			wrapperPackage.classList.add('no-transition');
+			wrapperPosition = 0;
+			wrapperPackage.style.transform = `translateX(0)`;
+		}
+		++wrapperPosition;
+		setTimeout(function (){
+			wrapperPackage.style.transform = `translateX(${ -wrapperPosition * 100/3 }%)`;
+			wrapperPackage.classList.remove('no-transition');
+		}, 10)
 	}
 
-	buttonLeft.addEventListener('click', moveCarouselLeft);
-	buttonRight.addEventListener('click', moveCarouselRight);
+	function addMoveCarouselEvents() {
+		buttonLeft.addEventListener('click', moveCarouselLeft);
+		buttonRight.addEventListener('click', moveCarouselRight);
+	}
+
+	return {
+		addMoveCarouselEvents: addMoveCarouselEvents,
+	}
 })()
+
+slider.addMoveCarouselEvents();

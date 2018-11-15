@@ -127,6 +127,7 @@
 }
 
 .o-main__pockets-wrapper {
+	overflow-x: hidden;
 	position: relative;
 	margin: 0 5px;
 }
@@ -135,25 +136,25 @@
 	position: relative;
 	white-space: nowrap;
 	padding: 30px 0 60px;
-	overflow-x: hidden;
+	transition: transform 400ms ease-in-out;
 }
 
 .o-main__pockets-button-left,
 .o-main__pockets-button-right {
 	position: absolute;
-	width: 50px;
-	height: 50px;
+	width: 45px;
+	height: 45px;
 	color: #000;
 	top: 105px;
 	cursor: pointer;
 }
 
 .o-main__pockets-button-left {
-	left: -20px;
+	left: -15px;
 }
 
 .o-main__pockets-button-right {
-	right: -20px;
+	right: -15px;
 	transform: rotateZ(180deg)
 }
 

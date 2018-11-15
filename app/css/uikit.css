@@ -441,3 +441,7 @@ input[type="checkbox"]:checked + .o-label-toggle::after {
 .o-modal-input::placeholder {
 	color: #9FA3A7;
 }
+
+.no-transition {
+	transition: none !important;
+}
