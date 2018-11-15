@@ -83,6 +83,8 @@ var randomPackages = (function() {
 		},
 	];
 
+	var packageLength = packageObj.length;
+
 	function getRandomPackage() {
 		var elem = packageObj.splice(getRandomInteger(0, packageObj.length - 1), 1)[0];
 		return elem;
@@ -108,17 +110,36 @@ var randomPackages = (function() {
 		}
 	}
 
+	function addPackageRadioButtons () {
+		var form = document.getElementsByClassName('o-carousel__radio-buttons')[0];
+
+		var template = document.querySelector('#packageRadioTemplate');
+
+		var radio = template.content.querySelectorAll('input.js-carousel-radio')[0];
+		var label = template.content.querySelectorAll('label.js-carousel-label-radio')[0];
+		for ( var i = 0; i < packageLength; i++) {
+			radio.id = `carousel-radio-${i}`;
+			label.setAttribute('for', `carousel-radio-${i}`);
+
+			var clone = document.importNode(template.content, true);
+
+			form.appendChild(clone);
+		}
+	}
+
 	return {
 		addRandomPackages: addRandomPackages,
+		addPackageRadioButtons: addPackageRadioButtons,
 	}
 })();
 
 randomPackages.addRandomPackages();
+randomPackages.addPackageRadioButtons();
 
 
-var slider = (function() {
-	var buttonLeft = document.getElementsByClassName('js-slider-button-left')[0];
-	var buttonRight = document.getElementsByClassName('js-slider-button-right')[0];
+var carousel = (function() {
+	var buttonLeft = document.getElementsByClassName('js-carousel-button-left')[0];
+	var buttonRight = document.getElementsByClassName('js-carousel-button-right')[0];
 	var wrapperPackage = document.getElementsByClassName('js-packages-carousel')[0];
 	
 	// добавим 2 первых элемента в конец
@@ -158,14 +179,32 @@ var slider = (function() {
 		}, 10)
 	}
 
-	function addMoveCarouselEvents() {
+	function moveCarouselEvents() {
 		buttonLeft.addEventListener('click', moveCarouselLeft);
 		buttonRight.addEventListener('click', moveCarouselRight);
 	}
 
+	function moveCarouselRadioButtonsEvent() {
+		var radioButtons = document.getElementsByClassName('js-carousel-radio');
+
+		for ( let i = 0; i < radioButtons.length; i++) {
+			radioButtons[i].addEventListener('click', function() {
+				if ( i === 0 ) {
+					wrapperPosition = maxWrapperPosition - 1;
+					wrapperPackage.style.transform = `translateX(${ -wrapperPosition * 100/3 }%)`;
+				} else {
+					wrapperPosition = i - 1;
+					wrapperPackage.style.transform = `translateX(${ -wrapperPosition * 100/3 }%)`;
+				}
+			})
+		}
+	}
+
 	return {
-		addMoveCarouselEvents: addMoveCarouselEvents,
+		moveCarouselEvents: moveCarouselEvents,
+		moveCarouselRadioButtonsEvent: moveCarouselRadioButtonsEvent,
 	}
 })()
 
-slider.addMoveCarouselEvents();
+carousel.moveCarouselEvents();
+carousel.moveCarouselRadioButtonsEvent();

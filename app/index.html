@@ -48,15 +48,20 @@
 							<time class="o-main__pocket-date"></time>
 						</div>
 					</template>
+					<template id="packageRadioTemplate" style="display: none">
+						<input class="js-carousel-radio" type="radio" name="carousel">
+						<label class="o-label-radio js-carousel-label-radio"></label>
+					</template>
 					<div class="o-main__pockets l-grid js-packages-carousel" style="transform: translateX(0)">
 					</div>
-					<svg class="o-main__pockets-button-left js-slider-button-left">
+					<svg class="o-main__pockets-button-left js-carousel-button-left">
 						<use xlink:href="#icon-arrow"></use>
 					</svg>
 				
-					<svg class="o-main__pockets-button-right js-slider-button-right">
+					<svg class="o-main__pockets-button-right js-carousel-button-right">
 						<use xlink:href="#icon-arrow"></use>
 					</svg>
+					<form class="o-carousel__radio-buttons" action=""></form>
 				</div>
 				<div class="o-main__apps-wrapper">
 					<div class="o-main__apps l-grid">

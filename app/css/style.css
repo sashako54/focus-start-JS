@@ -994,3 +994,12 @@
 .o-modal__info-text_margin_top_30 {
 	margin-top: 30px;
 }
+
+.o-carousel__radio-buttons {
+	margin: 0 auto;
+	width: 240px;
+	text-align: center;
+	padding-bottom: 20px;
+	white-space: nowrap;
+	overflow-x: auto;
+}
