@@ -136,7 +136,7 @@
 	position: relative;
 	white-space: nowrap;
 	padding: 30px 0 60px;
-	transition: transform 400ms ease-in-out;
+	transition: transform 200ms ease-in-out;
 }
 
 .o-main__pockets-button-left,
@@ -997,9 +997,39 @@
 
 .o-carousel__radio-buttons {
 	margin: 0 auto;
-	width: 240px;
+	margin-bottom: 20px;
+	width: 256px;
 	text-align: center;
-	padding-bottom: 20px;
+	padding-bottom: 10px;
 	white-space: nowrap;
 	overflow-x: auto;
 }
+
+.o-carousel-label-radio {
+	padding-left: 16px;
+	margin: 0 8px;
+}
+
+.o-carousel__radio-buttons::-webkit-scrollbar {
+	background-color: #fff;
+	height: 10px;
+}
+
+.o-carousel__radio-buttons::-webkit-scrollbar-button,
+.o-carousel__radio-buttons::-webkit-scrollbar-thumb {
+	background-color: #fff;
+	transition: background-color 200ms ease-in-out;
+}
+
+.o-carousel__radio-buttons::-webkit-scrollbar-button {
+	width: 10px;
+	height: 10px;
+}
+
+.o-carousel__radio-buttons::-webkit-scrollbar-thumb {
+	border-left: solid 1px #fff;
+	border-right: solid 1px #fff;
+}
+
+.o-carousel__radio-buttons:hover::-webkit-scrollbar-button {background-color: #c0c0c0;}
+.o-carousel__radio-buttons:hover::-webkit-scrollbar-thumb {background-color: #cecece;}
