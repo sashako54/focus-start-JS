@@ -1,3 +1,5 @@
+import { addRandomPackages } from '/js/drawRandomRackages.js';
+
 const xhr = new XMLHttpRequest();
 let packageObj = {};
 
@@ -11,4 +13,5 @@ xhr.onprogress = function(e) {}
 
 xhr.onload = function(e) {
 	packageObj = JSON.parse(xhr.responseText);
+	addRandomPackages(packageObj);
 }

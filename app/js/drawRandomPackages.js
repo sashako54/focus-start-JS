@@ -38,15 +38,15 @@ var packageObj = [
 
 var packageLength = packageObj.length;
 
-function getRandomPackage() {
-	var elem = packageObj.splice(getRandomInteger(0, packageObj.length - 1), 1)[0];
+function getRandomPackage(obj) {
+	var elem = obj.splice(getRandomInteger(0, obj.length - 1), 1)[0];
 	return elem;
 }
 
-function addRandomPackages() {
+function addRandomPackages(obj) {
 	var wrapper = document.getElementsByClassName('o-main__pockets')[0];
-	while (Object.keys(packageObj).length != 0) {
-		var randomPackage = getRandomPackage();
+	while (Object.keys(obj).length != 0) {
+		var randomPackage = getRandomPackage(obj);
 		var template = document.querySelector('#packageTemplate');
 
 		var elemImg = template.content.querySelectorAll('a.o-main__pocket-img')[0];
@@ -82,5 +82,6 @@ function addPackageRadioButtons () {
 	document.getElementsByClassName('js-carousel-radio')[1].checked = true;
 }
 
-addRandomPackages();
 addPackageRadioButtons();
+
+export {addRandomPackages};
