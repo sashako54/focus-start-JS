@@ -53,33 +53,33 @@ var randomPackages = (function() {
 	var packageObj = [
 		{
 			'url':'assets/images/shot-1.jpg',
-			'h': 'Стандартный пакет',
-			'time':'08 апреля 2012',
+			'title': 'Стандартный пакет',
+			'date':'08 апреля 2012',
 		},
 		{
 			'url':'assets/images/shot-2.jpg',
-			'h': 'Новый ЦФТ банк',
-			'time':'09 сентября 2016',
+			'title': 'Новый ЦФТ банк',
+			'date':'09 сентября 2016',
 		},
 		{
 			'url':'assets/images/shot-3.jpg',
-			'h': 'Каталог разработок',
-			'time':'03 марта 2015',
+			'title': 'Каталог разработок',
+			'date':'03 марта 2015',
 		},
 		{
 			'url':'assets/images/shot-1.jpg',
-			'h': 'Стандартный пакет',
-			'time':'08 апреля 2012',
+			'title': 'Стандартный пакет',
+			'date':'08 апреля 2012',
 		},
 		{
 			'url':'assets/images/shot-2.jpg',
-			'h': 'Новый ЦФТ банк',
-			'time':'09 сентября 2016',
+			'title': 'Новый ЦФТ банк',
+			'date':'09 сентября 2016',
 		},
 		{
 			'url':'assets/images/shot-3.jpg',
-			'h': 'Каталог разработок',
-			'time':'03 марта 2015',
+			'title': 'Каталог разработок',
+			'date':'03 марта 2015',
 		},
 	];
 
@@ -98,11 +98,11 @@ var randomPackages = (function() {
 	
 			var elemImg = template.content.querySelectorAll('a.o-main__pocket-img')[0];
 			var elemTitle = template.content.querySelectorAll('h4.o-main__pocket-title')[0];
-			var elemTime = template.content.querySelectorAll('time.o-main__pocket-date')[0];
+			var elemDate = template.content.querySelectorAll('time.o-main__pocket-date')[0];
 	
 			elemImg.style.backgroundImage = `url(${package.url}`;
-			elemTitle.innerHTML = package.h;
-			elemTime.innerHTML = package.time;
+			elemTitle.innerHTML = package.title;
+			elemDate.innerHTML = package.date;
 	
 			var clone = document.importNode(template.content, true);
 	
