@@ -230,3 +230,5 @@ var carousel = (function() {
 
 carousel.moveCarouselEvents();
 carousel.moveCarouselRadioButtonsEvent();
+
+getPackageObj();
