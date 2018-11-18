@@ -1,42 +1,13 @@
+var packagesNum;
+
+function getPackagesNum(obj) {
+	packagesNum = obj.length;
+}
+
 function getRandomInteger(min, max) {
 	// в выражении не добавляем 1, так как консоль ругается, когда рандомно выпадает последний элемент
 	return Math.floor( min + Math.random() * (max - min));
 }
-
-var packageObj = [
-	{
-		'url':'assets/images/shot-1.jpg',
-		'title': 'Стандартный пакет',
-		'date':'08 апреля 2012',
-	},
-	{
-		'url':'assets/images/shot-2.jpg',
-		'title': 'Новый ЦФТ банк',
-		'date':'09 сентября 2016',
-	},
-	{
-		'url':'assets/images/shot-3.jpg',
-		'title': 'Каталог разработок',
-		'date':'03 марта 2015',
-	},
-	{
-		'url':'assets/images/shot-1.jpg',
-		'title': 'Стандартный пакет',
-		'date':'08 апреля 2012',
-	},
-	{
-		'url':'assets/images/shot-2.jpg',
-		'title': 'Новый ЦФТ банк',
-		'date':'09 сентября 2016',
-	},
-	{
-		'url':'assets/images/shot-3.jpg',
-		'title': 'Каталог разработок',
-		'date':'03 марта 2015',
-	},
-];
-
-var packageLength = packageObj.length;
 
 function getRandomPackage(obj) {
 	var elem = obj.splice(getRandomInteger(0, obj.length - 1), 1)[0];
@@ -45,7 +16,7 @@ function getRandomPackage(obj) {
 
 function addRandomPackages(obj) {
 	var wrapper = document.getElementsByClassName('o-main__pockets')[0];
-	while (Object.keys(obj).length != 0) {
+	while (obj.length != 0) {
 		var randomPackage = getRandomPackage(obj);
 		var template = document.querySelector('#packageTemplate');
 
@@ -63,14 +34,14 @@ function addRandomPackages(obj) {
 	}
 }
 
-function addPackageRadioButtons () {
+function addPackageRadioButtons() {
 	var form = document.getElementsByClassName('o-carousel__radio-buttons')[0];
 
 	var template = document.querySelector('#packageRadioTemplate');
 
 	var radio = template.content.querySelectorAll('input.js-carousel-radio')[0];
 	var label = template.content.querySelectorAll('label.js-carousel-label-radio')[0];
-	for ( let i = 0; i < packageLength; i++) {
+	for ( let i = 0; i < packagesNum; i++) {
 		radio.id = `carousel-radio-${i}`;
 		label.setAttribute('for', `carousel-radio-${i}`);
 
@@ -82,6 +53,4 @@ function addPackageRadioButtons () {
 	document.getElementsByClassName('js-carousel-radio')[1].checked = true;
 }
 
-addPackageRadioButtons();
-
-export {addRandomPackages};
+export { getPackagesNum, addRandomPackages, addPackageRadioButtons };
