@@ -1,4 +1,4 @@
-import { addRandomPackages } from '/js/drawRandomRackages.js';
+import { addRandomPackages } from '/js/drawRandomPackages.js';
 
 const xhr = new XMLHttpRequest();
 let packageObj = {};
