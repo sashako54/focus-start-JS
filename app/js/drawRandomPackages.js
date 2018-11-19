@@ -1,3 +1,5 @@
+import { getDate } from '/js/getDate.js';
+
 var packagesNum;
 
 function getPackagesNum(obj) {
@@ -7,17 +9,6 @@ function getPackagesNum(obj) {
 function getRandomInteger(min, max) {
 	// в выражении не добавляем 1, так как консоль ругается, когда рандомно выпадает последний элемент
 	return Math.floor( min + Math.random() * (max - min));
-}
-
-function getDate(objDate) {
-	var date = objDate * 1000;
-	var formatter = new Intl.DateTimeFormat("ru", {
-		year: "numeric",
-		month: "long",
-		day: "numeric"
-	});
-
-	return formatter.format(date);
 }
 
 function getRandomPackage(obj) {

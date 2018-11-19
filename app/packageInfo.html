@@ -276,12 +276,13 @@
 					</ul>
 				</div>
 			</div>
-			<div class="o-content clearfix">
-				<h3 class="o-content__title o-title-4 o-content__title_border_bottom o-content__title_margin_side_40">Новый ЦФТ-банк</h3>
+			<div class="o-content clearfix js-content"></div>
+			<template id="packageInfoTemplate" style="display: none">
+				<h3 class="o-content__title o-title-4 o-content__title_border_bottom o-content__title_margin_side_40 js-content__title"></h3>
 				<div class="o-app">
 					<div class="o-app__wrapper clearfix">
 						<div class="o-app__inbasket">
-							<div class="o-app__img"></div>
+							<div class="o-app__img js-app__img"></div>
 							<button class="o-app__button o-app__button_margin_top_20 o-button o-button_primary o-button_icon js-app__button"><span>В корзину</span>
 								<svg class="o-app__button-icon o-app__button-icon_margin_left_5">
 									<use xlink:href="#icon-basket"></use>
@@ -289,7 +290,7 @@
 							</button>
 						</div>
 						<div class="o-app__info">
-							<time class="o-app__info-date o-app__info-date_margin_bottom_14">09 сентября 2016</time>
+							<time class="o-app__info-date o-app__info-date_margin_bottom_14 js-app__info-date"></time>
 							<p class="o-app__info-text">Приложение лицензировано в 25 банках<br>
 								Тип Приложения: Базовое<br>
 								Разработчик: ЦФТ<br>
@@ -307,7 +308,7 @@
 						</ul>
 					</div>
 				</div>
-			</div>
+			</template>
 		</div>
 		
 
@@ -431,9 +432,11 @@
 			
 			
 		</svg>
+		<script type="module" src="js/getDate.js"></script>
+		<script type="module" src="js/drawPackageInfo.js"></script>
 		<script type="module" src="js/getUrlParam.js"></script>
 		<script type="module" src="js/getPackageById.js"></script>
 		<script type="module" src="js/second.js"></script>
-		<script type="module" src="js/script.js"></script>
+		<!-- <script type="module" src="js/script.js"></script> -->
 	</body>
 </html>

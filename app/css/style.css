@@ -441,8 +441,7 @@
 
 .o-app__img {
 	height: 190px;
-	background-image: url(../assets/images/shot-2-info.jpg);
-	background-position: 100%;
+	background-position: center;
 	background-size: cover;
 }
 
