@@ -9,6 +9,17 @@ function getRandomInteger(min, max) {
 	return Math.floor( min + Math.random() * (max - min));
 }
 
+function getDate(objDate) {
+	var date = objDate * 1000;
+	var formatter = new Intl.DateTimeFormat("ru", {
+		year: "numeric",
+		month: "long",
+		day: "numeric"
+	});
+
+	return formatter.format(date);
+}
+
 function getRandomPackage(obj) {
 	var elem = obj.splice(getRandomInteger(0, obj.length - 1), 1)[0];
 	return elem;
@@ -26,7 +37,7 @@ function addRandomPackages(obj) {
 
 		elemImg.style.backgroundImage = `url(${randomPackage.url}`;
 		elemTitle.innerHTML = randomPackage.title;
-		elemDate.innerHTML = randomPackage.date;
+		elemDate.innerHTML = getDate(randomPackage.lastUpdate);
 
 		var clone = document.importNode(template.content, true);
 

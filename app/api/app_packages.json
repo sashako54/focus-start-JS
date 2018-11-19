@@ -1,0 +1,44 @@
+[
+	{
+		"id":1,
+		"url": "assets/images/shot-1.jpg",
+		"title": "Стандартный пакет",
+		"lastUpdate": 1336410000,
+		"guid": "00000000001"
+	},
+	{
+		"id":2,
+		"url":"assets/images/shot-2.jpg",
+		"title": "Новый ЦФТ банк",
+		"lastUpdate": 1475946000,
+		"guid": "00000000002"
+	},
+	{
+		"id": 3,
+		"url": "assets/images/shot-3.jpg",
+		"title": "Каталог разработок",
+		"lastUpdate": 1427997600,
+		"guid": "00000000003"
+	},
+	{
+		"id": 4,
+		"url": "assets/images/shot-1.jpg",
+		"title": "Стандартный пакет",
+		"lastUpdate": 1336410000,
+		"guid": "00000000004"
+	},
+	{
+		"id": 5,
+		"url": "assets/images/shot-2.jpg",
+		"title": "Новый ЦФТ банк",
+		"lastUpdate": 1475946000,
+		"guid": "00000000005"
+	},
+	{
+		"id": 6,
+		"url": "assets/images/shot-3.jpg",
+		"title": "Каталог разработок",
+		"lastUpdate": 1427997600,
+		"guid": "00000000006"
+	}
+]
