@@ -4,7 +4,6 @@ function getUrlParam(param) {
 	for ( var i = 0; i < paramArray.length; i++ ) {
 		var currentParam = paramArray[i].split('=');
 		if ( currentParam[0] == param ) {
-			console.log(currentParam[1])
 			return currentParam[1];
 		}
 	}

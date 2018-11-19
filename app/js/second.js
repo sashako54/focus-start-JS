@@ -1,4 +1,4 @@
-import { getUrlParam } from '/js/getUrlParam.js';
+import { getPackageById } from '/js/getPackageById.js';
 
 const xhr = new XMLHttpRequest();
 let packageObj = {};
@@ -9,5 +9,6 @@ xhr.send();
 
 xhr.onload = function(e) {
 	packageObj = JSON.parse(xhr.responseText);
-	getUrlParam('id');
+	var currentPackage = getPackageById(packageObj);
+	console.log(currentPackage);
 }
