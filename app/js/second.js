@@ -1,5 +1,6 @@
 import { getPackageById } from '/js/getPackageById.js';
 import { drawPackageInfo } from '/js/drawPackageInfo.js';
+import { highlightCurrentElem } from '/js/highlightCurrentElem.js';
 
 const xhr = new XMLHttpRequest();
 let packageObj = {};
@@ -12,4 +13,5 @@ xhr.onload = function(e) {
 	packageObj = JSON.parse(xhr.responseText);
 	var currentPackage = getPackageById(packageObj);
 	drawPackageInfo(currentPackage);
+	highlightCurrentElem();
 }

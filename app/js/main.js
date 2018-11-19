@@ -21,7 +21,7 @@ xhr.onload = function(e) {
 }
 
 
-// fetch("http://localhost:3000/api/apps.json").then(function(response) {
+// fetch("http://localhost:3000/api/app_packages.json").then(function(response) {
 // 	return response.json();
 // }).then(function(data) {
 // 	getPackagesNum(data);
