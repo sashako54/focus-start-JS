@@ -6,7 +6,7 @@ import { addPackageRadioButtons, getPackagesNum, addRandomPackages } from '/js/d
 const xhr = new XMLHttpRequest();
 let packageObj = {};
 
-xhr.open("GET", "http://localhost:3000/api/apps.json", true);
+xhr.open("GET", "http://localhost:3000/api/app_packages.json", true);
 
 xhr.send();
 
