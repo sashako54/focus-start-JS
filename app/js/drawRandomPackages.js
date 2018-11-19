@@ -36,6 +36,7 @@ function addRandomPackages(obj) {
 		var elemDate = template.content.querySelectorAll('time.o-main__pocket-date')[0];
 
 		elemImg.style.backgroundImage = `url(${randomPackage.url}`;
+		elemImg.setAttribute('href', `http://localhost:3000/catalog-new-bank.html?id=${randomPackage.id}`);
 		elemTitle.innerHTML = randomPackage.title;
 		elemDate.innerHTML = getDate(randomPackage.lastUpdate);
 
