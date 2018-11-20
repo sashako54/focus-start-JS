@@ -291,20 +291,20 @@
 						</div>
 						<div class="o-app__info">
 							<time class="o-app__info-date o-app__info-date_margin_bottom_14 js-app__info-date"></time>
-							<p class="o-app__info-text">Приложение лицензировано в 25 банках<br>
-								Тип Приложения: Базовое<br>
-								Разработчик: ЦФТ<br>
-								Код по каталогу: 1B365001<br><br>
-								<span>Требования:</span> совместимо с v.14.1, ТЯ v.7.4.0.0 и выше, при наличии лицензии на Проигрыватель форм в web
+							<p class="o-app__info-text"><span class="js-app-info-banks"></span><br>
+								Тип Приложения: <span class="js-app-info-type"></span><br>
+								Разработчик: <span class="js-app-info-developer"></span><br>
+								Код по каталогу: <span class="js-app-info-code"></span><br><br>
+								<span class="o-app__info-text-bold">Требования:</span> <span class="js-app-info-requirements"></span>
 							</p>
 						</div>
 					</div>
 					<div class="o-app__functions">
 						<h4 class="o-app__functions-title">Основные функции</h4>
-						<ul class="o-app__finctions-list">
-							<li class="o-app__finctions-item">Выполнение операций по банковским продуктам, используемым клиентом, и оформление новых продуктов банка непосредственно из Единого окна</li>
-							<li class="o-app__finctions-item">Возможность определения одного банковского продукта для отображения в Едином окне как рекомендуемого (для формирования списка адресно рекомендуемых продуктов необходима лицензия на Приложение Управление целевым маркетингом)</li>
-							<li class="o-app__finctions-item">Начисление баллов операционным сотрудникам за выполнение операций по банковским продуктам и отображение результатов в Едином окне (для использования гибкой настройки условий начисления баллов необходима лицензия на Приложение Игрофикация)</li>
+						<ul class="o-app__finctions-list js-app-features-list">
+							<template id="packageInfoListTemplate">
+								<li class="o-app__finctions-item js-app-features-item"></li>
+							</template>
 						</ul>
 					</div>
 				</div>
