@@ -4,18 +4,31 @@ import { removePackageInfo } from '/js/removePackageInfo.js';
 import { drawPackageInfo } from '/js/drawPackageInfo.js';
 import { highlightCurrentElem } from '/js/highlightCurrentElem.js';
 
+let packages = {};
+
 function addHttpRequest() {
 	const xhr = new XMLHttpRequest();
-	let packageObj = {};
 	
 	xhr.open("GET", `http://localhost:3000/api/app_package_${getUrlParam('id')}.json`, true);
 	
 	xhr.send();
+
+	if ( packages[`${getUrlParam('id')}`] ) {
+		xhr.onabort = function(e) {
+			console.log('abort');
+			removePackageInfo();
+			var currentPackage = packages[`${getUrlParam('id')}`];
+			drawPackageInfo(currentPackage);
+			highlightCurrentElem();
+		}
+		xhr.abort();
+	}
 	
 	xhr.onload = function(e) {
+		console.log('load');
 		removePackageInfo();
-		packageObj = JSON.parse(xhr.responseText);
-		var currentPackage = packageObj[0];
+		var currentPackage = JSON.parse(xhr.responseText)[0];
+		packages[`${getUrlParam('id')}`] = currentPackage;
 		drawPackageInfo(currentPackage);
 		highlightCurrentElem();
 	}
