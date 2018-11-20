@@ -29,6 +29,7 @@
 }
 
 .o-header__nav-list {
+	display: inline-block;
 	padding-top: 42px;
 	font-size: 0;
 }
@@ -37,8 +38,8 @@
 	display: inline-block;
 }
 
-.o-header__nav-item_margin_left_40 {
-	margin-left: 40px;
+.o-header__nav-item_margin_right_40 {
+	margin-right: 40px;
 }
 
 .o-header__nav-link {
@@ -51,6 +52,50 @@
 .o-header__nav-link:hover {
 	color: #ed1b2f;
 }
+
+.o-header__basket-wrapper {
+	display: inline-block;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+.o-header__basket-icon {
+	width: 30px;
+	height: 30px;
+	color: #adafb2;
+	vertical-align: middle;
+}
+
+.o-header__basket-icon:hover {
+	color: #ed1b2f;
+	
+}
+
+.o-header__basket-sum-cost {
+	display: inline-block;
+	vertical-align: inherit;
+	color: #adafb2;
+}
+
+.o-header__basket-sum-cost_marg {
+	margin: 0 10px;
+}
+
+.o-header__basket-sum-packages {
+	display: inline-block;
+	vertical-align: inherit;
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	border-radius: 3px;
+	background-color: #adafb2;
+	color: #fff;
+}
+
+.o-header__basket-wrapper:hover .o-header__basket-sum-packages {background-color: #ed1b2f;}
+.o-header__basket-wrapper:hover .o-header__basket-icon,
+.o-header__basket-wrapper:hover .o-header__basket-sum-cost {color: #ed1b2f;}
 
 /* Контейнер для главной страницы */
 
