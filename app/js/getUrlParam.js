@@ -1,5 +1,5 @@
 function getUrlParam(param) {
-	var fullUrl = window.location.search.substring(1);
+	var fullUrl = window.location.hash.substring(1);
 	var paramArray = fullUrl.split('&');
 	for ( var i = 0; i < paramArray.length; i++ ) {
 		var currentParam = paramArray[i].split('=');
