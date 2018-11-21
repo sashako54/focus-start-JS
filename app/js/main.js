@@ -20,17 +20,4 @@ xhr.onload = function(e) {
 	moveCarouselRadioButtonsEvent();
 }
 
-
-// fetch("http://localhost:3000/api/app_packages.json").then(function(response) {
-// 	return response.json();
-// }).then(function(data) {
-// 	getPackagesNum(data);
-// 	addRandomPackages(data);
-// 	addPackageRadioButtons();
-// 	addPackageClones();
-// 	setCarouselSettings();
-// 	moveCarouselRadioButtonsEvent();
-// })
-
-
 moveCarouselEvents();

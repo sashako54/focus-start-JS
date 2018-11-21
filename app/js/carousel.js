@@ -1,13 +1,13 @@
-var buttonLeft = document.getElementsByClassName('js-carousel-button-left')[0],
-	buttonRight = document.getElementsByClassName('js-carousel-button-right')[0],
-	wrapperPackage = document.getElementsByClassName('js-packages-carousel')[0],
+let buttonLeft = document.querySelector('svg.js-carousel-button-left'),
+	buttonRight = document.querySelector('svg.js-carousel-button-right'),
+	wrapperPackage = document.querySelector('div.js-packages-carousel'),
 	wrapperPosition = 2,
 	maxWrapperPosition,
 	radioButtonChecked = 1;
 	
 	
 function addPackageClones() {
-	var numProductsDisplay = 3;
+	let numProductsDisplay = 3;
 	// добавим 2 последних элемента в начало обёртки
 	wrapperPackage.insertBefore(wrapperPackage.children[wrapperPackage.children.length - 1].cloneNode(true), wrapperPackage.children[0]);
 	wrapperPackage.insertBefore(wrapperPackage.children[wrapperPackage.children.length - 2].cloneNode(true), wrapperPackage.children[0]);
@@ -25,7 +25,7 @@ function setCarouselSettings() {
 }
 
 function checkRadioButtons() {
-	var	radioButtons = document.getElementsByClassName('js-carousel-radio'),
+	let	radioButtons = document.getElementsByClassName('js-carousel-radio'),
 		radioButtonMin = 0,
 		radioButtonMax = radioButtons.length - 1;
 	
@@ -75,7 +75,7 @@ function moveCarouselEvents() {
 }
 
 function moveCarouselRadioButtonsEvent() {
-	var	radioButtons = document.getElementsByClassName('js-carousel-radio');
+	let	radioButtons = document.getElementsByClassName('js-carousel-radio');
 	for ( let i = 0; i < radioButtons.length; i++) {
 		radioButtons[i].addEventListener('click', function() {
 			wrapperPackage.classList.remove('no-transition');

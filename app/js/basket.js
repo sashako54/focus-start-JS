@@ -18,7 +18,7 @@ class Basket {
 let basket = new Basket();
 
 function addPackageToBasketEvent() {
-	var button = document.querySelector('button.js-app__button');
+	let button = document.querySelector('button.js-app__button');
 	button.addEventListener('click', function() {
 		basket.addPackageToBasket(currentPackage);
 	})

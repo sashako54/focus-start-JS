@@ -1,7 +1,7 @@
 import { getDate } from '/js/getDate.js';
 
 function drawPackageInfo(currentPackage) {
-	var wrapper = document.querySelector('div.js-content'),
+	let wrapper = document.querySelector('div.js-content'),
 		template = document.querySelector('#packageInfoTemplate'),
 		
 		title = template.content.querySelector('h3.js-content__title'),
@@ -26,18 +26,18 @@ function drawPackageInfo(currentPackage) {
 	requirements.innerHTML = currentPackage.requirements;
 	price.innerHTML = `${currentPackage.price} $`;
 
-	var clone = document.importNode(template.content, true);
+	let clone = document.importNode(template.content, true);
 	
 	wrapper.appendChild(clone);
 
-	var templateList = document.querySelector('#packageInfoListTemplate'),
+	let templateList = document.querySelector('#packageInfoListTemplate'),
 		featuresList = wrapper.querySelector('ul.js-app-features-list'),
 
 		featuresItem = templateList.content.querySelector('li.js-app-features-item');
 
-	for ( var i = 0; i < currentPackage.features.length; i++ ) {
+	for ( let i = 0; i < currentPackage.features.length; i++ ) {
 		featuresItem.innerHTML = currentPackage.features[i];
-		var cloneList = document.importNode(templateList.content, true);
+		let cloneList = document.importNode(templateList.content, true);
 		featuresList.appendChild(cloneList);
 	}
 }

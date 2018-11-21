@@ -5,7 +5,7 @@ function getHashFromLink(links, i) {
 }
 
 function addHttpRequestEvent() {
-	var links = document.querySelectorAll('a.js-catalog__link');
+	let links = document.querySelectorAll('a.js-catalog__link');
 	for ( let i = 0; i < links.length; i++ ) {
 		// проверка, имеется ли у ссылки hash
 		if ( links[i].href.split('#')[1] !== undefined ) {

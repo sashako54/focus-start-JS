@@ -1,6 +1,6 @@
 // скрипт, посвечивающий рандомные элементы сайта (1 практическое задание по JS)
 
-var querySelectors = document.querySelectorAll('*');
+let querySelectors = document.querySelectorAll('*');
 
 function getRandomInteger(min, max) {
 	// в выражении не добавляем 1, так как консоль ругается, когда рандомно выпадает последний элемент
@@ -17,12 +17,12 @@ function getRandomColor() {
 }
 
 function setLight() {
-	var elem = querySelectors[getRandomNumQuery()];
+	let elem = querySelectors[getRandomNumQuery()];
 	elem.style.boxShadow = `0 0 5px 5px ${getRandomColor()}`;
 }
 
 function deleteLight() {
-	var elem = querySelectors[getRandomNumQuery()];
+	let elem = querySelectors[getRandomNumQuery()];
 	elem.style.boxShadow = null;
 }
 

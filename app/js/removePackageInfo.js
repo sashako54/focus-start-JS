@@ -1,5 +1,5 @@
 function removePackageInfo() {
-	var wrapper = document.querySelector('div.js-content');
+	let wrapper = document.querySelector('div.js-content');
 
 	wrapper.innerHTML = null;
 }
