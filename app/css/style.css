@@ -84,7 +84,7 @@
 .o-header__basket-sum-packages {
 	display: inline-block;
 	vertical-align: inherit;
-	width: 20px;
+	padding: 0 5px;
 	height: 20px;
 	line-height: 20px;
 	text-align: center;

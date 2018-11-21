@@ -3,8 +3,10 @@ import { getUrlParam } from '/js/getUrlParam.js';
 import { removePackageInfo } from '/js/removePackageInfo.js';
 import { drawPackageInfo } from '/js/drawPackageInfo.js';
 import { highlightCurrentElem } from '/js/highlightCurrentElem.js';
+import { addPackageToBasketEvent } from '/js/basket.js';
 
-let packages = {};
+const packages = {};
+let currentPackage = {};
 
 function addHttpRequest() {
 	const xhr = new XMLHttpRequest();
@@ -17,9 +19,10 @@ function addHttpRequest() {
 		xhr.onabort = function(e) {
 			console.log('abort');
 			removePackageInfo();
-			var currentPackage = packages[`${getUrlParam('id')}`];
+			currentPackage = packages[`${getUrlParam('id')}`];
 			drawPackageInfo(currentPackage);
 			highlightCurrentElem();
+			addPackageToBasketEvent();
 		}
 		xhr.abort();
 	}
@@ -27,14 +30,16 @@ function addHttpRequest() {
 	xhr.onload = function(e) {
 		console.log('load');
 		removePackageInfo();
-		var currentPackage = JSON.parse(xhr.responseText)[0];
+		currentPackage = JSON.parse(xhr.responseText)[0];
 		packages[`${getUrlParam('id')}`] = currentPackage;
 		drawPackageInfo(currentPackage);
 		highlightCurrentElem();
+		addPackageToBasketEvent();
 	}
 }
 
 addHttpRequest();
 addHttpRequestEvent();
 
-export { addHttpRequest };
+
+export { addHttpRequest, currentPackage };
