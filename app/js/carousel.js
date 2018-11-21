@@ -3,6 +3,7 @@ let buttonLeft = document.querySelector('svg.js-carousel-button-left'),
 	wrapperPackage = document.querySelector('div.js-packages-carousel'),
 	wrapperPosition = 2,
 	maxWrapperPosition,
+	wrapperPositionBefore,
 	radioButtonChecked = 1;
 	
 	
@@ -40,33 +41,11 @@ function checkRadioButtons() {
 }
 
 function moveCarouselLeft() {
-	// wrapperPackage.classList.remove('no-transition');
-	// if (wrapperPosition === 1) {
-	// 	wrapperPackage.classList.add('no-transition');
-	// 	wrapperPosition = maxWrapperPosition;
-	// 	wrapperPackage.style.transform = `translateX(${ -wrapperPosition * 100/3 }%)`;
-	// }
-	// --wrapperPosition;
-	// setTimeout(function() {
-	// 	wrapperPackage.classList.remove('no-transition');
-	// 	wrapperPackage.style.transform = `translateX(${ -wrapperPosition * 100/3 }%)`;
-	// }, 10)
 	--radioButtonChecked;
 	checkRadioButtons();
 }
 
 function moveCarouselRight() {
-	// wrapperPackage.classList.remove('no-transition');
-	// if (wrapperPosition === maxWrapperPosition - 1) {
-	// 	wrapperPackage.classList.add('no-transition');
-	// 	wrapperPosition = 0;
-	// 	wrapperPackage.style.transform = `translateX(0)`;
-	// }
-	// ++wrapperPosition;
-	// setTimeout(function() {
-	// 	wrapperPackage.style.transform = `translateX(${ -wrapperPosition * 100/3 }%)`;
-	// 	wrapperPackage.classList.remove('no-transition');
-	// }, 10)
 	++radioButtonChecked;
 	checkRadioButtons();
 }
@@ -81,10 +60,30 @@ function moveCarouselRadioButtonsEvent() {
 	for ( let i = 0; i < radioButtons.length; i++) {
 		radioButtons[i].addEventListener('change', function() {
 			wrapperPackage.classList.remove('no-transition');
-			
 			wrapperPosition = i + 1;
-			wrapperPackage.style.transform = `translateX(${ -wrapperPosition * 100/3 }%)`;
-			radioButtonChecked = i;
+			if (wrapperPositionBefore === 1 && wrapperPosition === maxWrapperPosition - 1) {
+				wrapperPackage.classList.add('no-transition');
+				wrapperPosition = maxWrapperPosition;
+				wrapperPackage.style.transform = `translateX(${ -wrapperPosition * 100/3 }%)`;
+				--wrapperPosition;
+				setTimeout(function() {
+					wrapperPackage.classList.remove('no-transition');
+					wrapperPackage.style.transform = `translateX(${ -wrapperPosition * 100/3 }%)`;
+				}, 10);
+			} else if (wrapperPositionBefore === maxWrapperPosition - 1 && wrapperPosition === 1) {
+				wrapperPackage.classList.add('no-transition');
+				wrapperPosition = 0;
+				wrapperPackage.style.transform = `translateX(0)`;
+				++wrapperPosition;
+				setTimeout(function() {
+					wrapperPackage.style.transform = `translateX(${ -wrapperPosition * 100/3 }%)`;
+					wrapperPackage.classList.remove('no-transition');
+				}, 10);
+			} else {
+				wrapperPackage.style.transform = `translateX(${ -wrapperPosition * 100/3 }%)`;
+				radioButtonChecked = i;
+			}
+			wrapperPositionBefore = wrapperPosition;
 		})
 	}
 }
