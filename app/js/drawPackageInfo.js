@@ -12,33 +12,34 @@ function drawPackageInfo(currentPackage) {
 		appType = template.content.querySelector('span.js-app-info-type'),
 		developer = template.content.querySelector('span.js-app-info-developer'),
 		catalogCode = template.content.querySelector('span.js-app-info-code'),
-		requirements = template.content.querySelector('span.js-app-info-requirements');
+		requirements = template.content.querySelector('span.js-app-info-requirements'),
+		price = template.content.querySelector('span.js-app-info-price');
 
-		title.innerHTML = currentPackage.title;
-		img.style.backgroundImage = `url(${currentPackage.url})`;
-		date.innerHTML = getDate(currentPackage.lastUpdate);
+	title.innerHTML = currentPackage.title;
+	img.style.backgroundImage = `url(${currentPackage.url})`;
+	date.innerHTML = getDate(currentPackage.lastUpdate);
 
-		banks.innerHTML = currentPackage.description.banks;
-		appType.innerHTML = currentPackage.description.appType;
-		developer.innerHTML = currentPackage.description.developer;
-		catalogCode.innerHTML = currentPackage.description.catalogCode;
-		requirements.innerHTML = currentPackage.requirements;
+	banks.innerHTML = currentPackage.description.banks;
+	appType.innerHTML = currentPackage.description.appType;
+	developer.innerHTML = currentPackage.description.developer;
+	catalogCode.innerHTML = currentPackage.description.catalogCode;
+	requirements.innerHTML = currentPackage.requirements;
+	price.innerHTML = `${currentPackage.price} $`;
 
-		var clone = document.importNode(template.content, true);
-		
-		wrapper.appendChild(clone);
+	var clone = document.importNode(template.content, true);
+	
+	wrapper.appendChild(clone);
 
-		var templateList = document.querySelector('#packageInfoListTemplate'),
-			featuresList = wrapper.querySelector('ul.js-app-features-list'),
+	var templateList = document.querySelector('#packageInfoListTemplate'),
+		featuresList = wrapper.querySelector('ul.js-app-features-list'),
 
-			featuresItem = templateList.content.querySelector('li.js-app-features-item');
+		featuresItem = templateList.content.querySelector('li.js-app-features-item');
 
-		for ( var i = 0; i < currentPackage.features.length; i++ ) {
-			featuresItem.innerHTML = currentPackage.features[i];
-			var cloneList = document.importNode(templateList.content, true);
-			featuresList.appendChild(cloneList);
-		}
-
+	for ( var i = 0; i < currentPackage.features.length; i++ ) {
+		featuresItem.innerHTML = currentPackage.features[i];
+		var cloneList = document.importNode(templateList.content, true);
+		featuresList.appendChild(cloneList);
 	}
+}
 
 export { drawPackageInfo };
