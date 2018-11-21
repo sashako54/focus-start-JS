@@ -83,7 +83,7 @@ var popup = (function() {
 	}
 
 	function showPopupEvent() {
-		var button = document.getElementsByClassName('js-app__button')[0];
+		var button = document.querySelector('div.js-header-basket');
 		button.addEventListener('click', function() {
 			// Показываем модальное окно
 			main.toggleExistClass('js-modal', 'hidden');
