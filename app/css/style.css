@@ -676,9 +676,8 @@
 .o-modal__table-img {
 	width: 116px;
 	height: 87px;
-	background-image: url(../assets/images/shot-2-popup.jpg);
 	background-size: cover;
-	background-position: 100%;
+	background-position: center;
 }
 
 .o-modal__table-name-cell {
@@ -686,7 +685,7 @@
 	width: 34.64%;
 }
 
-.o-modal__table-name-label {
+.o-modal__table-label {
 	position: relative;
 }
 

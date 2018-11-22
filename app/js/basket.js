@@ -27,13 +27,42 @@ class Basket {
 		return count;
 	}
 
-	drowBasketInfo() {
+	drawBasketInfo() {
 		document.querySelector('p.js-basket-sum-cost').innerHTML = `${this._sumCost} $`;
 		document.querySelector('div.js-basket-count').innerHTML = this._count;
 	}
 
 	addInLocalStorage() {
 		localStorage.setItem('basket', JSON.stringify(this._packageList));
+	}
+
+	drawStringInTable(currentPackage) {
+		let wrapper = document.querySelector('tbody.js-modal__table-body'),
+			template = document.querySelector('#templateTableString'),
+
+			string = template.content.querySelector('tr.js-modal__table-row'),
+			img = template.content.querySelector('div.js-modal__table-img'),
+			name = template.content.querySelector('h4.js-modal__table-name'),
+			price = template.content.querySelector('td.js-modal__table-cost'),
+			minusButton = template.content.querySelector('svg.js-modal__table-quantity-icon-minus'),
+			plusButton = template.content.querySelector('svg.js-modal__table-quantity-icon-plus'),
+			checkInput = template.content.querySelector('input.js-modal__table-input'),
+			checkLabel = template.content.querySelector('label.js-modal__table-label');
+
+		string.classList.add(`js-table-row-id-${currentPackage.id}`);
+		img.style.backgroundImage = `url(${currentPackage.url})`;
+		name.innerHTML = currentPackage.title;
+		price.innerHTML = `$ ${currentPackage.price}`;
+		minusButton.setAttribute('data-id', currentPackage.id);
+		plusButton.setAttribute('data-id', currentPackage.id);
+		checkInput.setAttribute('id', `install-${currentPackage.id}`);
+		checkLabel.setAttribute('for', `install-${currentPackage.id}`);
+
+		let clone = document.importNode(template.content, true);
+	
+		wrapper.appendChild(clone);
+
+
 	}
 
 	addPackageToBasket(currentPackage) {
@@ -45,9 +74,10 @@ class Basket {
 		}
 		this._sumCost += currentPackage.price;
 		this._count++;
-		this.drowBasketInfo();
+		this.drawBasketInfo();
 		// console.log(this._packageList);
 		this.addInLocalStorage();
+		this.drawStringInTable(currentPackage);
 	}
 
 	addPackageToBasketEvent(packages) {
@@ -65,7 +95,7 @@ class Basket {
 			this._sumCost = 0;
 			this._count = 0;
 			localStorage.clear();
-			this.drowBasketInfo();
+			this.drawBasketInfo();
 		})
 	}
 }

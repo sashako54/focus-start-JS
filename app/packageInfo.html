@@ -46,21 +46,22 @@
 								<th class="o-modal__table-title-name"></th>
 							</tr>
 						</thead>
-						<tbody class="o-modal__table-body">
-							<tr class="o-modal__table-row">
+						<template id="templateTableString">
+							<tr class="o-modal__table-row js-modal__table-row">
 								<td class="o-modal__table-img-cell">
-									<div class="o-modal__table-img"></div>
+									<div class="o-modal__table-img js-modal__table-img"></div>
 								</td>
 								<td class="o-modal__table-name-cell">
-									<h4 class="o-modal__table-name o-modal__table-name_margin_bottom_12">Новый ЦФТ-Банк</h4>
-									<input type="checkbox" name="" id="install-1">
-									<label class="o-modal__table-name-label o-label-checkbox" for="install-1">установка и настройка
+									<h4 class="o-modal__table-name o-modal__table-name_margin_bottom_12 js-modal__table-name"></h4>
+									<input class="js-modal__table-input" type="checkbox" checked>
+									<label class="o-modal__table-label o-label-checkbox js-modal__table-label">
+										<span>установка и настройка</span>
 										<svg class="o-label-icon">
 											<use xlink:href="#icon-thick-check"></use>
 										</svg>
 									</label>
 								</td>
-								<td class="o-modal__table-cost-cell">$139,99</td>
+								<td class="o-modal__table-cost-cell js-modal__table-cost"></td>
 								<td class="o-modal__table-quantity-cell">
 									<div class="o-modal__table-quantity">
 										<svg class="o-modal__table-quantity-icon-minus js-modal__table-quantity-icon-minus">
@@ -72,46 +73,15 @@
 										<input class="o-modal__table-quantity-input js-modal__table-quantity-input" type="number" value="1" min="1" max="10" readonly/>
 									</div>
 								</td>
-								<td class="o-modal__table-sum-cell">$139,99</td>
+								<td class="o-modal__table-sum-cell"></td>
 								<td class="o-modal__table-del-cell">
 									<svg class="o-modal__table-del-icon">
 										<use xlink:href="#icon-rubish-bin"></use>
 									</svg>
 								</td>
 							</tr>
-							<tr class="o-modal__table-row">
-								<td class="o-modal__table-img-cell">
-									<div class="o-modal__table-img"></div>
-								</td>
-								<td class="o-modal__table-name-cell">
-									<h4 class="o-modal__table-name o-modal__table-name_margin_bottom_12">Новый ЦФТ-Банк</h4>
-									<input type="checkbox" name="" id="install-2" checked>
-									<label class="o-modal__table-name-label o-label-checkbox" for="install-2">установка и настройка
-										<svg class="o-label-icon">
-											<use xlink:href="#icon-thick-check"></use>
-										</svg>
-									</label>
-								</td>
-								<td class="o-modal__table-cost-cell">$139,99</td>
-								<td class="o-modal__table-quantity-cell">
-									<div class="o-modal__table-quantity">
-										<svg class="o-modal__table-quantity-icon-minus js-modal__table-quantity-icon-minus">
-											<use xlink:href="#icon-minus"></use>
-										</svg>
-										<svg class="o-modal__table-quantity-icon-plus js-modal__table-quantity-icon-plus">
-											<use xlink:href="#icon-plus"></use>
-										</svg>
-										<input class="o-modal__table-quantity-input js-modal__table-quantity-input" type="number" value="1" min="1" max="10" readonly/>
-									</div>
-								</td>
-								<td class="o-modal__table-sum-cell">$139,99</td>
-								<td class="o-modal__table-del-cell">
-									<svg class="o-modal__table-del-icon">
-										<use xlink:href="#icon-rubish-bin"></use>
-									</svg>
-								</td>
-							</tr>
-						</tbody>
+						</template>
+						<tbody class="o-modal__table-body js-modal__table-body"></tbody>
 					</table>
 					<footer class="o-modal__footer clearfix">
 						<div class="o-modal__footer-wrapper">
