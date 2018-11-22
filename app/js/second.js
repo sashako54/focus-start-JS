@@ -9,8 +9,12 @@ let basket = new Basket(JSON.parse(localStorage.getItem('basket')));
 basket.clearBasketEvent();
 basket.drawBasketInfo();
 
+let packages = {};
 
-const packages = {};
+if (JSON.parse(localStorage.getItem('basket')) !== null) {
+	packages = JSON.parse(localStorage.getItem('basket'));
+}
+
 let currentPackage = {};
 
 function addHttpRequest() {
