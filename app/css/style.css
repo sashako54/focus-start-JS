@@ -66,9 +66,17 @@
 	vertical-align: middle;
 }
 
+.o-header__basket-clear-icon {
+	width: 20px;
+	height: 20px;
+	color: #adafb2;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+.o-header__basket-clear-icon:hover,
 .o-header__basket-icon:hover {
 	color: #ed1b2f;
-	
 }
 
 .o-header__basket-sum-cost {

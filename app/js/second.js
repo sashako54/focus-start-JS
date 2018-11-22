@@ -3,7 +3,12 @@ import { getUrlParam } from '/js/getUrlParam.js';
 import { removePackageInfo } from '/js/removePackageInfo.js';
 import { drawPackageInfo } from '/js/drawPackageInfo.js';
 import { highlightCurrentElem } from '/js/highlightCurrentElem.js';
-import { addPackageToBasketEvent } from '/js/basket.js';
+import { Basket } from '/js/basket.js';
+
+let basket = new Basket(JSON.parse(localStorage.getItem('basket')));
+basket.clearBasketEvent();
+basket.drowBasketInfo();
+
 
 const packages = {};
 let currentPackage = {};
@@ -22,7 +27,7 @@ function addHttpRequest() {
 			currentPackage = packages[`${getUrlParam('id')}`];
 			drawPackageInfo(currentPackage);
 			highlightCurrentElem();
-			addPackageToBasketEvent();
+			basket.addPackageToBasketEvent(currentPackage);
 		}
 		xhr.abort();
 	}
@@ -34,7 +39,7 @@ function addHttpRequest() {
 		packages[`${getUrlParam('id')}`] = currentPackage;
 		drawPackageInfo(currentPackage);
 		highlightCurrentElem();
-		addPackageToBasketEvent();
+		basket.addPackageToBasketEvent(currentPackage);
 	}
 }
 
