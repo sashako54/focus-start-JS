@@ -50,10 +50,11 @@ class Basket {
 		this.addInLocalStorage();
 	}
 
-	addPackageToBasketEvent(currentPackage) {
+	addPackageToBasketEvent(packages) {
 		let button = document.querySelector('button.js-app__button');
-		button.addEventListener('click', () => {
-			this.addPackageToBasket(currentPackage);
+		button.addEventListener('click', (e) => {
+			console.log('button-id: ', button.dataset.id);
+			this.addPackageToBasket(packages[button.dataset.id]);
 		})
 	}
 
@@ -72,7 +73,7 @@ class Basket {
 
 window.addEventListener("storage", function(e) {
 	console.log('storage event: ', e);
-	console.log(JSON.parse(localStorage.getItem('basket')));
+	console.log('LocalStorage: ',JSON.parse(localStorage.getItem('basket')));
 })
 
 

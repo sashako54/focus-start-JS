@@ -13,7 +13,8 @@ function drawPackageInfo(currentPackage) {
 		developer = template.content.querySelector('span.js-app-info-developer'),
 		catalogCode = template.content.querySelector('span.js-app-info-code'),
 		requirements = template.content.querySelector('span.js-app-info-requirements'),
-		price = template.content.querySelector('span.js-app-info-price');
+		price = template.content.querySelector('span.js-app-info-price'),
+		button = template.content.querySelector('button.js-app__button');
 
 	title.innerHTML = currentPackage.title;
 	img.style.backgroundImage = `url(${currentPackage.url})`;
@@ -25,6 +26,7 @@ function drawPackageInfo(currentPackage) {
 	catalogCode.innerHTML = currentPackage.description.catalogCode;
 	requirements.innerHTML = currentPackage.requirements;
 	price.innerHTML = `${currentPackage.price} $`;
+	button.setAttribute('data-id', currentPackage.id);
 
 	let clone = document.importNode(template.content, true);
 	

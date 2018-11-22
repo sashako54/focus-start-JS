@@ -27,7 +27,7 @@ function addHttpRequest() {
 			currentPackage = packages[`${getUrlParam('id')}`];
 			drawPackageInfo(currentPackage);
 			highlightCurrentElem();
-			basket.addPackageToBasketEvent(currentPackage);
+			basket.addPackageToBasketEvent(packages);
 		}
 		xhr.abort();
 	}
@@ -39,7 +39,7 @@ function addHttpRequest() {
 		packages[`${getUrlParam('id')}`] = currentPackage;
 		drawPackageInfo(currentPackage);
 		highlightCurrentElem();
-		basket.addPackageToBasketEvent(currentPackage);
+		basket.addPackageToBasketEvent(packages);
 	}
 }
 
