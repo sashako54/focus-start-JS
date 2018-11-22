@@ -13,9 +13,10 @@ let packages = {};
 
 if (JSON.parse(localStorage.getItem('basket')) !== null) {
 	packages = JSON.parse(localStorage.getItem('basket'));
+	for ( let prop in packages ) {
+		delete packages[prop].count;
+	}
 }
-
-let currentPackage = {};
 
 function addHttpRequest() {
 	const xhr = new XMLHttpRequest();
@@ -26,10 +27,9 @@ function addHttpRequest() {
 
 	if ( packages[`${getUrlParam('id')}`] ) {
 		xhr.onabort = function(e) {
-			console.log('abort');
+			console.log('abort Request');
 			removePackageInfo();
-			currentPackage = packages[`${getUrlParam('id')}`];
-			drawPackageInfo(currentPackage);
+			drawPackageInfo(packages[`${getUrlParam('id')}`]);
 			highlightCurrentElem();
 			basket.addPackageToBasketEvent(packages);
 		}
@@ -37,11 +37,10 @@ function addHttpRequest() {
 	}
 	
 	xhr.onload = function(e) {
-		console.log('load');
+		console.log('load Request');
 		removePackageInfo();
-		currentPackage = JSON.parse(xhr.responseText)[0];
-		packages[`${getUrlParam('id')}`] = currentPackage;
-		drawPackageInfo(currentPackage);
+		packages[`${getUrlParam('id')}`] = JSON.parse(xhr.responseText)[0];
+		drawPackageInfo(packages[`${getUrlParam('id')}`]);
 		highlightCurrentElem();
 		basket.addPackageToBasketEvent(packages);
 	}
@@ -51,4 +50,4 @@ addHttpRequest();
 addHttpRequestEvent();
 
 
-export { addHttpRequest, currentPackage };
+export { addHttpRequest };

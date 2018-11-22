@@ -37,10 +37,9 @@ class Basket {
 	}
 
 	drawStringInTable(currentPackage) {
-		let wrapper = document.querySelector('tbody.js-modal__table-body');
-		let wrapperChild = wrapper.querySelector(`tr[data-id="${currentPackage.id}"]`);
-		if (!wrapperChild) {
-			currentPackage.count = 1;
+		let table = document.querySelector('tbody.js-modal__table-body');
+		let tableString = table.querySelector(`tr[data-id="${currentPackage.id}"]`);
+		if (!tableString) {
 			console.log('Добавляем строку');
 			let template = document.querySelector('#templateTableString'),
 	
@@ -52,8 +51,7 @@ class Basket {
 				plusButton = template.content.querySelector('svg.js-modal__table-quantity-icon-plus'),
 				checkInput = template.content.querySelector('input.js-modal__table-input'),
 				checkLabel = template.content.querySelector('label.js-modal__table-label');
-	
-			// string.classList.add(`js-table-row-id-${currentPackage.id}`);
+
 			string.setAttribute('data-id', currentPackage.id);
 			img.style.backgroundImage = `url(${currentPackage.url})`;
 			name.innerHTML = currentPackage.title;
@@ -65,11 +63,9 @@ class Basket {
 	
 			let clone = document.importNode(template.content, true);
 	
-			wrapper.appendChild(clone);
+			table.appendChild(clone);
 		}
-		console.log('повышаем count');
-		// currentPackage.count = currentPackage.count + 1;
-		console.log('count', currentPackage.count)
+		console.log('ownCount', currentPackage.count)
 	}
 
 	addPackageToBasket(currentPackage) {
@@ -84,7 +80,7 @@ class Basket {
 		this.drawBasketInfo();
 		// console.log(this._packageList);
 		this.addInLocalStorage();
-		this.drawStringInTable(currentPackage);
+		this.drawStringInTable(this._packageList[currentPackage.id]);
 	}
 
 	addPackageToBasketEvent(packages) {
