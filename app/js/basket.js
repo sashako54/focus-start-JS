@@ -30,6 +30,7 @@ class Basket {
 	drawBasketInfo() {
 		document.querySelector('p.js-basket-sum-cost').innerHTML = `${this._sumCost} $`;
 		document.querySelector('div.js-basket-count').innerHTML = this._count;
+		document.querySelector('span.js-modal__sum-cost-dollars').innerHTML = `$ ${this._sumCost}`;
 	}
 
 	addInLocalStorage() {
@@ -58,7 +59,8 @@ class Basket {
 				plusButton = template.content.querySelector('svg.js-modal__table-quantity-icon-plus'),
 				checkInput = template.content.querySelector('input.js-modal__table-input'),
 				checkLabel = template.content.querySelector('label.js-modal__table-label'),
-				countInput = template.content.querySelector('input.js-modal__table-quantity-input');
+				countInput = template.content.querySelector('input.js-modal__table-quantity-input'),
+				deleteButton = template.content.querySelector('svg.js-modal__table-del-icon');
 
 			string.setAttribute('data-id', currentPackage.id);
 			img.style.backgroundImage = `url(${currentPackage.url})`;
@@ -70,21 +72,34 @@ class Basket {
 			checkInput.setAttribute('id', `install-${currentPackage.id}`);
 			checkLabel.setAttribute('for', `install-${currentPackage.id}`);
 			countInput.setAttribute('data-id', currentPackage.id);
+			deleteButton.setAttribute('data-id', currentPackage.id);
 
 			let clone = document.importNode(template.content, true);
 	
 			table.appendChild(clone);
 
-			// TODO: вставить вызов обработчика событий для добавления, убавления и удаления строки
-			this.plusPachageEvent(currentPackage);
+			this.plusPackageEvent(currentPackage);
+			this.minusPackageEvent(currentPackage);
+			this.deleteStringFromTableEvent(currentPackage);
 		}
 		console.log('ownCount', currentPackage.count)
+
 		// количество каждого товара в таблице
 		table.querySelector(`input.js-modal__table-quantity-input[data-id="${currentPackage.id}"]`).value = currentPackage.count;
 		// суммарная стоимость однотипных товаров
 		table.querySelector(`td.js-modal__table-sum-cell[data-id="${currentPackage.id}"]`).innerHTML = `$ ${currentPackage.count * currentPackage.price}`;
-		// общая стоимость
-		document.querySelector('span.js-modal__sum-cost-dollars').innerHTML = `$ ${this._sumCost}`;
+	}
+
+	deleteStringFromTable(currentPackage) {
+		let tableString = document.querySelector(`tr.js-modal__table-row[data-id="${currentPackage.id}"]`);
+		
+		this._count -= this._packageList[currentPackage.id].count;
+		this._sumCost -= this._packageList[currentPackage.id].count * this._packageList[currentPackage.id].price;
+		
+		tableString.remove();
+		delete this._packageList[currentPackage.id];
+		this.drawBasketInfo();
+		this.addInLocalStorage();
 	}
 
 	addPackageToBasket(currentPackage) {
@@ -95,9 +110,21 @@ class Basket {
 			++this._packageList[currentPackage.id].count;
 		}
 		this._sumCost += currentPackage.price;
-		this._count++;
+		++this._count;
 		this.drawBasketInfo();
 		// console.log(this._packageList);
+		this.addInLocalStorage();
+		this.drawStringInTable(this._packageList[currentPackage.id]);
+	}
+
+	removePackageFromBasket(currentPackage) {
+		if (this._packageList[currentPackage.id].count === 0) {
+			return;
+		}
+		--this._packageList[currentPackage.id].count;
+		this._sumCost -= currentPackage.price
+		--this._count;
+		this.drawBasketInfo();
 		this.addInLocalStorage();
 		this.drawStringInTable(this._packageList[currentPackage.id]);
 	}
@@ -110,10 +137,24 @@ class Basket {
 		})
 	}
 	
-	plusPachageEvent(currentPackage) {
+	plusPackageEvent(currentPackage) {
 		let plusButton = document.querySelector(`svg.js-modal__table-quantity-icon-plus[data-id="${currentPackage.id}"]`);
 		plusButton.addEventListener('click', () => {
 			this.addPackageToBasket(currentPackage);
+		})
+	}
+
+	minusPackageEvent(currentPackage) {
+		let minusButton = document.querySelector(`svg.js-modal__table-quantity-icon-minus[data-id="${currentPackage.id}"]`);
+		minusButton.addEventListener('click', () => {
+			this.removePackageFromBasket(currentPackage);
+		})
+	}
+
+	deleteStringFromTableEvent(currentPackage) {
+		let deleteButton = document.querySelector(`svg.js-modal__table-del-icon[data-id="${currentPackage.id}"]`);
+		deleteButton.addEventListener('click', () => {
+			this.deleteStringFromTable(currentPackage);
 		})
 	}
 
