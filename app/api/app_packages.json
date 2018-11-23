@@ -21,10 +21,10 @@
 		"guid": "00000000003"
 	},
 	{
-		"id": 1,
-		"url": "assets/images/shot-1.jpg",
-		"title": "Стандартный пакет",
-		"lastUpdate": 1336410000,
+		"id": "cash",
+		"url": "assets/images/Cash.jpeg",
+		"title": "Cash Management",
+		"lastUpdate": 1312097600,
 		"guid": "00000000004"
 	},
 	{
@@ -41,4 +41,5 @@
 		"lastUpdate": 1427997600,
 		"guid": "00000000006"
 	}
+	
 ]
