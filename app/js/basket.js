@@ -43,8 +43,8 @@ class Basket {
 	}
 
 	drawStringInTable(currentPackage) {
-		let table = document.querySelector('tbody.js-modal__table-body');
-		let tableString = table.querySelector(`tr[data-id="${currentPackage.id}"]`);
+		let table = document.querySelector('tbody.js-modal__table-body'),
+			tableString = table.querySelector(`tr.js-modal__table-row[data-id="${currentPackage.id}"]`);
 		if (!tableString) {
 			console.log('Добавляем строку');
 			let template = document.querySelector('#templateTableString'),
@@ -74,6 +74,9 @@ class Basket {
 			let clone = document.importNode(template.content, true);
 	
 			table.appendChild(clone);
+
+			// TODO: вставить вызов обработчика событий для добавления, убавления и удаления строки
+			this.plusPachageEvent(currentPackage);
 		}
 		console.log('ownCount', currentPackage.count)
 		// количество каждого товара в таблице
@@ -101,20 +104,31 @@ class Basket {
 	
 	addPackageToBasketEvent(packages) {
 		let button = document.querySelector('button.js-app__button');
-		button.addEventListener('click', (e) => {
+		button.addEventListener('click', () => {
 			console.log('button-id: ', button.dataset.id);
 			this.addPackageToBasket(packages[button.dataset.id]);
 		})
 	}
+	
+	plusPachageEvent(currentPackage) {
+		let plusButton = document.querySelector(`svg.js-modal__table-quantity-icon-plus[data-id="${currentPackage.id}"]`);
+		plusButton.addEventListener('click', () => {
+			this.addPackageToBasket(currentPackage);
+		})
+	}
 
 	clearBasketEvent() {
-		let basketClearButton = document.querySelector('svg.js-header-basket-clear');
+		let basketClearButton = document.querySelector('svg.js-header-basket-clear'),
+			table = document.querySelector('tbody.js-modal__table-body'),
+			sumCost = document.querySelector('span.js-modal__sum-cost-dollars');
 		basketClearButton.addEventListener('click', () => {
 			this._packageList = {};
 			this._sumCost = 0;
 			this._count = 0;
 			localStorage.clear();
 			this.drawBasketInfo();
+			table.innerHTML = null;
+			sumCost.innerHTML = '$ 0';
 		})
 	}
 }

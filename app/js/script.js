@@ -104,41 +104,41 @@ var popup = (function() {
 
 popup.showPopupEvent();
 
-var inputs = (function(){
-	var inputs = document.getElementsByClassName('js-modal__table-quantity-input');
+// var inputs = (function(){
+// 	var inputs = document.getElementsByClassName('js-modal__table-quantity-input');
 
-	var plusButton = document.getElementsByClassName('js-modal__table-quantity-icon-plus');
-	var minusButton = document.getElementsByClassName('js-modal__table-quantity-icon-minus');
+// 	var plusButton = document.getElementsByClassName('js-modal__table-quantity-icon-plus');
+// 	var minusButton = document.getElementsByClassName('js-modal__table-quantity-icon-minus');
 
-	function plusEvent() {
-		for ( let i = 0; i < inputs.length; i++ ) {
-			plusButton[i].addEventListener('click', function() {
-				if ( inputs[i].value >= 0  && inputs[i].value < 10 ) {
-					inputs[i].value = +inputs[i].value + 1;
-				}
-			})
-		}
-	}
+// 	function plusEvent() {
+// 		for ( let i = 0; i < inputs.length; i++ ) {
+// 			plusButton[i].addEventListener('click', function() {
+// 				if ( inputs[i].value >= 0  && inputs[i].value < 10 ) {
+// 					inputs[i].value = +inputs[i].value + 1;
+// 				}
+// 			})
+// 		}
+// 	}
 
-	function minusEvent() {
-		for ( let i = 0; i < inputs.length; i++ ) {
-			minusButton[i].addEventListener('click', function() {
-				if ( inputs[i].value > 0  && inputs[i].value <= 10 ) {
-					inputs[i].value = +inputs[i].value - 1;
-				}
-			})
-		}
-	}
+// 	function minusEvent() {
+// 		for ( let i = 0; i < inputs.length; i++ ) {
+// 			minusButton[i].addEventListener('click', function() {
+// 				if ( inputs[i].value > 0  && inputs[i].value <= 10 ) {
+// 					inputs[i].value = +inputs[i].value - 1;
+// 				}
+// 			})
+// 		}
+// 	}
 
-	return {
-		plusEvent: plusEvent,
-		minusEvent: minusEvent,
-	}
+// 	return {
+// 		plusEvent: plusEvent,
+// 		minusEvent: minusEvent,
+// 	}
 
-})();
+// })();
 
-inputs.plusEvent();
-inputs.minusEvent();
+// inputs.plusEvent();
+// inputs.minusEvent();
 
 var transitionPopupForword = (function(){
 
