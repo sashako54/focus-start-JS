@@ -36,6 +36,12 @@ class Basket {
 		localStorage.setItem('basket', JSON.stringify(this._packageList));
 	}
 
+	drawTable(packages) {
+		for (let prop in packages) {
+			this.drawStringInTable(packages[prop]);
+		}
+	}
+
 	drawStringInTable(currentPackage) {
 		let table = document.querySelector('tbody.js-modal__table-body');
 		let tableString = table.querySelector(`tr[data-id="${currentPackage.id}"]`);
@@ -47,25 +53,35 @@ class Basket {
 				img = template.content.querySelector('div.js-modal__table-img'),
 				name = template.content.querySelector('h4.js-modal__table-name'),
 				price = template.content.querySelector('td.js-modal__table-cost'),
+				sumCost = template.content.querySelector('td.js-modal__table-sum-cell'),
 				minusButton = template.content.querySelector('svg.js-modal__table-quantity-icon-minus'),
 				plusButton = template.content.querySelector('svg.js-modal__table-quantity-icon-plus'),
 				checkInput = template.content.querySelector('input.js-modal__table-input'),
-				checkLabel = template.content.querySelector('label.js-modal__table-label');
+				checkLabel = template.content.querySelector('label.js-modal__table-label'),
+				countInput = template.content.querySelector('input.js-modal__table-quantity-input');
 
 			string.setAttribute('data-id', currentPackage.id);
 			img.style.backgroundImage = `url(${currentPackage.url})`;
 			name.innerHTML = currentPackage.title;
 			price.innerHTML = `$ ${currentPackage.price}`;
+			sumCost.setAttribute('data-id', currentPackage.id);
 			minusButton.setAttribute('data-id', currentPackage.id);
 			plusButton.setAttribute('data-id', currentPackage.id);
 			checkInput.setAttribute('id', `install-${currentPackage.id}`);
 			checkLabel.setAttribute('for', `install-${currentPackage.id}`);
-	
+			countInput.setAttribute('data-id', currentPackage.id);
+
 			let clone = document.importNode(template.content, true);
 	
 			table.appendChild(clone);
 		}
 		console.log('ownCount', currentPackage.count)
+		// количество каждого товара в таблице
+		table.querySelector(`input.js-modal__table-quantity-input[data-id="${currentPackage.id}"]`).value = currentPackage.count;
+		// суммарная стоимость однотипных товаров
+		table.querySelector(`td.js-modal__table-sum-cell[data-id="${currentPackage.id}"]`).innerHTML = `$ ${currentPackage.count * currentPackage.price}`;
+		// общая стоимость
+		document.querySelector('span.js-modal__sum-cost-dollars').innerHTML = `$ ${this._sumCost}`;
 	}
 
 	addPackageToBasket(currentPackage) {
@@ -82,7 +98,7 @@ class Basket {
 		this.addInLocalStorage();
 		this.drawStringInTable(this._packageList[currentPackage.id]);
 	}
-
+	
 	addPackageToBasketEvent(packages) {
 		let button = document.querySelector('button.js-app__button');
 		button.addEventListener('click', (e) => {

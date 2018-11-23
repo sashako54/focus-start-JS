@@ -8,6 +8,7 @@ import { Basket } from '/js/basket.js';
 let basket = new Basket(JSON.parse(localStorage.getItem('basket')));
 basket.clearBasketEvent();
 basket.drawBasketInfo();
+basket.drawTable(JSON.parse(localStorage.getItem('basket')));
 
 let packages = {};
 
