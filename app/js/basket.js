@@ -1,27 +1,27 @@
 class Basket {
-	constructor(packageList) {
-		if (packageList === null) {
+	constructor() {
+		if (!JSON.parse(localStorage.getItem('basket'))) {
 			this._packageList = {};
 		} else {
-			this._packageList = packageList;
+			this._packageList = JSON.parse(localStorage.getItem('basket'));
 		}
-		this._sumCost = this.setSumCost(packageList);
-		this._count = this.setCount(packageList);
+		this._sumCost = this.setSumCost();
+		this._count = this.setCount();
 	}
 
-	setSumCost(packageList) {
+	setSumCost() {
 		let sumCost = 0;
-		for (let prop in packageList) {
-			sumCost = sumCost + packageList[prop].count * packageList[prop].price;
+		for (let prop in this._packageList) {
+			sumCost += this._packageList[prop].count * this._packageList[prop].price;
 		}
 		console.log('sum cost: ', sumCost);
 		return sumCost;
 	}
 
-	setCount(packageList) {
+	setCount() {
 		let count = 0;
-		for (let prop in packageList) {
-			count = count + packageList[prop].count;
+		for (let prop in this._packageList) {
+			count += this._packageList[prop].count;
 		}
 		console.log('count:', count);
 		return count;
@@ -37,9 +37,9 @@ class Basket {
 		localStorage.setItem('basket', JSON.stringify(this._packageList));
 	}
 
-	drawTable(packages) {
-		for (let prop in packages) {
-			this.drawStringInTable(packages[prop]);
+	drawTable() {
+		for (let prop in this._packageList) {
+			this.drawStringInTable(this._packageList[prop]);
 		}
 	}
 
@@ -82,7 +82,7 @@ class Basket {
 			this.minusPackageEvent(currentPackage);
 			this.deleteStringFromTableEvent(currentPackage);
 		}
-		console.log('ownCount', currentPackage.count)
+		console.log('ownCount', currentPackage.count);
 
 		// количество каждого товара в таблице
 		table.querySelector(`input.js-modal__table-quantity-input[data-id="${currentPackage.id}"]`).value = currentPackage.count;
@@ -102,52 +102,51 @@ class Basket {
 		this.addInLocalStorage();
 	}
 
-	addPackageToBasket(currentPackage) {
-		if ( this._packageList[currentPackage.id] === undefined ) {
+	addPackage(currentPackage) {
+		if ( !this._packageList[currentPackage.id] ) {
 			this._packageList[currentPackage.id] = currentPackage;
 			this._packageList[currentPackage.id].count = 1;
 		} else {
-			++this._packageList[currentPackage.id].count;
+			this._packageList[currentPackage.id].count += 1;
 		}
 		this._sumCost += currentPackage.price;
-		++this._count;
+		this._count += 1;
 		this.drawBasketInfo();
-		// console.log(this._packageList);
 		this.addInLocalStorage();
 		this.drawStringInTable(this._packageList[currentPackage.id]);
 	}
 
-	removePackageFromBasket(currentPackage) {
+	removePackage(currentPackage) {
 		if (this._packageList[currentPackage.id].count === 0) {
 			return;
 		}
-		--this._packageList[currentPackage.id].count;
+		this._packageList[currentPackage.id].count -= 1;
 		this._sumCost -= currentPackage.price
-		--this._count;
+		this._count -= 1;
 		this.drawBasketInfo();
 		this.addInLocalStorage();
 		this.drawStringInTable(this._packageList[currentPackage.id]);
 	}
 	
-	addPackageToBasketEvent(packages) {
+	addPackageEvent(packages) {
 		let button = document.querySelector('button.js-app__button');
 		button.addEventListener('click', () => {
 			console.log('button-id: ', button.dataset.id);
-			this.addPackageToBasket(packages[button.dataset.id]);
+			this.addPackage(packages[button.dataset.id]);
 		})
 	}
 	
 	plusPackageEvent(currentPackage) {
 		let plusButton = document.querySelector(`svg.js-modal__table-quantity-icon-plus[data-id="${currentPackage.id}"]`);
 		plusButton.addEventListener('click', () => {
-			this.addPackageToBasket(currentPackage);
+			this.addPackage(currentPackage);
 		})
 	}
 
 	minusPackageEvent(currentPackage) {
 		let minusButton = document.querySelector(`svg.js-modal__table-quantity-icon-minus[data-id="${currentPackage.id}"]`);
 		minusButton.addEventListener('click', () => {
-			this.removePackageFromBasket(currentPackage);
+			this.removePackage(currentPackage);
 		})
 	}
 
@@ -162,6 +161,7 @@ class Basket {
 		let basketClearButton = document.querySelector('svg.js-header-basket-clear'),
 			table = document.querySelector('tbody.js-modal__table-body'),
 			sumCost = document.querySelector('span.js-modal__sum-cost-dollars');
+
 		basketClearButton.addEventListener('click', () => {
 			this._packageList = {};
 			this._sumCost = 0;

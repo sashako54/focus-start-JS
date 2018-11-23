@@ -5,14 +5,14 @@ import { drawPackageInfo } from '/js/drawPackageInfo.js';
 import { highlightCurrentElem } from '/js/highlightCurrentElem.js';
 import { Basket } from '/js/basket.js';
 
-let basket = new Basket(JSON.parse(localStorage.getItem('basket')));
+let basket = new Basket();
 basket.clearBasketEvent();
 basket.drawBasketInfo();
-basket.drawTable(JSON.parse(localStorage.getItem('basket')));
+basket.drawTable();
 
 let packages = {};
 
-if (JSON.parse(localStorage.getItem('basket')) !== null) {
+if (JSON.parse(localStorage.getItem('basket'))) {
 	packages = JSON.parse(localStorage.getItem('basket'));
 	for ( let prop in packages ) {
 		delete packages[prop].count;
@@ -32,7 +32,7 @@ function addHttpRequest() {
 			removePackageInfo();
 			drawPackageInfo(packages[`${getUrlParam('id')}`]);
 			highlightCurrentElem();
-			basket.addPackageToBasketEvent(packages);
+			basket.addPackageEvent(packages);
 		}
 		xhr.abort();
 	}
@@ -43,7 +43,7 @@ function addHttpRequest() {
 		packages[`${getUrlParam('id')}`] = JSON.parse(xhr.responseText)[0];
 		drawPackageInfo(packages[`${getUrlParam('id')}`]);
 		highlightCurrentElem();
-		basket.addPackageToBasketEvent(packages);
+		basket.addPackageEvent(packages);
 	}
 }
 
