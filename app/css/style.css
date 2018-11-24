@@ -769,6 +769,7 @@
 	width: 32px;
 	height: 32px;
 	color: #4A90E2;
+	cursor: pointer;
 }
 
 .o-modal__table-del-icon:hover {
