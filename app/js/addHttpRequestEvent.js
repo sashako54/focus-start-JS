@@ -1,3 +1,4 @@
+import { getUrlParam } from '/js/getUrlParam.js';
 import { addHttpRequest } from '/js/second.js';
 
 function getHashFromLink(links, i) {

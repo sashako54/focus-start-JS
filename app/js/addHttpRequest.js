@@ -1,7 +1,7 @@
-function addHttpRequest(obj) {
+function addHttpRequestPromise(method, url) {
 	return new Promise(function(resolve, reject){
 		let xhr = new XMLHttpRequest();
-		xhr.open(obj.method || "GET", obj.url, true);
+		xhr.open(method || "GET", url, true);
         xhr.onload = () => {
             if (xhr.status >= 200 && xhr.status < 300) {
                 resolve(JSON.parse(xhr.responseText));
@@ -10,8 +10,8 @@ function addHttpRequest(obj) {
             }
         };
         xhr.onerror = () => reject(xhr.statusText);
-        xhr.send(obj.body);
+        xhr.send();
 	})
 }
 
-export { addHttpRequest };
+export { addHttpRequestPromise };

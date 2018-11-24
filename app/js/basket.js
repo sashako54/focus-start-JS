@@ -128,11 +128,11 @@ class Basket {
 		this.drawStringInTable(this._packageList[currentPackage.id]);
 	}
 	
-	addPackageEvent(packages) {
+	addPackageEvent(currentPackage) {
 		let button = document.querySelector('button.js-app__button');
 		button.addEventListener('click', () => {
 			console.log('button-id: ', button.dataset.id);
-			this.addPackage(packages[button.dataset.id]);
+			this.addPackage(currentPackage);
 		})
 	}
 	
