@@ -30,7 +30,6 @@ class Basket {
 	drawBasketInfo() {
 		document.querySelector('p.js-basket-sum-cost').innerHTML = `${this._sumCost} $`;
 		document.querySelector('div.js-basket-count').innerHTML = this._count;
-		document.querySelector('span.js-modal__sum-cost-dollars').innerHTML = `$ ${this._sumCost}`;
 	}
 
 	addInLocalStorage() {
@@ -41,6 +40,8 @@ class Basket {
 		for (let prop in this._packageList) {
 			this.drawStringInTable(this._packageList[prop]);
 		}
+		// сумма заказа
+		document.querySelector('span.js-modal__sum-cost-dollars').innerHTML = `$ ${this._sumCost}`;
 	}
 
 	drawStringInTable(currentPackage) {
@@ -113,7 +114,8 @@ class Basket {
 		this._count += 1;
 		this.drawBasketInfo();
 		this.addInLocalStorage();
-		this.drawStringInTable(this._packageList[currentPackage.id]);
+		// this.drawStringInTable(this._packageList[currentPackage.id]);
+		// TODO: сделать разные функции для добавления элементов для кнопки В КОРЗИНУ, и в ПЛЮС)
 	}
 
 	removePackage(currentPackage) {
@@ -125,7 +127,7 @@ class Basket {
 		this._count -= 1;
 		this.drawBasketInfo();
 		this.addInLocalStorage();
-		this.drawStringInTable(this._packageList[currentPackage.id]);
+		// this.drawStringInTable(this._packageList[currentPackage.id]);
 	}
 	
 	addPackageEvent(currentPackage) {

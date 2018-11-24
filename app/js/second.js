@@ -26,4 +26,4 @@ function addHttpRequest() {
 addHttpRequest();
 addHttpRequestEvent();
 
-export { addHttpRequest };
+export { addHttpRequest, basket };

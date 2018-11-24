@@ -1,3 +1,4 @@
+import { basket } from '/js/second.js';
 
 var main = (function() {
 	function toggleNotExistClass(class1, class2, j = 0) {
@@ -94,6 +95,8 @@ var popup = (function() {
 			window.addEventListener('click', hidePopupClickAreaEvent);
 			// Обработчик событий, при нажатии на Esc происходит закрытие Popup
 			window.addEventListener('keydown', hidePopupEscapeEvent);
+
+			basket.drawTable();
 		})
 	}
 
