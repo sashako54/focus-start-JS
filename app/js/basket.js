@@ -11,8 +11,8 @@ class Basket {
 
 	setSumCost() {
 		let sumCost = 0;
-		for (let prop in this._packageList) {
-			sumCost += this._packageList[prop].count * this._packageList[prop].price;
+		for (let key in this._packageList) {
+			sumCost += this._packageList[key].count * this._packageList[key].price;
 		}
 		console.log('sum cost: ', sumCost);
 		return sumCost;
@@ -20,8 +20,8 @@ class Basket {
 
 	setCount() {
 		let count = 0;
-		for (let prop in this._packageList) {
-			count += this._packageList[prop].count;
+		for (let key in this._packageList) {
+			count += this._packageList[key].count;
 		}
 		console.log('count:', count);
 		return count;
@@ -37,8 +37,10 @@ class Basket {
 	}
 
 	drawTable() {
-		for (let prop in this._packageList) {
-			this.drawStringInTable(this._packageList[prop]);
+		let table = document.querySelector('tbody.js-modal__table-body');
+		table.innerHTML = null;
+		for (let key in this._packageList) {
+			this.drawStringInTable(this._packageList[key]);
 		}
 		// сумма заказа
 		document.querySelector('span.js-modal__sum-cost-dollars').innerHTML = `$ ${this._sumCost}`;
@@ -92,13 +94,11 @@ class Basket {
 	}
 
 	deleteStringFromTable(currentPackage) {
-		let tableString = document.querySelector(`tr.js-modal__table-row[data-id="${currentPackage.id}"]`);
-		
 		this._count -= this._packageList[currentPackage.id].count;
 		this._sumCost -= this._packageList[currentPackage.id].count * this._packageList[currentPackage.id].price;
-		
-		tableString.remove();
 		delete this._packageList[currentPackage.id];
+		
+		this.drawTable();
 		this.drawBasketInfo();
 		this.addInLocalStorage();
 	}
@@ -114,20 +114,27 @@ class Basket {
 		this._count += 1;
 		this.drawBasketInfo();
 		this.addInLocalStorage();
-		// this.drawStringInTable(this._packageList[currentPackage.id]);
-		// TODO: сделать разные функции для добавления элементов для кнопки В КОРЗИНУ, и в ПЛЮС)
 	}
 
-	removePackage(currentPackage) {
+	plusPackage(currentPackage) {
+		this._packageList[currentPackage.id].count += 1;
+		this._sumCost += currentPackage.price;
+		this._count += 1;
+		this.drawTable();
+		this.drawBasketInfo();
+		this.addInLocalStorage();
+	}
+
+	minusPackage(currentPackage) {
 		if (this._packageList[currentPackage.id].count === 0) {
 			return;
 		}
 		this._packageList[currentPackage.id].count -= 1;
 		this._sumCost -= currentPackage.price
 		this._count -= 1;
+		this.drawTable();
 		this.drawBasketInfo();
 		this.addInLocalStorage();
-		// this.drawStringInTable(this._packageList[currentPackage.id]);
 	}
 	
 	addPackageEvent(currentPackage) {
@@ -141,14 +148,14 @@ class Basket {
 	plusPackageEvent(currentPackage) {
 		let plusButton = document.querySelector(`svg.js-modal__table-quantity-icon-plus[data-id="${currentPackage.id}"]`);
 		plusButton.addEventListener('click', () => {
-			this.addPackage(currentPackage);
+			this.plusPackage(currentPackage);
 		})
 	}
 
 	minusPackageEvent(currentPackage) {
 		let minusButton = document.querySelector(`svg.js-modal__table-quantity-icon-minus[data-id="${currentPackage.id}"]`);
 		minusButton.addEventListener('click', () => {
-			this.removePackage(currentPackage);
+			this.minusPackage(currentPackage);
 		})
 	}
 
@@ -160,18 +167,13 @@ class Basket {
 	}
 
 	clearBasketEvent() {
-		let basketClearButton = document.querySelector('svg.js-header-basket-clear'),
-			table = document.querySelector('tbody.js-modal__table-body'),
-			sumCost = document.querySelector('span.js-modal__sum-cost-dollars');
-
+		let basketClearButton = document.querySelector('svg.js-header-basket-clear');
 		basketClearButton.addEventListener('click', () => {
 			this._packageList = {};
 			this._sumCost = 0;
 			this._count = 0;
-			localStorage.clear();
+			localStorage.removeItem('basket');
 			this.drawBasketInfo();
-			table.innerHTML = null;
-			sumCost.innerHTML = '$ 0';
 		})
 	}
 }
