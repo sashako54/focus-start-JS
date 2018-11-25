@@ -1,10 +1,10 @@
 class Carousel {
-	constructor(wrapper, radioButtons, buttonLeft, buttonRight) {
+	constructor(wrapper, radioButtons, buttonLeft, buttonRight, wrapperPositionStart) {
 		this._buttonLeft = document.querySelector(buttonLeft),
 		this._buttonRight = document.querySelector(buttonRight),
 		this._wrapperPackage = document.querySelector(wrapper),
 		this._radioButtons = document.getElementsByClassName(radioButtons),
-		this._wrapperPosition = 2,
+		this._wrapperPosition = wrapperPositionStart,
 		this._maxWrapperPosition,
 		this._wrapperPositionBefore,
 		this._radioButtonChecked = 1;

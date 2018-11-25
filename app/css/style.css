@@ -585,11 +585,22 @@
 }
 
 .o-modal__wrapper {
+	position: relative;
 	padding: 80px;
 	max-width: 1280px;
 	width: 100%;
 	margin: 0 auto;
 	background-color: #fff;
+}
+
+.o-modal-loading__wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.1);
+	z-index: 3;
 }
 
 .o-modal__wrapper_margin_vertical {
@@ -1086,3 +1097,95 @@
 
 .o-carousel__radio-buttons:hover::-webkit-scrollbar-button {background-color: #c0c0c0;}
 .o-carousel__radio-buttons:hover::-webkit-scrollbar-thumb {background-color: #cecece;}
+
+/* Анимация для loading в попапе */
+
+#floatingBarsG{
+	position:relative;
+	top: 50%;
+    transform: translateY(-50%);
+	width:60px;
+	height:75px;
+	margin:auto;
+}
+
+.blockG{
+	position:absolute;
+	background-color:rgb(255,255,255);
+	width:10px;
+	height:23px;
+	border-radius:8px 8px 0 0;
+	transform:scale(0.4);
+	animation-name:fadeG;
+	animation-duration:1.2s;
+	animation-iteration-count:infinite;
+	animation-direction:normal;
+}
+
+#rotateG_01{
+	left:0;
+	top:27px;
+	animation-delay:0.45s;
+	transform:rotate(-90deg);
+}
+
+#rotateG_02{
+	left:8px;
+	top:10px;
+	animation-delay:0.6s;
+	transform:rotate(-45deg);
+}
+
+#rotateG_03{
+	left:25px;
+	top:3px;
+	animation-delay:0.75s;
+	transform:rotate(0deg);
+}
+
+#rotateG_04{
+	right:8px;
+	top:10px;
+	animation-delay:0.9s;
+	transform:rotate(45deg);
+}
+
+#rotateG_05{
+	right:0;
+	top:27px;
+	animation-delay:1.05s;
+	transform:rotate(90deg);
+}
+
+#rotateG_06{
+	right:8px;
+	bottom:7px;
+	animation-delay:1.2s;
+	transform:rotate(135deg);
+}
+
+#rotateG_07{
+	bottom:0;
+	left:25px;
+	animation-delay:1.35s;
+	transform:rotate(180deg);
+}
+
+#rotateG_08{
+	left:8px;
+	bottom:7px;
+	animation-delay:1.5s;
+	transform:rotate(-135deg);
+}
+
+
+
+@keyframes fadeG{
+	0%{
+		background-color:rgb(0,0,0);
+	}
+
+	100%{
+		background-color:rgb(255,255,255);
+	}
+}
