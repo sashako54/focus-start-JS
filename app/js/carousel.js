@@ -1,8 +1,9 @@
 class Carousel {
-	constructor() {
-		this._buttonLeft = document.querySelector('svg.js-carousel-button-left'),
-		this._buttonRight = document.querySelector('svg.js-carousel-button-right'),
-		this._wrapperPackage = document.querySelector('div.js-packages-carousel'),
+	constructor(wrapper, radioButtons, buttonLeft, buttonRight) {
+		this._buttonLeft = document.querySelector(buttonLeft),
+		this._buttonRight = document.querySelector(buttonRight),
+		this._wrapperPackage = document.querySelector(wrapper),
+		this._radioButtons = document.getElementsByClassName(radioButtons),
 		this._wrapperPosition = 2,
 		this._maxWrapperPosition,
 		this._wrapperPositionBefore,
@@ -28,9 +29,8 @@ class Carousel {
 	}
 	
 	checkRadioButtons() {
-		let	radioButtons = document.getElementsByClassName('js-carousel-radio'),
-			radioButtonMin = 0,
-			radioButtonMax = radioButtons.length - 1;
+		let	radioButtonMin = 0,
+			radioButtonMax = this._radioButtons.length - 1;
 		
 		if (this._radioButtonChecked < radioButtonMin) {
 			this._radioButtonChecked = radioButtonMax;
@@ -38,8 +38,8 @@ class Carousel {
 			this._radioButtonChecked = radioButtonMin;
 		}
 		let changeEvent = new Event('change');
-		radioButtons[this._radioButtonChecked].checked = true;
-		radioButtons[this._radioButtonChecked].dispatchEvent(changeEvent);
+		this._radioButtons[this._radioButtonChecked].checked = true;
+		this._radioButtons[this._radioButtonChecked].dispatchEvent(changeEvent);
 	}
 	
 	moveCarouselLeft() {
@@ -57,20 +57,19 @@ class Carousel {
 		this._buttonRight.addEventListener('click', () => {this.moveCarouselRight()});
 	}
 	
-	moveCarouselRadioButtonsEvent() {
-		let	radioButtons = document.getElementsByClassName('js-carousel-radio');
-		for ( let i = 0; i < radioButtons.length; i++) {
-			radioButtons[i].addEventListener('change', () => {
+	moveCarouselRadioButtonsEvent(offset) {
+		for ( let i = 0; i < this._radioButtons.length; i++) {
+			this._radioButtons[i].addEventListener('change', () => {
 				this._wrapperPackage.classList.remove('no-transition');
 				this._wrapperPosition = i + 1;
 				if (this._wrapperPositionBefore === 1 && this._wrapperPosition === this._maxWrapperPosition - 1) {
 					this._wrapperPackage.classList.add('no-transition');
 					this._wrapperPosition = this._maxWrapperPosition;
-					this._wrapperPackage.style.transform = `translateX(${ -this._wrapperPosition * 100/3 }%)`;
+					this._wrapperPackage.style.transform = `translateX(${ -this._wrapperPosition * offset }%)`;
 					--this._wrapperPosition;
 					setTimeout(() => {
 						this._wrapperPackage.classList.remove('no-transition');
-						this._wrapperPackage.style.transform = `translateX(${ -this._wrapperPosition * 100/3 }%)`;
+						this._wrapperPackage.style.transform = `translateX(${ -this._wrapperPosition * offset }%)`;
 					}, 10);
 				} else if (this._wrapperPositionBefore === this._maxWrapperPosition - 1 && this._wrapperPosition === 1) {
 					this._wrapperPackage.classList.add('no-transition');
@@ -78,11 +77,11 @@ class Carousel {
 					this._wrapperPackage.style.transform = `translateX(0)`;
 					++this._wrapperPosition;
 					setTimeout(() => {
-						this._wrapperPackage.style.transform = `translateX(${ -this._wrapperPosition * 100/3 }%)`;
+						this._wrapperPackage.style.transform = `translateX(${ -this._wrapperPosition * offset }%)`;
 						this._wrapperPackage.classList.remove('no-transition');
 					}, 10);
 				} else {
-					this._wrapperPackage.style.transform = `translateX(${ -this._wrapperPosition * 100/3 }%)`;
+					this._wrapperPackage.style.transform = `translateX(${ -this._wrapperPosition * offset }%)`;
 					this._radioButtonChecked = i;
 				}
 				this._wrapperPositionBefore = this._wrapperPosition;
