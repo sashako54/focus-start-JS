@@ -11,9 +11,9 @@ addHttpRequestPromise("GET", "http://localhost:3000/api/app_packages.json")
 		addPackageClones();
 		setCarouselSettings();
 		moveCarouselRadioButtonsEvent();
+		moveCarouselEvents();
 	})
 	.catch(function(error) {
 		console.error('ошибка', error);
 	})
 
-moveCarouselEvents();

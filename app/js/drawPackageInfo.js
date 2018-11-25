@@ -34,6 +34,8 @@ function drawPackageInfo(currentPackage) {
 		price = template.content.querySelector('span.js-app-info-price'),
 		button = template.content.querySelector('button.js-app__button');
 
+	wrapper.innerHTML = null; // удаление предыдущего состояния
+
 	title.innerHTML = currentPackage.title;
 	img.style.backgroundImage = `url(${currentPackage.url})`;
 	date.innerHTML = getDate(currentPackage.lastUpdate);

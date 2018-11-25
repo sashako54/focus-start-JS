@@ -1,6 +1,5 @@
 import { addHttpRequestEvent } from '/js/addHttpRequestEvent.js';
 import { getUrlParam } from '/js/getUrlParam.js';
-import { removePackageInfo } from '/js/removePackageInfo.js';
 import { drawPackageInfo, drawPackageList } from '/js/drawPackageInfo.js';
 import { highlightCurrentElem } from '/js/highlightCurrentElem.js';
 import { Basket } from '/js/basket.js';
@@ -14,11 +13,9 @@ basket.drawTable();
 function addHttpRequest() {
 	addHttpRequestPromise("GET", `http://localhost:3000/api/app_package_${getUrlParam('id')}.json`)
 		.then(function(result) {
-			removePackageInfo();
 			drawPackageInfo(result[0]);
 			highlightCurrentElem();
 			basket.addPackageEvent(result[0]);
-			addHttpRequestEvent();
 		})
 		.catch(function(error) {
 			console.error('ошибка', error);
@@ -32,6 +29,7 @@ addHttpRequestPromise("GET", "http://localhost:3000/api/app_packages.json")
 			location.hash = `id=${result[0].id}`;
 		}
 	})
+	.then(addHttpRequestEvent)
 	.then(addHttpRequest)
 	.catch(function(error) {
 		console.error('ошибка', error);
