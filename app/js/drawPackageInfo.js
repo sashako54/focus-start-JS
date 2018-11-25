@@ -1,5 +1,23 @@
 import { getDate } from '/js/getDate.js';
 
+function drawPackageList(packages) {
+	let packageList = document.querySelector('ul.js-catalog__list');
+	
+	for ( let i = 0; i < packages.length; i++ ) {
+		let template = document.querySelector('#packageItemTemplate'),
+			link = template.content.querySelector('a.js-catalog__link');
+
+		link.href = `http://localhost:3000/catalog.html#id=${packages[i].id}`;
+		link.innerHTML = packages[i].title;
+
+		let clone = document.importNode(template.content, true);
+
+		packageList.appendChild(clone);
+	}
+	let activeItem = packageList.querySelector('a.js-catalog__link');
+	activeItem.classList.add('o-catalog__link_active');
+}
+
 function drawPackageInfo(currentPackage) {
 	let wrapper = document.querySelector('div.js-content'),
 		template = document.querySelector('#packageInfoTemplate'),
@@ -44,4 +62,4 @@ function drawPackageInfo(currentPackage) {
 	}
 }
 
-export { drawPackageInfo };
+export { drawPackageInfo, drawPackageList };

@@ -26,20 +26,5 @@
 		"title": "Cash Management",
 		"lastUpdate": 1312097600,
 		"guid": "00000000004"
-	},
-	{
-		"id": 2,
-		"url": "assets/images/shot-2.jpg",
-		"title": "Новый ЦФТ банк",
-		"lastUpdate": 1475946000,
-		"guid": "00000000005"
-	},
-	{
-		"id": 3,
-		"url": "assets/images/shot-3.jpg",
-		"title": "Каталог разработок",
-		"lastUpdate": 1427997600,
-		"guid": "00000000006"
 	}
-	
 ]
