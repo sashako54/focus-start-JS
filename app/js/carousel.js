@@ -1,91 +1,97 @@
-let buttonLeft = document.querySelector('svg.js-carousel-button-left'),
-	buttonRight = document.querySelector('svg.js-carousel-button-right'),
-	wrapperPackage = document.querySelector('div.js-packages-carousel'),
-	wrapperPosition = 2,
-	maxWrapperPosition,
-	wrapperPositionBefore,
-	radioButtonChecked = 1;
-	
-	
-function addPackageClones() {
-	let numProductsDisplay = 3;
-	// добавим 2 последних элемента в начало обёртки
-	wrapperPackage.insertBefore(wrapperPackage.children[wrapperPackage.children.length - 1].cloneNode(true), wrapperPackage.children[0]);
-	wrapperPackage.insertBefore(wrapperPackage.children[wrapperPackage.children.length - 2].cloneNode(true), wrapperPackage.children[0]);
-	
-	// добавим 2 первых элемента в конец обёртки
-	wrapperPackage.appendChild(wrapperPackage.children[2].cloneNode(true));
-	wrapperPackage.appendChild(wrapperPackage.children[3].cloneNode(true));
-	maxWrapperPosition = wrapperPackage.children.length - numProductsDisplay;
-}
-
-function setCarouselSettings() {
-	// начальное положение карусели
-	wrapperPackage.classList.add('no-transition');
-	wrapperPackage.style.transform = `translateX(${ -wrapperPosition * 100/3 }%)`;
-}
-
-function checkRadioButtons() {
-	let	radioButtons = document.getElementsByClassName('js-carousel-radio'),
-		radioButtonMin = 0,
-		radioButtonMax = radioButtons.length - 1;
-	
-	if (radioButtonChecked < radioButtonMin) {
-		radioButtonChecked = radioButtonMax;
-	} else if (radioButtonChecked > radioButtonMax) {
-		radioButtonChecked = radioButtonMin;
+class Carousel {
+	constructor() {
+		this._buttonLeft = document.querySelector('svg.js-carousel-button-left'),
+		this._buttonRight = document.querySelector('svg.js-carousel-button-right'),
+		this._wrapperPackage = document.querySelector('div.js-packages-carousel'),
+		this._wrapperPosition = 2,
+		this._maxWrapperPosition,
+		this._wrapperPositionBefore,
+		this._radioButtonChecked = 1;
 	}
-	let changeEvent = new Event('change');
-	radioButtons[radioButtonChecked].checked = true;
-	radioButtons[radioButtonChecked].dispatchEvent(changeEvent);
-}
-
-function moveCarouselLeft() {
-	--radioButtonChecked;
-	checkRadioButtons();
-}
-
-function moveCarouselRight() {
-	++radioButtonChecked;
-	checkRadioButtons();
-}
-
-function moveCarouselEvents() {
-	buttonLeft.addEventListener('click', moveCarouselLeft);
-	buttonRight.addEventListener('click', moveCarouselRight);
-}
-
-function moveCarouselRadioButtonsEvent() {
-	let	radioButtons = document.getElementsByClassName('js-carousel-radio');
-	for ( let i = 0; i < radioButtons.length; i++) {
-		radioButtons[i].addEventListener('change', function() {
-			wrapperPackage.classList.remove('no-transition');
-			wrapperPosition = i + 1;
-			if (wrapperPositionBefore === 1 && wrapperPosition === maxWrapperPosition - 1) {
-				wrapperPackage.classList.add('no-transition');
-				wrapperPosition = maxWrapperPosition;
-				wrapperPackage.style.transform = `translateX(${ -wrapperPosition * 100/3 }%)`;
-				--wrapperPosition;
-				setTimeout(function() {
-					wrapperPackage.classList.remove('no-transition');
-					wrapperPackage.style.transform = `translateX(${ -wrapperPosition * 100/3 }%)`;
-				}, 10);
-			} else if (wrapperPositionBefore === maxWrapperPosition - 1 && wrapperPosition === 1) {
-				wrapperPackage.classList.add('no-transition');
-				wrapperPosition = 0;
-				wrapperPackage.style.transform = `translateX(0)`;
-				++wrapperPosition;
-				setTimeout(function() {
-					wrapperPackage.style.transform = `translateX(${ -wrapperPosition * 100/3 }%)`;
-					wrapperPackage.classList.remove('no-transition');
-				}, 10);
-			} else {
-				wrapperPackage.style.transform = `translateX(${ -wrapperPosition * 100/3 }%)`;
-				radioButtonChecked = i;
-			}
-			wrapperPositionBefore = wrapperPosition;
-		})
+	
+	addPackageClones() {
+		let numProductsDisplay = 3;
+		// добавим 2 последних элемента в начало обёртки
+		this._wrapperPackage.insertBefore(this._wrapperPackage.children[this._wrapperPackage.children.length - 1].cloneNode(true), this._wrapperPackage.children[0]);
+		this._wrapperPackage.insertBefore(this._wrapperPackage.children[this._wrapperPackage.children.length - 2].cloneNode(true), this._wrapperPackage.children[0]);
+		
+		// добавим 2 первых элемента в конец обёртки
+		this._wrapperPackage.appendChild(this._wrapperPackage.children[2].cloneNode(true));
+		this._wrapperPackage.appendChild(this._wrapperPackage.children[3].cloneNode(true));
+		this._maxWrapperPosition = this._wrapperPackage.children.length - numProductsDisplay;
+	}
+	
+	setCarouselSettings() {
+		// начальное положение карусели
+		this._wrapperPackage.classList.add('no-transition');
+		this._wrapperPackage.style.transform = `translateX(${ -this._wrapperPosition * 100/3 }%)`;
+	}
+	
+	checkRadioButtons() {
+		let	radioButtons = document.getElementsByClassName('js-carousel-radio'),
+			radioButtonMin = 0,
+			radioButtonMax = radioButtons.length - 1;
+		
+		if (this._radioButtonChecked < radioButtonMin) {
+			this._radioButtonChecked = radioButtonMax;
+		} else if (this._radioButtonChecked > radioButtonMax) {
+			this._radioButtonChecked = radioButtonMin;
+		}
+		let changeEvent = new Event('change');
+		radioButtons[this._radioButtonChecked].checked = true;
+		radioButtons[this._radioButtonChecked].dispatchEvent(changeEvent);
+	}
+	
+	moveCarouselLeft() {
+		--this._radioButtonChecked;
+		this.checkRadioButtons();
+	}
+	
+	moveCarouselRight() {
+		++this._radioButtonChecked;
+		this.checkRadioButtons();
+	}
+	
+	moveCarouselEvents() {
+		this._buttonLeft.addEventListener('click', () => {this.moveCarouselLeft()});
+		this._buttonRight.addEventListener('click', () => {this.moveCarouselRight()});
+	}
+	
+	moveCarouselRadioButtonsEvent() {
+		let	radioButtons = document.getElementsByClassName('js-carousel-radio');
+		for ( let i = 0; i < radioButtons.length; i++) {
+			radioButtons[i].addEventListener('change', () => {
+				this._wrapperPackage.classList.remove('no-transition');
+				this._wrapperPosition = i + 1;
+				if (this._wrapperPositionBefore === 1 && this._wrapperPosition === this._maxWrapperPosition - 1) {
+					this._wrapperPackage.classList.add('no-transition');
+					this._wrapperPosition = this._maxWrapperPosition;
+					this._wrapperPackage.style.transform = `translateX(${ -this._wrapperPosition * 100/3 }%)`;
+					--this._wrapperPosition;
+					setTimeout(() => {
+						this._wrapperPackage.classList.remove('no-transition');
+						this._wrapperPackage.style.transform = `translateX(${ -this._wrapperPosition * 100/3 }%)`;
+					}, 10);
+				} else if (this._wrapperPositionBefore === this._maxWrapperPosition - 1 && this._wrapperPosition === 1) {
+					this._wrapperPackage.classList.add('no-transition');
+					this._wrapperPosition = 0;
+					this._wrapperPackage.style.transform = `translateX(0)`;
+					++this._wrapperPosition;
+					setTimeout(() => {
+						this._wrapperPackage.style.transform = `translateX(${ -this._wrapperPosition * 100/3 }%)`;
+						this._wrapperPackage.classList.remove('no-transition');
+					}, 10);
+				} else {
+					this._wrapperPackage.style.transform = `translateX(${ -this._wrapperPosition * 100/3 }%)`;
+					this._radioButtonChecked = i;
+				}
+				this._wrapperPositionBefore = this._wrapperPosition;
+			})
+		}
 	}
 }
 
-export { setCarouselSettings, addPackageClones, moveCarouselEvents, moveCarouselRadioButtonsEvent };
+	
+	
+
+export { Carousel };
