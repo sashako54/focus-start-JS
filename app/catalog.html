@@ -237,7 +237,12 @@
 		<div class="o-container o-cover o-container_height o-container_margin_top_50 o-container_margin_bottom_100">
 			<div class="o-catalog">
 				<div class="o-catalog__wrapper">
-					<h4 class="o-catalog__title o-title-5">Каталог приложений</h4>
+					<h4 class="o-catalog__title o-title-5">Каталог приложений</h4>,
+					<template id="packageItemTemplate">
+						<li class="o-catalog__item">
+							<a class="o-catalog__link js-catalog__link">Cash Management</a>
+						</li>
+					</template>
 					<ul class="o-catalog__list">
 						<li class="o-catalog__item"><a href="http://localhost:3000/catalog.html#id=1" class="o-catalog__link js-catalog__link">Стандартный пакет</a></li>
 						<li class="o-catalog__item"><a href="http://localhost:3000/catalog.html#id=2" class="o-catalog__link js-catalog__link">Новый ЦФТ-Банк</a></li>
@@ -421,7 +426,7 @@
 		<script type="module" src="js/getDate.js"></script>
 		<script type="module" src="js/drawPackageInfo.js"></script>
 		<script type="module" src="js/getUrlParam.js"></script>
-		<script type="module" src="js/second.js"></script>
+		<script type="module" src="js/catalog.js"></script>
 
 		<script type="module" src="js/script.js"></script>
 	</body>

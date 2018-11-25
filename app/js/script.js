@@ -1,4 +1,4 @@
-import { basket } from '/js/second.js';
+import { basket } from '/js/catalog.js';
 
 var main = (function() {
 	function toggleNotExistClass(class1, class2, j = 0) {

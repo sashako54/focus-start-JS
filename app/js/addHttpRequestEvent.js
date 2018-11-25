@@ -1,5 +1,5 @@
 import { getUrlParam } from '/js/getUrlParam.js';
-import { addHttpRequest } from '/js/second.js';
+import { addHttpRequest } from '/js/catalog.js';
 
 function getHashFromLink(links, i) {
 	return links[i].href.split('#')[1];

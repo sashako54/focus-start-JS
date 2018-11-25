@@ -23,6 +23,7 @@ function addHttpRequest() {
 			console.error('ошибка', error);
 		})
 }
+
 addHttpRequest();
 addHttpRequestEvent();
 
