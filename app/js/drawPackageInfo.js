@@ -14,8 +14,6 @@ function drawPackageList(packages) {
 
 		packageList.appendChild(clone);
 	}
-	let activeItem = packageList.querySelector('a.js-catalog__link');
-	activeItem.classList.add('o-catalog__link_active');
 }
 
 function drawPackageInfo(currentPackage) {

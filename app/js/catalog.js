@@ -10,11 +10,10 @@ basket.clearBasketEvent();
 basket.drawBasketInfo();
 basket.drawTable();
 
-function addHttpRequest() {
+function addHttpRequestForCurrentPackage() {
 	addHttpRequestPromise("GET", `http://localhost:3000/api/app_package_${getUrlParam('id')}.json`)
 		.then(function(result) {
 			drawPackageInfo(result[0]);
-			highlightCurrentElem();
 			basket.addPackageEvent(result[0]);
 		})
 		.catch(function(error) {
@@ -29,12 +28,13 @@ addHttpRequestPromise("GET", "http://localhost:3000/api/app_packages.json")
 			location.hash = `id=${result[0].id}`;
 		}
 	})
+	.then(highlightCurrentElem)
 	.then(addHttpRequestEvent)
-	.then(addHttpRequest)
+	.then(addHttpRequestForCurrentPackage)
 	.catch(function(error) {
 		console.error('ошибка', error);
 	})
 
 
 
-export { addHttpRequest, basket };
+export { addHttpRequestForCurrentPackage, basket };

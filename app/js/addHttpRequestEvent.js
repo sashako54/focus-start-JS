@@ -1,9 +1,5 @@
-import { getUrlParam } from '/js/getUrlParam.js';
-import { addHttpRequest } from '/js/catalog.js';
-
-function getHashFromLink(links, i) {
-	return links[i].href.split('#')[1];
-}
+import { addHttpRequestForCurrentPackage } from '/js/catalog.js';
+import { highlightCurrentElem } from '/js/highlightCurrentElem.js';
 
 function addHttpRequestEvent() {
 	let links = document.querySelectorAll('a.js-catalog__link');
@@ -14,8 +10,9 @@ function addHttpRequestEvent() {
 			if ( links[i].href.split('#')[1].length !== 0 ) {
 				links[i].addEventListener('click', function(e) {
 					e.preventDefault();
-					window.location.hash = getHashFromLink(links, i);
-					addHttpRequest();
+					window.location.hash = links[i].href.split('#')[1];
+					highlightCurrentElem();
+					addHttpRequestForCurrentPackage();
 				})
 			}
 		}
