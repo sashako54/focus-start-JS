@@ -144,7 +144,7 @@ function hideLoading() {
 	loadingPage.classList.add('hidden');
 }
 
-function moveToContactInfoStage(maxLoadingTime) {
+function moveToNextStageWidthLoading(maxLoadingTime) {
 	return new Promise(function(resolve, reject) {
 		setTimeout(function() {
 			resolve(moveToAnyStage);
@@ -152,26 +152,34 @@ function moveToContactInfoStage(maxLoadingTime) {
 	})
 }
 
-function moveToContactInfoStageEvent() {
-	let button = document.querySelector('button.js-modal__button-pay[data-stage="2"]');
+function moveToNextStageWidthLoadingEvent(buttonClass, maxLoadingTime) {
+	let button = document.querySelector(buttonClass);
 	button.addEventListener('click', function() {
 		showLoading();
-		moveToContactInfoStage(5)
-		.then(function(moveToAnyStage) {
-			moveToAnyStage(button.dataset.stage);
-		})
-		.then(hideLoading);
+		moveToNextStageWidthLoading(maxLoadingTime)
+			.then(function(moveToAnyStage) {
+				moveToAnyStage(button.dataset.stage);
+			})
+			.then(hideLoading)
+			.catch(function(error) {
+				console.error('ошибка:', error)
+				hideLoading();
+			})
 	})
 }
 
-moveToContactInfoStageEvent();
+moveToNextStageWidthLoadingEvent('button.js-modal__button-pay[data-stage="2"]', 2);
+moveToNextStageWidthLoadingEvent('button.js-modal__button-submit[data-stage="3"]', 3);
 
-
-function moveToCompletedInfoStageEvent() {
-	let button = document.
+function moveToPreviousStageEvent(buttonClass) {
+	let button = document.querySelector(buttonClass);
+	button.addEventListener('click', function() {
+		moveToAnyStage(button.dataset.stage);
+	})
 }
 
-
+moveToPreviousStageEvent('button.js-modal__button-back[data-stage="0"]');
+moveToPreviousStageEvent('button.js-modal__button-contacts-back[data-stage="1"]');
 
 
 
