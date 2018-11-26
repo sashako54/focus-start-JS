@@ -178,6 +178,7 @@ class Basket {
 	}
 }
 
+let basket = new Basket();
 
 window.addEventListener("storage", function(e) {
 	console.log('storage event: ', e);
@@ -185,4 +186,4 @@ window.addEventListener("storage", function(e) {
 })
 
 
-export { Basket };
+export { basket };

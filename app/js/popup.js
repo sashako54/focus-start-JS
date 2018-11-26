@@ -1,4 +1,4 @@
-import { basket } from '/js/catalog.js';
+import { basket } from '/js/basket.js';
 
 let modal = document.querySelector('div.js-modal'),
 	yOffset;

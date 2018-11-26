@@ -2,11 +2,10 @@ import { addHttpRequestEvent } from '/js/addHttpRequestEvent.js';
 import { getUrlParam } from '/js/getUrlParam.js';
 import { drawPackageInfo, drawPackageList } from '/js/drawPackageInfo.js';
 import { highlightCurrentElem } from '/js/highlightCurrentElem.js';
-import { Basket } from '/js/basket.js';
+import { basket } from '/js/basket.js';
 import { addHttpRequestPromise } from '/js/addHttpRequest.js';
 import { showPopupEvent, moveToPaymentStageEvent, moveToNextStageWithLoadingEvent, moveToPreviousStageEvent, moveToAnyPreviousStageEvent } from '/js/popup.js';
 
-let basket = new Basket();
 basket.clearBasketEvent();
 basket.drawBasketInfo();
 basket.drawTable();
