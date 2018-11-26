@@ -77,8 +77,7 @@ function hidePopupClickAreaEvent(event) {
 }
 
 function showPopupEvent() {
-	let button = document.querySelector('div.js-header-basket'),
-		tbody = document.querySelector('tbody.js-modal__table-body');
+	let button = document.querySelector('div.js-header-basket');
 	button.addEventListener('click', function() {
 		if (Object.keys(basket._packageList).length !== 0) {
 			// Показываем модальное окно
@@ -98,36 +97,90 @@ function showPopupEvent() {
 
 showPopupEvent();
 
-function moveToPaymentStage() {
-	
+function moveToAnyStage(i) {
+	let navItems = document.querySelectorAll('li.js-modal__steps-item');
+	let steps = document.querySelectorAll('div.js-steps-stage');
+	let containers = document.querySelectorAll('div.js-modal-container');
+	navItems[i].classList.remove('js-modal__steps-item_disabled');
+	// удаляем модификаторы у кнопок, скрываем все блоки
+	for ( let j = 0; j < navItems.length; j++) {
+		steps[j].classList.remove('o-steps_blue');
+		steps[j].classList.remove('o-steps_green');
+
+		containers[j].classList.add('hidden');
+		// для кнопок уровнем выше добавляем класс, чтобы сделать кнопки неактивными
+		if (i < j) {
+			navItems[j].classList.add('js-modal__steps-item_disabled');
+		}
+	}
+	for ( let j = 0; j <= i; j++) {
+		steps[j].classList.add('o-steps_blue');
+		if (j === 3) {
+			steps[j].classList.add('o-steps_green');
+		}
+	}
+	containers[i].classList.remove('hidden');
 }
+
+function moveToPaymentStageEvent() {
+	let button = document.querySelector('button.js-modal__button[data-stage="1"]');
+	button.addEventListener('click', function() {
+		moveToAnyStage(button.dataset.stage)
+	})
+
+}
+moveToPaymentStageEvent();
+
+function getrandomTimeLoading(maxLoadingTime) {
+	return Math.random() * maxLoadingTime * 1000;
+}
+
+function showLoading() {
+	let loadingPage = document.querySelector('div.js-modal-loading__wrapper');
+	loadingPage.classList.remove('hidden');
+}
+function hideLoading() {
+	let loadingPage = document.querySelector('div.js-modal-loading__wrapper');
+	loadingPage.classList.add('hidden');
+}
+
+function moveToContactInfoStage(maxLoadingTime) {
+	return new Promise(function(resolve, reject) {
+		setTimeout(function() {
+			resolve(moveToAnyStage);
+		},getrandomTimeLoading(maxLoadingTime))
+	})
+}
+
+function moveToContactInfoStageEvent() {
+	let button = document.querySelector('button.js-modal__button-pay[data-stage="2"]');
+	button.addEventListener('click', function() {
+		showLoading();
+		moveToContactInfoStage(5)
+		.then(function(moveToAnyStage) {
+			moveToAnyStage(button.dataset.stage);
+		})
+		.then(hideLoading);
+	})
+}
+
+moveToContactInfoStageEvent();
+
+
+function moveToCompletedInfoStageEvent() {
+	let button = document.
+}
+
+
+
 
 
 function moveToAnyPreviousStageEvent() {
 	let navItems = document.querySelectorAll('li.js-modal__steps-item');
-	let steps = document.querySelectorAll('div.js-steps-stage');
-	let container = document.querySelectorAll('div.js-modal-container');
 	for ( let i = 0; i < navItems.length; i++) {
 		navItems[i].addEventListener('click', function() {
 			if (!navItems[i].classList.contains('js-modal__steps-item_disabled')) {
-				// удаляем модификаторы у кнопок, скрываем все блоки
-				for ( let j = 0; j < navItems.length; j++) {
-					steps[j].classList.remove('o-steps_blue');
-					steps[j].classList.remove('o-steps_green');
-
-					container[j].classList.add('hidden');
-					// для кнопок уровнем выше добавляем класс, чтобы сделать кнопки неактивными
-					if (i < j) {
-						navItems[j].classList.add('js-modal__steps-item_disabled');
-					}
-				}
-				for ( let j = 0; j <= i; j++) {
-					steps[j].classList.add('o-steps_blue');
-					if (j === 3) {
-						steps[j].classList.add('o-steps_green');
-					}
-				}
-				container[i].classList.remove('hidden');
+				moveToAnyStage(i);
 			}
 		})
 	}
