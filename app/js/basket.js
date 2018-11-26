@@ -11,12 +11,18 @@ class Basket {
 		this._count = this.setCount();
 	}
 
+	saveVisaData() {
+		let form = document.querySelector('form.js-modal__payment-form');
+		form.addEventListener('submit', function() {
+			// TODO: брать по инпутам и раскидывать по массивам
+		}) // делать по клику
+	}
+
 	setSumCost() {
 		let sumCost = 0;
 		for (let key in this._packageList) {
 			sumCost += this._packageList[key].count * this._packageList[key].price;
 		}
-		console.log('sum cost: ', sumCost);
 		return sumCost;
 	}
 
@@ -25,7 +31,6 @@ class Basket {
 		for (let key in this._packageList) {
 			count += this._packageList[key].count;
 		}
-		console.log('count:', count);
 		return count;
 	}
 
@@ -52,7 +57,6 @@ class Basket {
 		let table = document.querySelector('tbody.js-modal__table-body'),
 			tableString = table.querySelector(`tr.js-modal__table-row[data-id="${currentPackage.id}"]`);
 		if (!tableString) {
-			console.log('Добавляем строку');
 			let template = document.querySelector('#templateTableString'),
 	
 				string = template.content.querySelector('tr.js-modal__table-row'),
@@ -87,7 +91,6 @@ class Basket {
 			this.minusPackageEvent(currentPackage);
 			this.deleteStringFromTableEvent(currentPackage);
 		}
-		console.log('ownCount', currentPackage.count);
 
 		// количество каждого товара в таблице
 		table.querySelector(`input.js-modal__table-quantity-input[data-id="${currentPackage.id}"]`).value = currentPackage.count;
@@ -146,7 +149,6 @@ class Basket {
 	addPackageEvent(currentPackage) {
 		let button = document.querySelector('button.js-app__button');
 		button.addEventListener('click', () => {
-			console.log('button-id: ', button.dataset.id);
 			this.addPackage(currentPackage);
 		})
 	}
@@ -185,6 +187,7 @@ class Basket {
 }
 
 let basket = new Basket();
+basket.saveVisaData();
 
 window.addEventListener("storage", function(e) {
 	console.log('storage event: ', e);

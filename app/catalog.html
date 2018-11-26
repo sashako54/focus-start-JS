@@ -106,41 +106,43 @@
 					</footer>
 				</div>
 				<div class="o-modal-container js-modal-container hidden" data-stage="1">
-					<div class="o-modal__payment-wrapper o-modal__payment-wrapper_margin_top_150 o-modal__payment-wrapper_margin_left_250">
-						<div class="o-modal__payment">
-							<div class="o-modal__payment-body clearfix">
-								<div class="o-modal__payment-inputs">
-									<input class="o-modal__payment-inputs-num o-modal__payment-inputs-num-margin_bottom_20 o-modal-input o-input-text" type="text" placeholder="Номер карты">
-									<input class="o-modal__payment-inputs-month o-modal__payment-inputs-month_margin_right_20 o-modal-input o-input-text" type="text" placeholder="Месяц">
-									<input class="o-modal__payment-inputs-year o-modal-input o-input-text" type="text" placeholder="Год">
+					<form class="o-modal__payment-form js-modal__payment-form">
+						<div class="o-modal__payment-wrapper o-modal__payment-wrapper_margin_top_150 o-modal__payment-wrapper_margin_left_250">
+							<div class="o-modal__payment">
+								<div class="o-modal__payment-body clearfix">
+									<div class="o-modal__payment-inputs">
+										<input class="o-modal__payment-inputs-num o-modal__payment-inputs-num-margin_bottom_20 o-modal-input o-input-text" type="text" placeholder="Номер карты">
+										<input class="o-modal__payment-inputs-month o-modal__payment-inputs-month_margin_right_20 o-modal-input o-input-text" type="text" placeholder="Месяц">
+										<input class="o-modal__payment-inputs-year o-modal-input o-input-text" type="text" placeholder="Год">
+									</div>
+									<div class="o-modal__payment-icons">
+										<svg class="o-modal__payment-icon-master-card o-modal__payment-icon-master-card_margin_bottom_20px">
+											<use xlink:href="#icon-master-card"></use>
+										</svg>
+										<svg class="o-modal__payment-icon-visa">
+											<use xlink:href="#icon-visa"></use>
+										</svg>
+									</div>
 								</div>
-								<div class="o-modal__payment-icons">
-									<svg class="o-modal__payment-icon-master-card o-modal__payment-icon-master-card_margin_bottom_20px">
-										<use xlink:href="#icon-master-card"></use>
-									</svg>
-									<svg class="o-modal__payment-icon-visa">
-										<use xlink:href="#icon-visa"></use>
-									</svg>
+								<div class="o-modal__payment-footer o-modal__payment-footer_margin_top_40">
+									<input class="o-modal__payment-inputs-name o-modal-input o-input-text" type="text" placeholder="Фамилия Имя владельца карты">
 								</div>
 							</div>
-							<div class="o-modal__payment-footer o-modal__payment-footer_margin_top_40">
-								<input class="o-modal__payment-inputs-name o-modal-input o-input-text" type="text" placeholder="Фамилия Имя владельца карты">
+							<div class="o-modal__payment-turnover">
+								<div class="o-modal__payment-turnover-strip o-modal__payment-turnover-strip_margin_bottom_20 o-modal__payment-turnover-strip_margin_top_35"></div>
+								<input class="o-modal__payment-turnover-input o-modal-input o-input-text" type="text" placeholder="CVV">
+								<p class="o-modal__payment-turnover-description" >Три цифры на обратной стороне</p>
 							</div>
 						</div>
-						<div class="o-modal__payment-turnover">
-							<div class="o-modal__payment-turnover-strip o-modal__payment-turnover-strip_margin_bottom_20 o-modal__payment-turnover-strip_margin_top_35"></div>
-							<input class="o-modal__payment-turnover-input o-modal-input o-input-text" type="text" placeholder="CVV">
-							<p class="o-modal__payment-turnover-description" >Три цифры на обратной стороне</p>
-						</div>
-					</div>
-					<footer class="o-modal__footer clearfix">
-						<button class="o-modal__button o-button o-button_secondary o-modal__button_float_left js-modal__button-back" data-stage="0">Назад</button>
-						<button class="o-modal__button o-button o-button_primary o-modal__button_float_right js-modal__button-pay" data-stage="2">Оплатить</button>
-					</footer>
+						<footer class="o-modal__footer clearfix">
+							<button class="o-modal__button o-button o-button_secondary o-modal__button_float_left js-modal__button-back" data-stage="0">Назад</button>
+							<button type="submit" class="o-modal__button o-button o-button_primary o-modal__button_float_right js-modal__button-pay" data-stage="2">Подтвердить</button>
+						</footer>
+					</form>
 				</div>
 				<div class="o-modal-container js-modal-container hidden" data-stage="2">
 					<div class="o-modal__contacts-wrapper o-modal__contacts-wrapper_margin_left_right_50 o-modal__contacts-wrapper_margin_top_120">
-						<form class="o-modal__contacts-form clearfix">
+						<form id="contactsForm" class="o-modal__contacts-form clearfix">
 							<h4 class="o-modal__contacts-title">Контактная информация</h4>
 							<div class="o-modal__contacts-inputs">
 								<div class="l-grid">
@@ -193,7 +195,7 @@
 					</div>
 					<footer class="o-modal__footer clearfix">
 						<button class="o-modal__button o-button o-button_secondary o-modal__button_float_left js-modal__button-contacts-back" data-stage="1">Назад</button>
-						<button class="o-modal__button o-button o-button_primary o-modal__button_float_right js-modal__button-submit" data-stage="3">Подтвердить</button>
+						<button form="contactsForm" type="submit" class="o-modal__button o-button o-button_primary o-modal__button_float_right js-modal__button-submit" data-stage="3">Подтвердить</button>
 					</footer>
 				</div>
 				<div class="o-modal-container js-modal-container hidden" data-stage="3">
