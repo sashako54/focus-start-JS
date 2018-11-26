@@ -1,21 +1,7 @@
 import { basket } from '/js/catalog.js';
 
-
-function toggleNotExistClass(class1, class2, j = 0) {
-	let elem = document.getElementsByClassName(class1)[j];
-	if (!elem.classList.contains(class2)) {
-		elem.classList.toggle(class2);
-	}
-}
-
-function toggleExistClass(class1, class2, j = 0) {
-	let elem = document.getElementsByClassName(class1)[j];
-	if (elem.classList.contains(class2)) {
-		elem.classList.toggle(class2);
-	}
-}
-
-let yOffset;
+let modal = document.querySelector('div.js-modal'),
+	yOffset;
 
 // задаём для body свойства
 
@@ -55,7 +41,7 @@ function removeBodyProperties() {
 
 function hidePopup() {
 	// Скрываем модальное окно
-	toggleNotExistClass('js-modal', 'hidden');
+	modal.classList.add('hidden');
 	// Возвращаем возможность скроллить body
 	removeBodyProperties()
 }
@@ -68,7 +54,6 @@ function hidePopupEscapeEvent(event) {
 }
 
 function hidePopupClickAreaEvent(event) {
-	let modal = document.getElementsByClassName('o-modal')[0];
 	if (event.target == modal) {
 		hidePopup();
 		// удаляем обработчик событий
@@ -81,7 +66,7 @@ function showPopupEvent() {
 	button.addEventListener('click', function() {
 		if (Object.keys(basket._packageList).length !== 0) {
 			// Показываем модальное окно
-			toggleExistClass('js-modal', 'hidden');
+			modal.classList.remove('hidden');
 			// Убираем возможность скроллить body
 			// Делаем страничку статичной
 			addBodyProperties();
@@ -94,8 +79,6 @@ function showPopupEvent() {
 		}
 	})
 }
-
-showPopupEvent();
 
 function moveToAnyStage(i) {
 	let navItems = document.querySelectorAll('li.js-modal__steps-item');
@@ -129,7 +112,6 @@ function moveToPaymentStageEvent() {
 	})
 
 }
-moveToPaymentStageEvent();
 
 function getrandomTimeLoading(maxLoadingTime) {
 	return Math.random() * maxLoadingTime * 1000;
@@ -139,12 +121,13 @@ function showLoading() {
 	let loadingPage = document.querySelector('div.js-modal-loading__wrapper');
 	loadingPage.classList.remove('hidden');
 }
+
 function hideLoading() {
 	let loadingPage = document.querySelector('div.js-modal-loading__wrapper');
 	loadingPage.classList.add('hidden');
 }
 
-function moveToNextStageWidthLoading(maxLoadingTime) {
+function moveToNextStageWithLoading(maxLoadingTime) {
 	return new Promise(function(resolve, reject) {
 		setTimeout(function() {
 			resolve(moveToAnyStage);
@@ -152,11 +135,11 @@ function moveToNextStageWidthLoading(maxLoadingTime) {
 	})
 }
 
-function moveToNextStageWidthLoadingEvent(buttonClass, maxLoadingTime) {
+function moveToNextStageWithLoadingEvent(buttonClass, maxLoadingTime) {
 	let button = document.querySelector(buttonClass);
 	button.addEventListener('click', function() {
 		showLoading();
-		moveToNextStageWidthLoading(maxLoadingTime)
+		moveToNextStageWithLoading(maxLoadingTime)
 			.then(function(moveToAnyStage) {
 				moveToAnyStage(button.dataset.stage);
 			})
@@ -168,20 +151,12 @@ function moveToNextStageWidthLoadingEvent(buttonClass, maxLoadingTime) {
 	})
 }
 
-moveToNextStageWidthLoadingEvent('button.js-modal__button-pay[data-stage="2"]', 2);
-moveToNextStageWidthLoadingEvent('button.js-modal__button-submit[data-stage="3"]', 3);
-
 function moveToPreviousStageEvent(buttonClass) {
 	let button = document.querySelector(buttonClass);
 	button.addEventListener('click', function() {
 		moveToAnyStage(button.dataset.stage);
 	})
 }
-
-moveToPreviousStageEvent('button.js-modal__button-back[data-stage="0"]');
-moveToPreviousStageEvent('button.js-modal__button-contacts-back[data-stage="1"]');
-
-
 
 function moveToAnyPreviousStageEvent() {
 	let navItems = document.querySelectorAll('li.js-modal__steps-item');
@@ -194,73 +169,4 @@ function moveToAnyPreviousStageEvent() {
 	}
 }
 
-moveToAnyPreviousStageEvent()
-
-
-
-
-
-
-
-
-
-// function setActiveClass(stepClass) {
-// 	if (stepClass === 'js-step-4') {
-// 		toggleNotExistClass(stepClass, 'o-steps_green');
-// 		toggleNotExistClass('js-step-4-span', 'o-steps_green_color');
-// 		toggleExistClass('js-modal__steps-stage-icon', 'hidden');
-// 	} else {
-// 		toggleNotExistClass(stepClass, 'o-steps_blue');
-// 	}
-// }
-
-// function hideBlock(blockHiddenClass, i) {
-// 	toggleNotExistClass(blockHiddenClass, 'hidden', i);
-// 	console.log('hide' + i)
-// }
-
-// function showBlock(blockShowClass, i) {
-// 	toggleExistClass(blockShowClass, 'hidden', i);
-// 	console.log('show' + i);
-// }
-
-// function moveToNextStageEvent(buttonClass, blockHiddenClass, blockShowClass, stepClass, i) {
-// 	let button = document.getElementsByClassName(buttonClass)[0];
-// 	button.addEventListener('click', function() {
-// 		setActiveClass(stepClass);
-// 		hideBlock(blockHiddenClass, i);
-// 		showBlock(blockShowClass, i + 1);
-// 	});
-// }
-
-// function moveToPaymentStagePromise() {
-// 	return new Promise(function(resolve, reject) {
-// 		let button = document.querySelector('button.js-modal__button');
-// 		button.addEventListener('click', resolve)
-// 	})
-// }
-
-
-// moveToNextStageEvent('js-modal__button', 'js-modal-container', 'js-modal-container', 'js-step-2', 0);
-
-// moveToNextStageEvent('js-modal__button-pay', 'js-modal-container', 'js-modal-container', 'js-step-3', 1);
-
-// moveToNextStageEvent('js-modal__button-submit', 'js-modal-container', 'js-modal-container', 'js-step-4', 2);
-
-
-// function delActiveClass(stepClass) {
-// 	toggleExistClass(stepClass, 'o-steps_blue');
-// }
-
-// function moveToPreviousStageEvent(buttonClass, blockHiddenClass, blockShowClass, stepClass, i) {
-// 	let button = document.getElementsByClassName(buttonClass)[0];
-// 	button.addEventListener('click', function() {
-// 		delActiveClass(stepClass);
-// 		hideBlock(blockHiddenClass, i + 1);
-// 		showBlock(blockShowClass, i);
-// 	});
-// }
-
-// moveToPreviousStageEvent('js-modal__button-back', 'js-modal-container', 'js-modal-container', 'js-step-2', 0);
-
-// moveToPreviousStageEvent('js-modal__button-contacts-back', 'js-modal-container', 'js-modal-container', 'js-step-3', 1);
+export { showPopupEvent, moveToPaymentStageEvent, moveToNextStageWithLoadingEvent, moveToPreviousStageEvent, moveToAnyPreviousStageEvent };

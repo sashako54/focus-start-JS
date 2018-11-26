@@ -4,6 +4,7 @@ import { drawPackageInfo, drawPackageList } from '/js/drawPackageInfo.js';
 import { highlightCurrentElem } from '/js/highlightCurrentElem.js';
 import { Basket } from '/js/basket.js';
 import { addHttpRequestPromise } from '/js/addHttpRequest.js';
+import { showPopupEvent, moveToPaymentStageEvent, moveToNextStageWithLoadingEvent, moveToPreviousStageEvent, moveToAnyPreviousStageEvent } from '/js/popup.js';
 
 let basket = new Basket();
 basket.clearBasketEvent();
@@ -35,6 +36,18 @@ addHttpRequestPromise("GET", "http://localhost:3000/api/app_packages.json")
 		console.error('ошибка', error);
 	})
 
+	
+showPopupEvent();
+
+moveToPaymentStageEvent();
+
+moveToNextStageWithLoadingEvent('button.js-modal__button-pay[data-stage="2"]', 2);
+moveToNextStageWithLoadingEvent('button.js-modal__button-submit[data-stage="3"]', 3);
+
+moveToPreviousStageEvent('button.js-modal__button-back[data-stage="0"]');
+moveToPreviousStageEvent('button.js-modal__button-contacts-back[data-stage="1"]');
+
+moveToAnyPreviousStageEvent()
 
 
 export { addHttpRequestForCurrentPackage, basket };
