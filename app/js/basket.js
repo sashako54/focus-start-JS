@@ -195,6 +195,91 @@ class Basket {
 		})
 	}
 
+	moveToAnyStage(i) {
+		let navItems = document.querySelectorAll('li.js-modal__steps-item');
+		let steps = document.querySelectorAll('div.js-steps-stage');
+		let containers = document.querySelectorAll('div.js-modal-container');
+		navItems[i].classList.remove('js-modal__steps-item_disabled');
+		// удаляем модификаторы у кнопок, скрываем все блоки
+		for ( let j = 0; j < navItems.length; j++) {
+			steps[j].classList.remove('o-steps_blue');
+			steps[j].classList.remove('o-steps_green');
+	
+			containers[j].classList.add('hidden');
+		}
+		for ( let j = 0; j <= i; j++) {
+			steps[j].classList.add('o-steps_blue');
+			if (j === 3) {
+				steps[j].classList.add('o-steps_green');
+			}
+		}
+		containers[i].classList.remove('hidden');
+	}
+	
+	moveToPaymentStageEvent() {
+		let button = document.querySelector('button.js-modal__button[data-stage="1"]');
+		button.addEventListener('click', () => {
+			this.moveToAnyStage(button.dataset.stage)
+		})
+	
+	}
+	
+	getrandomTimeLoading(maxLoadingTime) {
+		return Math.random() * maxLoadingTime * 1000;
+	}
+	
+	showLoading() {
+		let loadingPage = document.querySelector('div.js-modal-loading__wrapper');
+		loadingPage.classList.remove('hidden');
+	}
+	
+	hideLoading() {
+		let loadingPage = document.querySelector('div.js-modal-loading__wrapper');
+		loadingPage.classList.add('hidden');
+	}
+	
+	moveToNextStageWithLoading(maxLoadingTime) {
+		return new Promise((resolve, reject) => {
+			setTimeout(() => {
+				resolve(this.moveToAnyStage);
+			},this.getrandomTimeLoading(maxLoadingTime))
+		})
+	}
+	
+	moveToNextStageWithLoadingEvent(buttonClass, maxLoadingTime) {
+		let button = document.querySelector(buttonClass);
+		button.addEventListener('click', () => {
+			this.showLoading();
+			this.moveToNextStageWithLoading(maxLoadingTime)
+				.then((moveToAnyStage) => {
+					moveToAnyStage(button.dataset.stage);
+				})
+				.then(this.hideLoading)
+				.catch((error) => {
+					console.error('ошибка:', error)
+					this.hideLoading();
+				})
+		})
+	}
+	
+	moveToPreviousStageEvent(buttonClass) {
+		let button = document.querySelector(buttonClass);
+		button.addEventListener('click', () => {
+			this.moveToAnyStage(button.dataset.stage);
+		})
+	}
+	
+	moveToAnyPreviousStageEvent() {
+		let navItems = document.querySelectorAll('li.js-modal__steps-item');
+		for ( let i = 0; i < navItems.length; i++) {
+			navItems[i].addEventListener('click', () => {
+				if (!navItems[i].classList.contains('js-modal__steps-item_disabled')) {
+					this.moveToAnyStage(i);
+				}
+			})
+		}
+	}
+
 	clearBasketEvent() {
 		let basketClearButton = document.querySelector('svg.js-header-basket-clear');
 		basketClearButton.addEventListener('click', () => {
