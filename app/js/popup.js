@@ -91,10 +91,6 @@ function moveToAnyStage(i) {
 		steps[j].classList.remove('o-steps_green');
 
 		containers[j].classList.add('hidden');
-		// для кнопок уровнем выше добавляем класс, чтобы сделать кнопки неактивными
-		if (i < j) {
-			navItems[j].classList.add('js-modal__steps-item_disabled');
-		}
 	}
 	for ( let j = 0; j <= i; j++) {
 		steps[j].classList.add('o-steps_blue');

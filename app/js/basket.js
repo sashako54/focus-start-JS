@@ -9,13 +9,34 @@ class Basket {
 		}
 		this._sumCost = this.setSumCost();
 		this._count = this.setCount();
+		this._personData = {
+			visa: {
+				numberCard: '',
+				month: '',
+				year: '',
+				fullName: '',
+				CVV: ''
+			},
+			contacts: {
+				surname: '',
+				name: '',
+				phone: '',
+				email: '',
+				organization: '',
+				INN: '',
+				city: '',
+				quickInstall: '',
+				consultation: ''
+			}
+		}
 	}
 
 	saveVisaData() {
-		let form = document.querySelector('form.js-modal__payment-form');
-		form.addEventListener('submit', function() {
-			// TODO: брать по инпутам и раскидывать по массивам
-		}) // делать по клику
+		let inputs = document.querySelectorAll('input.js-visa-input');
+		for ( let i = 0; i < inputs.length; i++ ) {
+			Object.keys(this._personData.visa)[i] = inputs[i].value;
+		}
+		console.log(this._personData.visa);
 	}
 
 	setSumCost() {
