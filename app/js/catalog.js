@@ -46,7 +46,9 @@ basket.moveToNextStageWithLoadingEvent('button.js-modal__button-submit[data-stag
 basket.moveToPreviousStageEvent('button.js-modal__button-back[data-stage="0"]');
 basket.moveToPreviousStageEvent('button.js-modal__button-contacts-back[data-stage="1"]');
 
-basket.moveToAnyPreviousStageEvent()
+basket.moveToAnyPreviousStageEvent();
 
+basket.saveVisaDataEvent();
+basket.saveContactDataEvent();
 
 export { addHttpRequestForCurrentPackage, basket };

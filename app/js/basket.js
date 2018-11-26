@@ -25,18 +25,10 @@ class Basket {
 				organization: '',
 				INN: '',
 				city: '',
-				quickInstall: '',
-				consultation: ''
+				quickInstall: true,
+				consultation: false
 			}
 		}
-	}
-
-	saveVisaData() {
-		let inputs = document.querySelectorAll('input.js-visa-input');
-		for ( let i = 0; i < inputs.length; i++ ) {
-			Object.keys(this._personData.visa)[i] = inputs[i].value;
-		}
-		console.log(this._personData.visa);
 	}
 
 	setSumCost() {
@@ -280,6 +272,50 @@ class Basket {
 		}
 	}
 
+	saveVisaData() {
+		let inputs = document.querySelectorAll('input.js-visa-input');
+		let arrPersonData = [];
+		for ( let i = 0; i < inputs.length; i++ ) {
+			arrPersonData[i] = inputs[i].value;
+		}
+		for ( let key in this._personData.visa ) {
+			this._personData.visa[key] = arrPersonData.splice(0, 1)[0];
+		}
+		console.log('visa:',this._personData.visa);
+	}
+
+	saveVisaDataEvent() {
+		let button = document.querySelector('button.js-modal__button-pay');
+		button.addEventListener('click', () => {
+			this.saveVisaData();
+		})
+	}
+
+	saveContactData() {
+		let inputs = document.querySelectorAll('input.js-contacts-input');
+		let radioFastInstall = document.querySelector('#radio-fast-install');
+		let toggleConsultation = document.querySelector('#toggle-consultation');
+		let arrContactsData = [];
+		for ( let i = 0; i < inputs.length; i++ ) {
+			arrContactsData[i] = inputs[i].value;
+		}
+		for ( let key in this._personData.contacts ) {
+			if (arrContactsData.length !== 0) {
+				this._personData.contacts[key] = arrContactsData.splice(0, 1)[0];
+			}
+		}
+		radioFastInstall.checked ? this._personData.contacts.quickInstall = true : this._personData.contacts.quickInstall = false;
+		toggleConsultation.checked ? this._personData.contacts.consultation = true : this._personData.contacts.consultation = false;
+		console.log('contacts:',this._personData.contacts);
+	}
+
+	saveContactDataEvent() {
+		let button = document.querySelector('button.js-modal__button-submit');
+		button.addEventListener('click', () => {
+			this.saveContactData();
+		})
+	}
+
 	clearBasketEvent() {
 		let basketClearButton = document.querySelector('svg.js-header-basket-clear');
 		basketClearButton.addEventListener('click', () => {
@@ -293,7 +329,6 @@ class Basket {
 }
 
 let basket = new Basket();
-basket.saveVisaData();
 
 window.addEventListener("storage", function(e) {
 	console.log('storage event: ', e);
