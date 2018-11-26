@@ -51,4 +51,7 @@ basket.moveToAnyPreviousStageEvent();
 basket.saveVisaDataEvent();
 basket.saveContactDataEvent();
 
+basket.setVisaDataEvent();
+basket.setContactDataEvent();
+
 export { addHttpRequestForCurrentPackage, basket };

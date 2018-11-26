@@ -291,9 +291,34 @@ class Basket {
 		})
 	}
 
+	setVisaData() {
+		let inputs = document.querySelectorAll('input.js-visa-input');
+		let arrPersonData = [];
+		for ( let key in this._personData.visa ) {
+			arrPersonData.push(this._personData.visa[key])
+		}
+		for ( let i = 0; i < inputs.length; i++ ) {
+			inputs[i].value = arrPersonData[i];
+		}
+		console.log('arrayVisa:', arrPersonData);
+	}
+
+	setVisaDataEvent() {
+		let button1 = document.querySelector('li.js-modal__steps-item[data-stage="1"]');
+		let button2 = document.querySelector('button.js-modal__button-contacts-back[data-stage="1"]');
+		button1.addEventListener('click', () => {
+			if (!button1.classList.contains('js-modal__steps-item_disabled')) {
+				this.setVisaData();
+			}
+		})
+		button2.addEventListener('click', () => {
+			this.setVisaData();
+		})
+	}
+
 	saveContactData() {
 		let inputs = document.querySelectorAll('input.js-contacts-input');
-		let radioFastInstall = document.querySelector('#radio-fast-install');
+		let radioQuickInstall = document.querySelector('#radio-fast-install');
 		let toggleConsultation = document.querySelector('#toggle-consultation');
 		let arrContactsData = [];
 		for ( let i = 0; i < inputs.length; i++ ) {
@@ -304,7 +329,7 @@ class Basket {
 				this._personData.contacts[key] = arrContactsData.splice(0, 1)[0];
 			}
 		}
-		radioFastInstall.checked ? this._personData.contacts.quickInstall = true : this._personData.contacts.quickInstall = false;
+		radioQuickInstall.checked ? this._personData.contacts.quickInstall = true : this._personData.contacts.quickInstall = false;
 		toggleConsultation.checked ? this._personData.contacts.consultation = true : this._personData.contacts.consultation = false;
 		console.log('contacts:',this._personData.contacts);
 	}
@@ -313,6 +338,33 @@ class Basket {
 		let button = document.querySelector('button.js-modal__button-submit');
 		button.addEventListener('click', () => {
 			this.saveContactData();
+		})
+	}
+
+	setContactData() {
+		let inputs = document.querySelectorAll('input.js-contacts-input');
+		let radioQuickInstall = document.querySelector('#radio-fast-install');
+		let radioDeferredInstall = document.querySelector('#radio-deferred-install');
+		let toggleConsultation = document.querySelector('#toggle-consultation');
+		let arrContactsData = [];
+		for ( let key in this._personData.contacts ) {
+			arrContactsData.push(this._personData.contacts[key]);
+		}
+		for ( let i = 0; i < inputs.length; i++ ) {
+			inputs[i].value = arrContactsData[i];
+		}
+		radioQuickInstall.checked = this._personData.contacts.quickInstall;
+		radioDeferredInstall.checked = !this._personData.contacts.quickInstall;
+		toggleConsultation.checked = this._personData.contacts.consultation;
+		console.log('arrayContacts:', arrContactsData);
+	}
+
+	setContactDataEvent() {
+		let button = document.querySelector('li.js-modal__steps-item[data-stage="2"]');
+		button.addEventListener('click', () => {
+			if (!button.classList.contains('js-modal__steps-item_disabled')) {
+				this.setContactData();
+			}
 		})
 	}
 

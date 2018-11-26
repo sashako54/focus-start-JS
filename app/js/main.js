@@ -4,7 +4,7 @@ import { addPackageRadioButtons, getPackagesNum, addRandomPackages } from '/js/d
 import { addHttpRequestPromise } from '/js/addHttpRequest.js';
 
 import { basket } from '/js/basket.js';
-import { showPopupEvent, moveToPaymentStageEvent, moveToNextStageWithLoadingEvent, moveToPreviousStageEvent, moveToAnyPreviousStageEvent } from '/js/popup.js';
+import { showPopupEvent} from '/js/popup.js';
 
 basket.clearBasketEvent();
 basket.drawBasketInfo();
@@ -35,12 +35,18 @@ addHttpRequestPromise("GET", "http://localhost:3000/api/app_packages.json")
 
 showPopupEvent();
 
-moveToPaymentStageEvent();
+basket.moveToPaymentStageEvent();
 
-moveToNextStageWithLoadingEvent('button.js-modal__button-pay[data-stage="2"]', 2);
-moveToNextStageWithLoadingEvent('button.js-modal__button-submit[data-stage="3"]', 3);
+basket.moveToNextStageWithLoadingEvent('button.js-modal__button-pay[data-stage="2"]', 2);
+basket.moveToNextStageWithLoadingEvent('button.js-modal__button-submit[data-stage="3"]', 3);
 
-moveToPreviousStageEvent('button.js-modal__button-back[data-stage="0"]');
-moveToPreviousStageEvent('button.js-modal__button-contacts-back[data-stage="1"]');
+basket.moveToPreviousStageEvent('button.js-modal__button-back[data-stage="0"]');
+basket.moveToPreviousStageEvent('button.js-modal__button-contacts-back[data-stage="1"]');
 
-moveToAnyPreviousStageEvent()
+basket.moveToAnyPreviousStageEvent();
+
+basket.saveVisaDataEvent();
+basket.saveContactDataEvent();
+
+basket.setVisaDataEvent();
+basket.setContactDataEvent();
