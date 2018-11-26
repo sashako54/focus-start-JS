@@ -6,6 +6,9 @@ import { addHttpRequestPromise } from '/js/addHttpRequest.js';
 import { basket } from '/js/basket.js';
 import { showPopupEvent} from '/js/popup.js';
 
+basket.setPackageList();
+basket.setSumCost();
+basket.setCount();
 basket.clearBasketEvent();
 basket.drawBasketInfo();
 basket.drawTable();

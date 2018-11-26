@@ -7,7 +7,6 @@ function getPackagesNum(obj) {
 }
 
 function getRandomInteger(min, max) {
-	// в выражении не добавляем 1, так как консоль ругается, когда рандомно выпадает последний элемент
 	return Math.floor( min + Math.random() * (max - min));
 }
 

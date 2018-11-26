@@ -2,13 +2,9 @@ import { hidePopup } from '/js/popup.js';
 
 class Basket {
 	constructor() {
-		if (!JSON.parse(localStorage.getItem('basket'))) {
-			this._packageList = {};
-		} else {
-			this._packageList = JSON.parse(localStorage.getItem('basket'));
-		}
-		this._sumCost = this.setSumCost();
-		this._count = this.setCount();
+		this._packageList = {};
+		this._sumCost = 0;
+		this._count = 0;
 		this._personData = {
 			visa: {
 				numberCard: '',
@@ -30,23 +26,29 @@ class Basket {
 			}
 		}
 	}
-
+	
 	setSumCost() {
-		let sumCost = 0;
+		this._sumCost = 0;
 		for (let key in this._packageList) {
-			sumCost += this._packageList[key].count * this._packageList[key].price;
+			this._sumCost += this._packageList[key].count * this._packageList[key].price;
 		}
-		return sumCost;
 	}
-
+	
 	setCount() {
-		let count = 0;
+		this._count = 0;
 		for (let key in this._packageList) {
-			count += this._packageList[key].count;
+			this._count += this._packageList[key].count;
 		}
-		return count;
 	}
 
+	setPackageList() {
+		if (!JSON.parse(localStorage.getItem('basket'))) {
+			this._packageList = {};
+		} else {
+			this._packageList = JSON.parse(localStorage.getItem('basket'));
+		}
+	}
+	
 	drawBasketInfo() {
 		document.querySelector('p.js-basket-sum-cost').innerHTML = `${this._sumCost} $`;
 		document.querySelector('div.js-basket-count').innerHTML = this._count;
@@ -188,11 +190,10 @@ class Basket {
 	}
 
 	moveToAnyStage(i) {
-		let navItems = document.querySelectorAll('li.js-modal__steps-item');
-		let steps = document.querySelectorAll('div.js-steps-stage');
-		let containers = document.querySelectorAll('div.js-modal-container');
+		let navItems = document.querySelectorAll('li.js-modal__steps-item'),
+			steps = document.querySelectorAll('div.js-steps-stage'),
+			containers = document.querySelectorAll('div.js-modal-container');
 		navItems[i].classList.remove('js-modal__steps-item_disabled');
-		// удаляем модификаторы у кнопок, скрываем все блоки
 		for ( let j = 0; j < navItems.length; j++) {
 			steps[j].classList.remove('o-steps_blue');
 			steps[j].classList.remove('o-steps_green');
@@ -213,10 +214,9 @@ class Basket {
 		button.addEventListener('click', () => {
 			this.moveToAnyStage(button.dataset.stage)
 		})
-	
 	}
 	
-	getrandomTimeLoading(maxLoadingTime) {
+	getRandomTimeLoading(maxLoadingTime) {
 		return Math.random() * maxLoadingTime * 1000;
 	}
 	
@@ -234,7 +234,7 @@ class Basket {
 		return new Promise((resolve, reject) => {
 			setTimeout(() => {
 				resolve(this.moveToAnyStage);
-			},this.getrandomTimeLoading(maxLoadingTime))
+			},this.getRandomTimeLoading(maxLoadingTime))
 		})
 	}
 	
@@ -273,8 +273,8 @@ class Basket {
 	}
 
 	saveVisaData() {
-		let inputs = document.querySelectorAll('input.js-visa-input');
-		let arrPersonData = [];
+		let inputs = document.querySelectorAll('input.js-visa-input'),
+			arrPersonData = [];
 		for ( let i = 0; i < inputs.length; i++ ) {
 			arrPersonData[i] = inputs[i].value;
 		}
@@ -292,8 +292,8 @@ class Basket {
 	}
 
 	setVisaData() {
-		let inputs = document.querySelectorAll('input.js-visa-input');
-		let arrPersonData = [];
+		let inputs = document.querySelectorAll('input.js-visa-input'),
+			arrPersonData = [];
 		for ( let key in this._personData.visa ) {
 			arrPersonData.push(this._personData.visa[key])
 		}
@@ -304,8 +304,8 @@ class Basket {
 	}
 
 	setVisaDataEvent() {
-		let button1 = document.querySelector('li.js-modal__steps-item[data-stage="1"]');
-		let button2 = document.querySelector('button.js-modal__button-contacts-back[data-stage="1"]');
+		let button1 = document.querySelector('li.js-modal__steps-item[data-stage="1"]'),
+			button2 = document.querySelector('button.js-modal__button-contacts-back[data-stage="1"]');
 		button1.addEventListener('click', () => {
 			if (!button1.classList.contains('js-modal__steps-item_disabled')) {
 				this.setVisaData();
@@ -317,10 +317,10 @@ class Basket {
 	}
 
 	saveContactData() {
-		let inputs = document.querySelectorAll('input.js-contacts-input');
-		let radioQuickInstall = document.querySelector('#radio-fast-install');
-		let toggleConsultation = document.querySelector('#toggle-consultation');
-		let arrContactsData = [];
+		let inputs = document.querySelectorAll('input.js-contacts-input'),
+			radioQuickInstall = document.querySelector('#radio-fast-install'),
+			toggleConsultation = document.querySelector('#toggle-consultation'),
+			arrContactsData = [];
 		for ( let i = 0; i < inputs.length; i++ ) {
 			arrContactsData[i] = inputs[i].value;
 		}
@@ -342,11 +342,11 @@ class Basket {
 	}
 
 	setContactData() {
-		let inputs = document.querySelectorAll('input.js-contacts-input');
-		let radioQuickInstall = document.querySelector('#radio-fast-install');
-		let radioDeferredInstall = document.querySelector('#radio-deferred-install');
-		let toggleConsultation = document.querySelector('#toggle-consultation');
-		let arrContactsData = [];
+		let inputs = document.querySelectorAll('input.js-contacts-input'),
+			radioQuickInstall = document.querySelector('#radio-fast-install'),
+			radioDeferredInstall = document.querySelector('#radio-deferred-install'),
+			toggleConsultation = document.querySelector('#toggle-consultation'),
+			arrContactsData = [];
 		for ( let key in this._personData.contacts ) {
 			arrContactsData.push(this._personData.contacts[key]);
 		}
@@ -383,8 +383,16 @@ class Basket {
 let basket = new Basket();
 
 window.addEventListener("storage", function(e) {
-	console.log('storage event: ', e);
-	console.log('LocalStorage: ',JSON.parse(localStorage.getItem('basket')));
+	// работает не корректно, при добавлении товаров событие дублируется и вместо 1го добавляется 2
+	// пока приложение лучше запускать в 1 вкладке
+
+	// basket.setPackageList();
+	// basket.setSumCost();
+	// basket.setCount();
+	// basket.drawBasketInfo();
+	// if (!document.querySelector('div.js-modal').classList.contains('hidden')) {
+	// 	basket.drawTable();
+	// }
 })
 
 

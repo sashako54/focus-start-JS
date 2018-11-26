@@ -80,6 +80,4 @@ function showPopupEvent() {
 	})
 }
 
-
-
 export { showPopupEvent, hidePopup };
