@@ -169,4 +169,4 @@ function moveToAnyPreviousStageEvent() {
 	}
 }
 
-export { showPopupEvent, moveToPaymentStageEvent, moveToNextStageWithLoadingEvent, moveToPreviousStageEvent, moveToAnyPreviousStageEvent };
+export { showPopupEvent, moveToPaymentStageEvent, moveToNextStageWithLoadingEvent, moveToPreviousStageEvent, moveToAnyPreviousStageEvent, hidePopup };

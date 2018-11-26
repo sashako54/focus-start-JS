@@ -1,3 +1,5 @@
+import { hidePopup } from '/js/popup.js';
+
 class Basket {
 	constructor() {
 		if (!JSON.parse(localStorage.getItem('basket'))) {
@@ -101,6 +103,10 @@ class Basket {
 		this.drawTable();
 		this.drawBasketInfo();
 		this.addInLocalStorage();
+
+		if (Object.keys(this._packageList).length === 0) {
+			hidePopup();
+		}
 	}
 
 	addPackage(currentPackage) {

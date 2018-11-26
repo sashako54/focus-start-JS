@@ -3,7 +3,12 @@ import { Carousel } from '/js/carousel.js';
 import { addPackageRadioButtons, getPackagesNum, addRandomPackages } from '/js/drawRandomPackages.js';
 import { addHttpRequestPromise } from '/js/addHttpRequest.js';
 
+import { basket } from '/js/basket.js';
 import { showPopupEvent, moveToPaymentStageEvent, moveToNextStageWithLoadingEvent, moveToPreviousStageEvent, moveToAnyPreviousStageEvent } from '/js/popup.js';
+
+basket.clearBasketEvent();
+basket.drawBasketInfo();
+basket.drawTable();
 
 let carousel = new Carousel(
 	'div.js-packages-carousel',
