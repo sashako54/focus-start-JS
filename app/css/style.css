@@ -614,6 +614,7 @@
 
 .o-modal__steps-item {
 	display: inline-block;
+	cursor: pointer;
 }
 
 .o-modal__steps-item_margin_right_100 {

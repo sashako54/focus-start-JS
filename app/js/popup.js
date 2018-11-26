@@ -77,44 +77,91 @@ function hidePopupClickAreaEvent(event) {
 }
 
 function showPopupEvent() {
-	let button = document.querySelector('div.js-header-basket');
+	let button = document.querySelector('div.js-header-basket'),
+		tbody = document.querySelector('tbody.js-modal__table-body');
 	button.addEventListener('click', function() {
-		// Показываем модальное окно
-		toggleExistClass('js-modal', 'hidden');
-		// Убираем возможность скроллить body
-		// Делаем страничку статичной
-		addBodyProperties();
-		// ОБработчик события, по клику вне Popup происходит закрытие Popup
-		window.addEventListener('click', hidePopupClickAreaEvent);
-		// Обработчик событий, при нажатии на Esc происходит закрытие Popup
-		window.addEventListener('keydown', hidePopupEscapeEvent);
+		if (Object.keys(basket._packageList).length !== 0) {
+			// Показываем модальное окно
+			toggleExistClass('js-modal', 'hidden');
+			// Убираем возможность скроллить body
+			// Делаем страничку статичной
+			addBodyProperties();
+			// ОБработчик события, по клику вне Popup происходит закрытие Popup
+			window.addEventListener('click', hidePopupClickAreaEvent);
+			// Обработчик событий, при нажатии на Esc происходит закрытие Popup
+			window.addEventListener('keydown', hidePopupEscapeEvent);
 
-		basket.drawTable();
+			basket.drawTable();
+		}
 	})
 }
 
 showPopupEvent();
 
+function moveToPaymentStage() {
+	
+}
 
-function setActiveClass(stepClass) {
-	if (stepClass === 'js-step-4') {
-		toggleNotExistClass(stepClass, 'o-steps_green');
-		toggleNotExistClass('js-step-4-span', 'o-steps_green_color');
-		toggleExistClass('js-modal__steps-stage-icon', 'hidden');
-	} else {
-		toggleNotExistClass(stepClass, 'o-steps_blue');
+
+function moveToAnyPreviousStageEvent() {
+	let navItems = document.querySelectorAll('li.js-modal__steps-item');
+	let steps = document.querySelectorAll('div.js-steps-stage');
+	let container = document.querySelectorAll('div.js-modal-container');
+	for ( let i = 0; i < navItems.length; i++) {
+		navItems[i].addEventListener('click', function() {
+			if (!navItems[i].classList.contains('js-modal__steps-item_disabled')) {
+				// удаляем модификаторы у кнопок, скрываем все блоки
+				for ( let j = 0; j < navItems.length; j++) {
+					steps[j].classList.remove('o-steps_blue');
+					steps[j].classList.remove('o-steps_green');
+
+					container[j].classList.add('hidden');
+					// для кнопок уровнем выше добавляем класс, чтобы сделать кнопки неактивными
+					if (i < j) {
+						navItems[j].classList.add('js-modal__steps-item_disabled');
+					}
+				}
+				for ( let j = 0; j <= i; j++) {
+					steps[j].classList.add('o-steps_blue');
+					if (j === 3) {
+						steps[j].classList.add('o-steps_green');
+					}
+				}
+				container[i].classList.remove('hidden');
+			}
+		})
 	}
 }
 
-function hideBlock(blockHiddenClass, i) {
-	toggleNotExistClass(blockHiddenClass, 'hidden', i);
-	console.log('hide' + i)
-}
+moveToAnyPreviousStageEvent()
 
-function showBlock(blockShowClass, i) {
-	toggleExistClass(blockShowClass, 'hidden', i);
-	console.log('show' + i);
-}
+
+
+
+
+
+
+
+
+// function setActiveClass(stepClass) {
+// 	if (stepClass === 'js-step-4') {
+// 		toggleNotExistClass(stepClass, 'o-steps_green');
+// 		toggleNotExistClass('js-step-4-span', 'o-steps_green_color');
+// 		toggleExistClass('js-modal__steps-stage-icon', 'hidden');
+// 	} else {
+// 		toggleNotExistClass(stepClass, 'o-steps_blue');
+// 	}
+// }
+
+// function hideBlock(blockHiddenClass, i) {
+// 	toggleNotExistClass(blockHiddenClass, 'hidden', i);
+// 	console.log('hide' + i)
+// }
+
+// function showBlock(blockShowClass, i) {
+// 	toggleExistClass(blockShowClass, 'hidden', i);
+// 	console.log('show' + i);
+// }
 
 // function moveToNextStageEvent(buttonClass, blockHiddenClass, blockShowClass, stepClass, i) {
 // 	let button = document.getElementsByClassName(buttonClass)[0];
@@ -124,12 +171,6 @@ function showBlock(blockShowClass, i) {
 // 		showBlock(blockShowClass, i + 1);
 // 	});
 // }
-function moveToPaymentStagePromise() {
-	return new Promise(function(resolve, reject) {
-		let button = document.querySelector('button.js-modal__button');
-		button.addEventListener('click', resolve)
-	})
-}
 
 // function moveToPaymentStagePromise() {
 // 	return new Promise(function(resolve, reject) {
@@ -137,13 +178,6 @@ function moveToPaymentStagePromise() {
 // 		button.addEventListener('click', resolve)
 // 	})
 // }
-
-moveToPaymentStagePromise()
-	.then(function() {
-		setActiveClass('js-step-2');
-		hideBlock('js-modal-container', 0);
-		showBlock('js-modal-container', 1);
-	})
 
 
 // moveToNextStageEvent('js-modal__button', 'js-modal-container', 'js-modal-container', 'js-step-2', 0);
@@ -153,19 +187,19 @@ moveToPaymentStagePromise()
 // moveToNextStageEvent('js-modal__button-submit', 'js-modal-container', 'js-modal-container', 'js-step-4', 2);
 
 
-function delActiveClass(stepClass) {
-	toggleExistClass(stepClass, 'o-steps_blue');
-}
+// function delActiveClass(stepClass) {
+// 	toggleExistClass(stepClass, 'o-steps_blue');
+// }
 
-function moveToPreviousStageEvent(buttonClass, blockHiddenClass, blockShowClass, stepClass, i) {
-	let button = document.getElementsByClassName(buttonClass)[0];
-	button.addEventListener('click', function() {
-		delActiveClass(stepClass);
-		hideBlock(blockHiddenClass, i + 1);
-		showBlock(blockShowClass, i);
-	});
-}
+// function moveToPreviousStageEvent(buttonClass, blockHiddenClass, blockShowClass, stepClass, i) {
+// 	let button = document.getElementsByClassName(buttonClass)[0];
+// 	button.addEventListener('click', function() {
+// 		delActiveClass(stepClass);
+// 		hideBlock(blockHiddenClass, i + 1);
+// 		showBlock(blockShowClass, i);
+// 	});
+// }
 
-moveToPreviousStageEvent('js-modal__button-back', 'js-modal-container', 'js-modal-container', 'js-step-2', 0);
+// moveToPreviousStageEvent('js-modal__button-back', 'js-modal-container', 'js-modal-container', 'js-step-2', 0);
 
-moveToPreviousStageEvent('js-modal__button-contacts-back', 'js-modal-container', 'js-modal-container', 'js-step-3', 1);
+// moveToPreviousStageEvent('js-modal__button-contacts-back', 'js-modal-container', 'js-modal-container', 'js-step-3', 1);
