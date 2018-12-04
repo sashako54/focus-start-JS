@@ -63,17 +63,17 @@ table {
 	vertical-align: top;
 }
 
-.l-grid-1 {width: 8.33%}
-.l-grid-2 {width: 16.66%}
+.l-grid-1 {width: 8.33333%}
+.l-grid-2 {width: 16.66666%}
 .l-grid-3 {width: 25%}
-.l-grid-4 {width: 33.33%}
-.l-grid-5 {width: 41.66%}
+.l-grid-4 {width: 33.33333%}
+.l-grid-5 {width: 41.66666%}
 .l-grid-6 {width: 50%}
-.l-grid-7 {width: 58.33%}
-.l-grid-8 {width: 66.66%}
+.l-grid-7 {width: 58.33333%}
+.l-grid-8 {width: 66.66666%}
 .l-grid-9 {width: 75%}
-.l-grid-10 {width: 83.33%}
-.l-grid-11 {width: 91.66%}
+.l-grid-10 {width: 83.33333%}
+.l-grid-11 {width: 91.66666%}
 .l-grid-12 {width: 100%}
 
 .hidden {
@@ -169,20 +169,27 @@ table {
 	color: #fff;
 }
 
-.o-modal {
+.o-steps_green_color {
+	color: var(--success-color);
+}
+
+.o-modal-banner {
+	max-width: 770px;
+	margin: 0 auto;
+	padding: 40px 0 45px;
 	width: 100%;
 	background-color: var(--light-color);
 }
 
-.o-modal_shadow {
+.o-modal-banner_shadow {
 	box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.11);
 }
 
-.o-modal_border_prymary {
+.o-modal-banner_border_prymary {
 	border: solid 1px var(--primary-border-color);
 }
 
-.o-modal_border_bottom_blue {
+.o-modal-banner_border_bottom_blue {
 	border-bottom: solid 2px var(--primary-color);
 }
 
@@ -252,6 +259,8 @@ table {
 .o-button_disabled {
 	opacity: .5;
 }
+
+input[type="search"]::-webkit-search-cancel-button {display: none;}
 
 input[type="radio"] {display: none;}
 input[type="checkbox"] {display: none;}
@@ -341,9 +350,14 @@ input[type="checkbox"]:checked + .o-label-checkbox .o-label-icon {
 }
 
 .o-label-toggle {
+	display: inline-block;
 	position: relative;
-	padding-left: 60px;
+	padding-left: 75px;
 	cursor: pointer;
+	font-size: 12px;
+	font-weight: bold;
+	color: #34495e;
+	line-height: 26px;
 }
 
 .o-label-toggle::before {
@@ -368,6 +382,7 @@ input[type="checkbox"]:checked + .o-label-checkbox .o-label-icon {
 	border-radius: 50%;
 	background-color: var(--light-color);
 	transition: left 200ms ease-in-out;
+	z-index: 2;
 }
 
 input[type="checkbox"]:checked + .o-label-toggle::before {
@@ -414,4 +429,19 @@ input[type="checkbox"]:checked + .o-label-toggle::after {
 .o-cover {
 	max-width: 1180px;
 	margin: 0 auto;
+}
+
+.o-modal-input {
+	height: 46px;
+	border: solid 1px #e6e6e6;
+	background-color: #fafafa;
+	color: var(--secondary-color);
+}
+
+.o-modal-input::placeholder {
+	color: #9FA3A7;
+}
+
+.no-transition {
+	transition: none !important;
 }

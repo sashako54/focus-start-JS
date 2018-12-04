@@ -6,6 +6,7 @@
 	height: 105px;
 	background-color: #fff;
 	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08);
+	user-select: none;
 }
 
 .o-header__logo-wrapper {
@@ -29,6 +30,7 @@
 }
 
 .o-header__nav-list {
+	display: inline-block;
 	padding-top: 42px;
 	font-size: 0;
 }
@@ -37,8 +39,8 @@
 	display: inline-block;
 }
 
-.o-header__nav-item_margin_left_40 {
-	margin-left: 40px;
+.o-header__nav-item_margin_right_40 {
+	margin-right: 40px;
 }
 
 .o-header__nav-link {
@@ -51,6 +53,58 @@
 .o-header__nav-link:hover {
 	color: #ed1b2f;
 }
+
+.o-header__basket-wrapper {
+	display: inline-block;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+.o-header__basket-icon {
+	width: 30px;
+	height: 30px;
+	color: #adafb2;
+	vertical-align: middle;
+}
+
+.o-header__basket-clear-icon {
+	width: 20px;
+	height: 20px;
+	color: #adafb2;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+.o-header__basket-clear-icon:hover,
+.o-header__basket-icon:hover {
+	color: #ed1b2f;
+}
+
+.o-header__basket-sum-cost {
+	display: inline-block;
+	vertical-align: inherit;
+	color: #adafb2;
+}
+
+.o-header__basket-sum-cost_marg {
+	margin: 0 10px;
+}
+
+.o-header__basket-sum-packages {
+	display: inline-block;
+	vertical-align: inherit;
+	padding: 0 5px;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	border-radius: 3px;
+	background-color: #adafb2;
+	color: #fff;
+}
+
+.o-header__basket-wrapper:hover .o-header__basket-sum-packages {background-color: #ed1b2f;}
+.o-header__basket-wrapper:hover .o-header__basket-icon,
+.o-header__basket-wrapper:hover .o-header__basket-sum-cost {color: #ed1b2f;}
 
 /* Контейнер для главной страницы */
 
@@ -127,11 +181,40 @@
 }
 
 .o-main__pockets-wrapper {
+	overflow-x: hidden;
+	position: relative;
 	margin: 0 5px;
 }
 
 .o-main__pockets {
+	position: relative;
+	white-space: nowrap;
 	padding: 30px 0 60px;
+	transition: transform 200ms ease-in-out;
+}
+
+.o-main__pockets-button-left,
+.o-main__pockets-button-right {
+	position: absolute;
+	width: 45px;
+	height: 45px;
+	color: #000;
+	top: 105px;
+	cursor: pointer;
+}
+
+.o-main__pockets-button-left {
+	left: -15px;
+}
+
+.o-main__pockets-button-right {
+	right: -15px;
+	transform: rotateZ(180deg)
+}
+
+.o-main__pockets-button-left:hover,
+.o-main__pockets-button-right:hover {
+	color: #212121;
 }
 
 .o-main__pocket {
@@ -299,6 +382,10 @@
 	border-bottom: solid 1px #d8d8d8;
 }
 
+.o-modal-container {
+	width: 100%;
+}
+
 .o-modal__table,
 .o-content__table {
 	display: inline-block;
@@ -408,8 +495,7 @@
 
 .o-app__img {
 	height: 190px;
-	background-image: url(../assets/images/shot-2-info.jpg);
-	background-position: 100%;
+	background-position: center;
 	background-size: cover;
 }
 
@@ -460,7 +546,7 @@
 	color: #79878e;
 }
 
-.o-app__info-text span {
+.o-app__info-text-bold {
 	color: #4f5659
 }
 
@@ -494,16 +580,27 @@
 	left: 0;
 	width: 100%;
 	height: 100%;
-	overflow-y: auto;
+	overflow-y: scroll;
 	background-color: rgba(0, 0, 0, 0.8);
 }
 
 .o-modal__wrapper {
+	position: relative;
 	padding: 80px;
 	max-width: 1280px;
 	width: 100%;
 	margin: 0 auto;
 	background-color: #fff;
+}
+
+.o-modal-loading__wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.1);
+	z-index: 3;
 }
 
 .o-modal__wrapper_margin_vertical {
@@ -517,6 +614,7 @@
 
 .o-modal__steps-item {
 	display: inline-block;
+	cursor: pointer;
 }
 
 .o-modal__steps-item_margin_right_100 {
@@ -524,12 +622,23 @@
 }
 
 .o-modal__steps-stage {
+	position: relative;
 	display: inline-block;
 	margin-right: 15px;
 	font-size: 14px;
 	font-weight: 900;
 	line-height: 30px;
 	text-align: center;
+}
+
+.o-modal__steps-stage-icon {
+	display: inline-block;
+	position: absolute;
+	top: 7px;
+	left: 7px;
+	width: 16px;
+	height: 16px;
+	color: #fff;
 }
 
 .o-modal__steps-name {
@@ -580,9 +689,8 @@
 .o-modal__table-img {
 	width: 116px;
 	height: 87px;
-	background-image: url(../assets/images/shot-2-popup.jpg);
 	background-size: cover;
-	background-position: 100%;
+	background-position: center;
 }
 
 .o-modal__table-name-cell {
@@ -590,7 +698,7 @@
 	width: 34.64%;
 }
 
-.o-modal__table-name-label {
+.o-modal__table-label {
 	position: relative;
 }
 
@@ -674,6 +782,7 @@
 	width: 32px;
 	height: 32px;
 	color: #4A90E2;
+	cursor: pointer;
 }
 
 .o-modal__table-del-icon:hover {
@@ -681,7 +790,7 @@
 }
 
 .o-modal__footer {
-	height: 40px;
+	position: relative;
 	padding: 70px 160px;
 }
 
@@ -718,6 +827,366 @@
 	margin-left: 70px;
 }
 
+.o-modal__button_float_left {
+	float: left;
+}
+
+.o-modal__button_float_right {
+	float: right;
+}
+
+.o-modal__payment-wrapper {
+	position: relative;
+}
+
+.o-modal__payment-wrapper_margin_top_150 {
+	margin-top: 150px;
+}
+
+.o-modal__payment-wrapper_margin_left_250 {
+	margin-left: 250px;
+}
+
+.o-modal__payment {
+	position: relative;
+	padding: 30px;
+	width: 430px;
+	height: 260px;
+	border-radius: 7px;
+	border: solid 2px #d8d8d8;
+	background-color: #fff;
+	z-index: 2;
+}
+
+.o-modal__payment-turnover {
+	position: absolute;
+	top: 30px;
+	left: 115px;
+	width: 430px;
+	height: 260px;
+	border-radius: 7px;
+	border: solid 1px #e8e9ed;
+	background-color: #fafafa;
+	z-index: 1;
+}
+
+.o-modal__payment-inputs {
+	float: left;
+	width: 250px;
+	font-size: 0;
+}
+
+.o-modal__payment-icons {
+	float: right;
+}
+
+.o-modal__payment-icon-master-card {
+	display: block;
+	width: 61px;
+	height: 36px;
+}
+
+.o-modal__payment-icon-master-card_margin_bottom_20px {
+	margin-bottom: 20px;
+}
+
+.o-modal__payment-icon-visa {
+	display: block;
+	width: 58px;
+	height: 19px;
+}
+
+/* .o-modal__payment-inputs-num {} */
+
+.o-modal__payment-inputs-num-margin_bottom_20 {
+	margin-bottom: 20px;
+}
+
+.o-modal__payment-inputs-month,
+.o-modal__payment-inputs-year {
+	width: 115px;
+}
+
+.o-modal__payment-inputs-month_margin_right_20 {
+	margin-right: 20px;
+}
+
+.o-modal__payment-footer_margin_top_40 {
+	margin-top: 40px;
+}
+
+.o-modal__payment-turnover-strip {
+	height: 40px;
+	background-color: #e8e9ed;
+}
+
+.o-modal__payment-turnover-strip_margin_top_35 {
+	margin-top: 35px;
+}
+
+.o-modal__payment-turnover-strip_margin_bottom_20 {
+	margin-bottom: 20px;
+}
+
+.o-modal__payment-turnover-input {
+	position: absolute;
+	top: 95px;
+	right: 20px;
+	width: 76px;
+	background-color: #fff;
+}
+
+.o-modal__payment-turnover-description {
+	position: absolute;
+	top: 150px;
+	right: 20px;
+	width: 77px;
+	font-size: 12px;
+	line-height: 1.7;
+	color: #C8C8C8;
+}
+
+.o-modal__contacts-wrapper {
+	position: relative;
+}
+
+.o-modal__contacts-wrapper_margin_top_120 {
+	margin-top: 120px;
+}
+
+.o-modal__contacts-wrapper_margin_left_right_50 {
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
+.o-modal__contacts-title {
+	padding: 0 10px;
+	font-size: 18px;
+	font-weight: normal;
+	text-transform: uppercase;
+	color: #030303;
+}
+
+.o-modal__contacts-inputs {
+	float: left;
+	max-width: 660px;
+	width: 100%;
+}
+
+.o-modal__contacts-radio-buttons {
+	float: right;
+	max-width: 225px;
+	width: 100%;
+}
+
+.o-modal__contacts-input-wrapper {
+	padding: 10px;
+}
+
+.o-modal__contacts-radio_margin_bottom_20 {
+	margin-bottom: 20px;
+}
+
+.o-modal__contacts-toggle_margin_top_50 {
+	margin-top: 50px;
+}
+
+.o-modal__contacts-toggle-icon-check,
+.o-modal__contacts-toggle-icon-cross {
+	position: absolute;
+	top: 5px;
+	width: 16px;
+	height: 16px;
+	color: #fff;
+	z-index: 1;
+}
+
+.o-modal__contacts-toggle-icon-check {left: 5px;}
+
+.o-modal__contacts-toggle-icon-cross {left: 39px;}
+
+.o-modal__info-link {
+	display: block;
+	width: 205px;
+	margin: 0 auto;
+}
+
+
+.o-modal__info-wrapper {
+	margin: 0 auto;
+}
+
+.o-modal__info-wrapper_margin_top_120 {
+	margin-top: 120px;
+}
+
+.o-modal__info-icon-wrapper {
+	margin: 0 auto;
+	padding: 19px;
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	border: solid 3px #358ED7;
+}
+
+.o-modal__info-icon {
+	width: 36px;
+	height: 36px;
+	color: var(--success-color);
+}
+
+.o-modal__info-icon-wrapper_margin_bottom_25 {
+	margin-bottom: 25px;
+}
+
+.o-modal__info-notice {
+	font-size: 14px;
+	letter-spacing: 0.3px;
+	text-align: center;
+	color: #34495e;
+}
+
+.o-modal__info-text {
+	margin: 0 auto;
+	max-width: 390px;
+	width: 100%;
+	font-size: 14px;
+	line-height: 2;
+	text-align: center;
+	color: #9FA3A7;
+}
+
+.o-modal__info-text_margin_top_30 {
+	margin-top: 30px;
+}
+
+.o-carousel__radio-buttons {
+	margin: 0 auto;
+	margin-bottom: 20px;
+	width: 256px;
+	text-align: center;
+	padding-bottom: 10px;
+	white-space: nowrap;
+	overflow-x: auto;
+}
+
+.o-carousel-label-radio {
+	padding-left: 16px;
+	margin: 0 8px;
+}
+
+.o-carousel__radio-buttons::-webkit-scrollbar {
+	background-color: #fff;
+	height: 10px;
+}
+
+.o-carousel__radio-buttons::-webkit-scrollbar-button,
+.o-carousel__radio-buttons::-webkit-scrollbar-thumb {
+	background-color: #fff;
+	transition: background-color 200ms ease-in-out;
+}
+
+.o-carousel__radio-buttons::-webkit-scrollbar-button {
+	width: 10px;
+	height: 10px;
+}
+
+.o-carousel__radio-buttons::-webkit-scrollbar-thumb {
+	border-left: solid 1px #fff;
+	border-right: solid 1px #fff;
+}
+
+.o-carousel__radio-buttons:hover::-webkit-scrollbar-button {background-color: #c0c0c0;}
+.o-carousel__radio-buttons:hover::-webkit-scrollbar-thumb {background-color: #cecece;}
+
+/* Анимация для loading в попапе */
+
+#floatingBarsG{
+	position:relative;
+	top: 50%;
+    transform: translateY(-50%);
+	width:60px;
+	height:75px;
+	margin:auto;
+}
+
+.blockG{
+	position:absolute;
+	background-color:rgb(255,255,255);
+	width:10px;
+	height:23px;
+	border-radius:8px 8px 0 0;
+	transform:scale(0.4);
+	animation-name:fadeG;
+	animation-duration:1.2s;
+	animation-iteration-count:infinite;
+	animation-direction:normal;
+}
+
+#rotateG_01{
+	left:0;
+	top:27px;
+	animation-delay:0.45s;
+	transform:rotate(-90deg);
+}
+
+#rotateG_02{
+	left:8px;
+	top:10px;
+	animation-delay:0.6s;
+	transform:rotate(-45deg);
+}
+
+#rotateG_03{
+	left:25px;
+	top:3px;
+	animation-delay:0.75s;
+	transform:rotate(0deg);
+}
+
+#rotateG_04{
+	right:8px;
+	top:10px;
+	animation-delay:0.9s;
+	transform:rotate(45deg);
+}
+
+#rotateG_05{
+	right:0;
+	top:27px;
+	animation-delay:1.05s;
+	transform:rotate(90deg);
+}
+
+#rotateG_06{
+	right:8px;
+	bottom:7px;
+	animation-delay:1.2s;
+	transform:rotate(135deg);
+}
+
+#rotateG_07{
+	bottom:0;
+	left:25px;
+	animation-delay:1.35s;
+	transform:rotate(180deg);
+}
+
+#rotateG_08{
+	left:8px;
+	bottom:7px;
+	animation-delay:1.5s;
+	transform:rotate(-135deg);
+}
 
 
 
+@keyframes fadeG{
+	0%{
+		background-color:rgb(0,0,0);
+	}
+
+	100%{
+		background-color:rgb(255,255,255);
+	}
+}

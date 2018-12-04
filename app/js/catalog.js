@@ -1,9 +1,9 @@
-
-import { Carousel } from '/js/carousel.js';
-import { addPackageRadioButtons, getPackagesNum, addRandomPackages } from '/js/drawRandomPackages.js';
-import { addHttpRequestPromise } from '/js/addHttpRequest.js';
-
+import { addHttpRequestEvent } from '/js/addHttpRequestEvent.js';
+import { getUrlParam } from '/js/getUrlParam.js';
+import { drawPackageInfo, drawPackageList } from '/js/drawPackageInfo.js';
+import { highlightCurrentElem } from '/js/highlightCurrentElem.js';
 import { basket } from '/js/basket.js';
+import { addHttpRequestPromise } from '/js/addHttpRequest.js';
 import { showPopupEvent} from '/js/popup.js';
 
 basket.setPackageList();
@@ -13,29 +13,32 @@ basket.clearBasketEvent();
 basket.drawBasketInfo();
 basket.drawTable();
 
-let carousel = new Carousel(
-	'div.js-packages-carousel',
-	'js-carousel-radio',
-	'svg.js-carousel-button-left',
-	'svg.js-carousel-button-right',
-	2
-);
-
+function addHttpRequestForCurrentPackage() {
+	addHttpRequestPromise("GET", `http://localhost:3000/api/app_package_${getUrlParam('id')}.json`)
+		.then(function(result) {
+			drawPackageInfo(result[0]);
+			basket.addPackageEvent(result[0]);
+		})
+		.catch(function(error) {
+			console.error('ошибка', error);
+		})
+}
 
 addHttpRequestPromise("GET", "http://localhost:3000/api/app_packages.json")
 	.then(function(result) {
-		getPackagesNum(result);
-		addRandomPackages(result);
-		addPackageRadioButtons();
-		carousel.addPackageClones();
-		carousel.setCarouselSettings();
-		carousel.moveCarouselRadioButtonsEvent(100/3);
-		carousel.moveCarouselEvents();
+		drawPackageList(result);
+		if (!location.hash) {
+			location.hash = `id=${result[0].id}`;
+		}
 	})
+	.then(highlightCurrentElem)
+	.then(addHttpRequestEvent)
+	.then(addHttpRequestForCurrentPackage)
 	.catch(function(error) {
 		console.error('ошибка', error);
 	})
 
+	
 showPopupEvent();
 
 basket.moveToPaymentStageEvent();
@@ -53,3 +56,5 @@ basket.saveContactDataEvent();
 
 basket.setVisaDataEvent();
 basket.setContactDataEvent();
+
+export { addHttpRequestForCurrentPackage, basket };
